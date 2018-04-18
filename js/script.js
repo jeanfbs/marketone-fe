@@ -2,29 +2,19 @@
 define(['chart'], function(chart){
     $(document).ready(function(){
         
-        var formatter = function (value) {
-          return "R$ " + parseFloat(value).toLocaleString();
-        };
-        var vendasDinheiro = new chart.Knob("#vendas-dinheiro", 12756.65, formatter);
-        vendasDinheiro.show();
-
-        var vendasCredito = new chart.Knob("#vendas-credito", Math.floor(1000 * Math.random()), formatter);
-        vendasCredito.show();
-
-        var vendasDebito = new chart.Knob("#vendas-debito", Math.floor(10000 * Math.random()), formatter);
-        vendasDebito.show();
+        var knobVendasDinheiro = new chart.Knob("#vendas-dinheiro", 12756.65, formatter);
+        var knobVendasCredito = new chart.Knob("#vendas-credito", Math.floor(1000 * Math.random()), formatter);
+        var knobVendasDebito = new chart.Knob("#vendas-debito", Math.floor(10000 * Math.random()), formatter);
         
         $("#insertHeader").load("./fragments/header.html");
 
-        var donut = new chart.Donut('donut-vendas-atuais', [
+        var donutVendasAtuais = new chart.Donut('donut-vendas-atuais', [
           { label: 'Dinheiro', value: 33389.40 },
           { label: 'Crédito', value: 87389.54 },
           { label: 'Débito', value: 29689.49 },
         ]);
 
-        donut.show();
-
-        var vendasSemanal = new chart.BarChart("vendas-semanal",[
+        var chartBarVendasSemanal = new chart.BarChart("vendas-semanal",[
           { y: '02/06', dinheiro: 1254, credito: 55.21, debito: 100 },
           { y: '03/06', dinheiro: 152.54,  credito: 125, debito: 205 },
           { y: '04/06', dinheiro: 50,  credito: 454, debito: 2120 },
@@ -39,7 +29,7 @@ define(['chart'], function(chart){
   
         });
 
-        var vendasMensal = new chart.BarChart("vendas-mensal",[
+        var chartBarvendasMensal = new chart.BarChart("vendas-mensal",[
           { y: '02/06', dinheiro: 1254, credito: 55.21, debito: 100, total:  (1254 + 55.21 + 100)},
           { y: '03/06', dinheiro: 152.54,  credito: 125, debito: 205 , total: (152.54 + 125 + 205)},
           { y: '04/06', dinheiro: 50,  credito: 454, debito: 2120 , total: (50 + 454 + 2120)},
@@ -73,12 +63,19 @@ define(['chart'], function(chart){
 
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-          var target = $(e.target).attr("href") // activated tab
+          var target = $(e.target).attr("href");
 
             switch (target) {
               case "#vendas":
-                  vendasSemanal.show();
-                  vendasMensal.show();
+
+                  knobVendasDinheiro.show();
+                  knobVendasCredito.show();
+                  knobVendasDebito.show();
+
+                  chartBarVendasSemanal.show();
+                  chartBarvendasMensal.show();
+
+                  donutVendasAtuais.show();
                 break;
 
                 case "#estoque":
@@ -89,6 +86,65 @@ define(['chart'], function(chart){
 
         $('[data-toggle="tooltip"]').tooltip();
 
+
+        var categoriaProduto = $("#categoria").select2({
+            placeholder: "Escolha uma opção",
+            allowClear: true,
+            theme: "bootstrap"
+        });
+
+        $("#buscar-indicadores").off("click").on("click",function(){
+            $("#td-tipo").text($("#inputConsulta").val() != "" ? 'Produto': 'Categoria');
+            $("#td-produto").text(($("#inputConsulta").val() != "" ? 'Produto ' + Math.floor(10 * Math.random()): categoriaProduto.val()));
+            $("#indicadoresForm").bootstrapValidator('revalidateField', 'categoria');
+        });
+
+
+        var boostrapValidationParameters = function(obj){
+
+          obj = {
+            "message": 'Este valor não é válido',
+            "feedbackIcons": {
+              "valid": '',
+              "invalid": '',
+              "validating": ''
+            },
+            "fields": obj.fields
+        
+          }
+        
+          return obj;
+        };
+
+        bootstrapParameters = boostrapValidationParameters({
+          fields: {
+              categoria: {
+                  validators: {
+                      notEmpty: {}
+                  }
+              }   
+          }
+      });
+
+      var showMessageOnlyTime = function(e, data) {
+        data.element
+          .data('bv.messages')
+          // Hide all the messages
+          .find('.help-block[data-bv-for="' + data.field + '"]').hide()
+          // Show only message associated with current validator
+          .filter('[data-bv-validator="' + data.validator + '"]').show();
+      }
+
+      $("#indicadoresForm").bootstrapValidator(bootstrapParameters)
+    .on('error.validator.bv', function(e, data){ showMessageOnlyTime(e, data)});
+
+
     });
+    
+
+
+    var formatter = function (value) {
+      return "R$ " + parseFloat(value).toLocaleString();
+    };
 
 });

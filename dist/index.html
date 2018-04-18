@@ -381,26 +381,32 @@
             <hr>
             <div class="col-sm-12">
               <p>
-                <h2><i class="fa fa-thermometer-half" aria-hidden="true"></i> Consulta de Indicadores por Produto</h2>
+                <h2><i class="fa fa-thermometer-half" aria-hidden="true"></i> Consulta de Indicadores por Categoria / Produto</h2>
               </p>
               <br>
-              <form class="form-inline">
-                <label for="categoriaProduto">Categoria: </label>
-                <div class="form-group">
-                  <select class="form-control">
-                    <option>Alimentos</option>
-                    <option>Bebidas</option>
-                    <option>Pereciveis</option>
-                  </select>
-                </div>
-                -
-                <div class="form-group">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Nome do Produto...">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button"> <i class="fa fa-search" aria-hidden="true"></i></button>
-                      </span>
+              <form class="form-horizontal" id="indicadoresForm">
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label for="categoria" class="col-sm-3 control-label">Categoria:</label>
+                    <div class="col-sm-7">
+                        <select class="form-control input-lg" name="categoria" id="categoria">
+                          <option></option>
+                          <option>Alimentos</option>
+                          <option>Bebidas</option>
+                          <option>Pereciveis</option>
+                        </select>
                     </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="inputConsulta" placeholder="Nome do Produto...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="button" id="buscar-indicadores"> <i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                      </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -412,8 +418,12 @@
                     <caption>Dados do Produto</caption>
                     <tbody>
                       <tr>
-                        <td>Produto</td>
-                        <td class="text-weight-bold">Leite em Pó Ninho 300g</td>
+                        <td>Tipo da Análise</td>
+                        <td class="text-uppercase" id="td-tipo">Produto</td>
+                      </tr>
+                      <tr>
+                        <td>Item</td>
+                        <td class="text-weight-bold" id="td-produto">Leite em Pó Ninho 300g</td>
                       </tr>
                       <tr>
                         <td>Estoque Atual</td>
@@ -428,6 +438,8 @@
                 </div>
               </div>
               <div class="col-sm-8">
+                <br>
+                <br>
                 <div class="col-sm-3">
                   <div class="well text-center">
                     <h4 class="text-weight-bold">R$ 1.358,12</h4>
@@ -468,7 +480,8 @@
   </div>
 </div>
 
-<script th:src="@{/vendor/js/vendor.min.js}" data-main="js/main" src="js/vendor.min.js"></script>
+<script th:src="@{/vendor/js/vendor.min.js}" src="js/vendor.min.js"></script>
+<script th:src="@{/vendor/js/vendor.min.js}" data-main="js/main" src="js/require.js"></script>
 
 <script>
   require(['main'], function(){

@@ -29,7 +29,10 @@ gulp.task('scripts',['appScripts'], function(){
 });
 
 gulp.task('appScripts', function(){
-    return gulp.src('js/**/*.js')
+    return gulp.src([
+        'vendor/requirejs/require.js',
+        'js/**/*.js'
+    ])
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'))
 });

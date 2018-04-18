@@ -14,7 +14,7 @@ define(function(){
         this.chartData = data;
         this.settings = opts;
         this.selector = elem;
-        this.morrisChart = null;
+        this.morrisObject = null;
 
         if(this.chartData.length > 0){
           this.xkey = Object.keys(this.chartData[0])[0];
@@ -24,7 +24,7 @@ define(function(){
     
       BarChart.prototype.show = function(){
         
-        if(this.morrisChart != null && this.morrisChart != 'undefined'){
+        if(this.morrisObject != null){
           this.redraw();
           return false;
         }
@@ -42,7 +42,7 @@ define(function(){
             });
             tempDataList.push(other);
           });
-          this.morrisChart.setData(tempDataList);
+          this.morrisObject.setData(tempDataList);
       };
     
       BarChart.prototype.buildCheckbox = function(){
@@ -59,7 +59,7 @@ define(function(){
       };
       
       BarChart.prototype.redraw = function(){
-        this.morrisChart.redraw();
+        this.morrisObject.redraw();
       };
 
       BarChart.prototype.addHandlerLegend = function(){
@@ -80,7 +80,7 @@ define(function(){
           .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
           return false;
         }
-        this.morrisChart =  Morris.Bar({
+        this.morrisObject =  Morris.Bar({
           element: this.selector,
           data: this.chartData,
           dataLabels:false,
@@ -177,6 +177,9 @@ define(function(){
     };
 
     Knob.prototype.show = function(){
+      if(this.knobObject != null){
+        return false;
+      }
       $.when(this.create()).then(this.animate());
     };
 
@@ -224,7 +227,15 @@ define(function(){
         });
       };
 
+      Donut.prototype.redraw = function(){
+        this.donutObject.redraw();
+      };
+
       Donut.prototype.show = function(){
+          if(this.donutObject != null){
+            this.redraw();
+            return false;
+          }
           this.create();
       };
       
