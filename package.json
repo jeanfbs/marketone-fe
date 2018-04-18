@@ -12,6 +12,7 @@
     "gulp-clean-css": "^3.9.3",
     "gulp-concat": "^2.6.1",
     "gulp-jshint": "^2.1.0",
+    "gulp-json-srv": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-requirejs-optimize": "^1.3.0",
     "gulp-uglify": "^3.0.0",

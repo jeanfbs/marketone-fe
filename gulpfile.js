@@ -9,8 +9,27 @@ var cleanCSS = require('gulp-clean-css');
 var runSequence = require('run-sequence');
 var es = require('event-stream');
 var browserSync = require('browser-sync').create();
+var jsonServer = require("gulp-json-srv");
+ 
+// Gulp Mock Server Tasks
+var server = jsonServer.create({
+    port: 3003,
+    baseUrl: '/api/',
+});
+ 
+gulp.task("mock-server", function(){
+    return gulp.src("mock-server/*.json")
+        .pipe(server.pipe());
+});
+
+gulp.task("watch-mock", function () {
+    gulp.watch("mock-server/*.json");
+});
+
+gulp.task("start-mock",['mock-server', 'watch-mock']);
 
 
+// Application Tasks
 gulp.task('clean', function(){
     return gulp.src('dist/')
     .pipe(clean())

@@ -11,6 +11,7 @@ define(function(){
 
 
       function BarChart(elem, data, opts){
+
         this.chartData = data;
         this.settings = opts;
         this.selector = elem;
@@ -21,6 +22,25 @@ define(function(){
           this.ykeys = Object.keys(this.chartData[0]).slice(1);
         }
       }
+
+      var getLabel = function(dataObjectArray, rowArray){
+          var newRowArray = [];
+
+          for(var i = 0; i < rowArray.length; i++){
+            var index = 0;
+            for(var j = 0; j < dataObjectArray.length; j++){
+              if(rowArray[i] == dataObjectArray[j]){
+                index = j;
+              }
+            }
+
+            var obj = {};
+            obj.key = rowArray[i];
+            obj.index = index;
+            newRowArray.push(obj);
+          }
+          return newRowArray;
+      };
     
       BarChart.prototype.show = function(){
         
@@ -47,11 +67,12 @@ define(function(){
     
       BarChart.prototype.buildCheckbox = function(){
         var divLegend = $('<div class="variables text-center"></div>');
-        var barColors = this.settings.barColors;
+        var _settings = this.settings;
+
         $.each(this.ykeys, function(i, key){
           var legend = $('<label class="checkbox-inline text-capitalize"></label>')
           .append($('<input type="checkbox" checked class="checkLegend"></span>').val(key))
-          .append(key).append($('<span class="legend">').css({"background-color" : barColors[i]}));
+          .append(_settings.labels[i]).append($('<span class="legend">').css({"background-color" : _settings.barColors[i]}));
           
           divLegend.append(legend);
         });
@@ -75,6 +96,7 @@ define(function(){
     
       BarChart.prototype.buildChart = function(){
         $("#" + this.selector).empty();
+        var _ykeys = this.ykeys;
         if(this.chartData != null && this.chartData.length ==0){
           $("#" + this.selector).addClass("vertical-align")
           .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
@@ -90,16 +112,19 @@ define(function(){
           ykeys: this.ykeys,
           labels: this.settings.labels,
           hoverCallback: function(index, options, content, row){
+
               var root = $("<div></div>");
               var morrisRowLabel = $("<div class='morris-hover-row-label'></div>").text(row.y);
               var contentTable = $("<table></table>").addClass("table table-bordered table-condensed");
               var tbody = $("<tbody></tbody>");
               var rowKeys = Object.keys(row).slice(1);
-              $.each(rowKeys, function(i, key){
+              var newRowArray = getLabel(_ykeys, rowKeys);
+              
+              $.each(newRowArray, function(i, obj){
                   
                   var line = $("<tr></tr>")
-                  .append("<td class='text-left text-capitalize'>"+ key + "</td>")
-                  .append("<td><b>R$ "+ parseFloat(row[key]).toLocaleString() + "</b></td>");
+                  .append("<td class='text-left text-capitalize'>"+ options.labels[obj.index] + "</td>")
+                  .append("<td><b>R$ "+ parseFloat(row[obj.key]).toLocaleString() + "</b></td>");
                   tbody.append(line);
               });
               contentTable.append(tbody);

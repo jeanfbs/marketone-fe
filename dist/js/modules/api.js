@@ -1,0 +1,1 @@
+define(function(){var a="http://localhost:3003/api/";return{"vendas.atual.dinheiro":a+"knob1","vendas.atual.credito":a+"knob2","vendas.atual.debito":a+"knob3"}});

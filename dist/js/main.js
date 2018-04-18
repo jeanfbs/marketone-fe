@@ -1,1 +1,1 @@
-requirejs.config({baseUrl:"js",paths:{chart:"modules/chart"}});
+requirejs.config({baseUrl:"js",paths:{chart:"modules/chart",api:"modules/api"}});

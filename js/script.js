@@ -1,12 +1,70 @@
 
-define(['chart'], function(chart){
+define(['chart', 'api'], function(chart, api){
+
+    var Ajax = {
+
+      call: function(url, method, data){
+        var settings = {
+            crossDomain: true,
+            headers: {
+              "content-type": "application/json",
+              "cache-control": "no-cache"
+            },
+            dataType: 'json',
+        };
+        
+        settings.url = url;
+        settings.method = method;
+        if(data != undefined && data != null){
+          settings.data = data;
+        }
+
+        return $.ajax(settings);
+      }
+    };  
+
     $(document).ready(function(){
         
-        var knobVendasDinheiro = new chart.Knob("#vendas-dinheiro", 12756.65, formatter);
-        var knobVendasCredito = new chart.Knob("#vendas-credito", Math.floor(1000 * Math.random()), formatter);
-        var knobVendasDebito = new chart.Knob("#vendas-debito", Math.floor(10000 * Math.random()), formatter);
-        
         $("#insertHeader").load("./fragments/header.html");
+
+        var ajaxObject = Ajax.call(api["vendas.atual.dinheiro"], "GET");
+
+        var knobVendasDinheiro = null;
+
+        ajaxObject.done(function(json){
+          
+          knobVendasDinheiro = new chart.Knob("#vendas-dinheiro", json.value, formatter);
+
+        }).fail(function(err){
+          console.log(err.responseText);
+        });
+        
+        
+        ajaxObject = Ajax.call(api["vendas.atual.credito"], "GET");
+
+        var knobVendasCredito = null;
+
+        ajaxObject.done(function(json){
+          
+          knobVendasCredito = new chart.Knob("#vendas-credito", json.value, formatter);
+          
+        }).fail(function(err){
+          console.log(err.responseText);
+        });
+        
+
+        ajaxObject = Ajax.call(api["vendas.atual.debito"], "GET");
+
+        var knobVendasDebito = null;
+
+        ajaxObject.done(function(json){
+          console.log(json);
+          
+          knobVendasDebito = new chart.Knob("#vendas-debito", json.value, formatter);
+          
+        }).fail(function(err){
+          console.log(err.responseText);
+        });
 
         var donutVendasAtuais = new chart.Donut('donut-vendas-atuais', [
           { label: 'Dinheiro', value: 33389.40 },
@@ -29,7 +87,7 @@ define(['chart'], function(chart){
   
         });
 
-        var chartBarvendasMensal = new chart.BarChart("vendas-mensal",[
+        var chartBarVendasMensal = new chart.BarChart("vendas-mensal",[
           { y: '02/06', dinheiro: 1254, credito: 55.21, debito: 100, total:  (1254 + 55.21 + 100)},
           { y: '03/06', dinheiro: 152.54,  credito: 125, debito: 205 , total: (152.54 + 125 + 205)},
           { y: '04/06', dinheiro: 50,  credito: 454, debito: 2120 , total: (50 + 454 + 2120)},
@@ -61,84 +119,67 @@ define(['chart'], function(chart){
 
         /* Tab Estoque */
 
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-          var target = $(e.target).attr("href");
-
-            switch (target) {
-              case "#vendas":
-
-                  knobVendasDinheiro.show();
-                  knobVendasCredito.show();
-                  knobVendasDebito.show();
-
-                  chartBarVendasSemanal.show();
-                  chartBarvendasMensal.show();
-
-                  donutVendasAtuais.show();
-                break;
-
-                case "#estoque":
-
-                break;
-            }
+        var chartBarEstoqueAnual = new chart.BarChart("estoque-anual",[
+          { y: '01/2018', entradas: 1254, saidas: 55, saldo: 100, valorTotal:  (1254 + 55.21 + 100)},
+          { y: '02/2018', entradas: 152,  saidas: 125, saldo: 205 , valorTotal: (152.54 + 125 + 205)},
+          { y: '03/2018', entradas: 50,  saidas: 454, saldo: 2120 , valorTotal: (50 + 454 + 2120)},
+          { y: '04/2018', entradas: 3678,  saidas: 3342, saldo: 490 , valorTotal: (3678.12 + 3342.67 + 490)},
+          { y: '05/2018', entradas: 242,  saidas: 2817, saldo: 809, valorTotal: (242 + 2817 + 809) },
+          { y: '06/2018', entradas: 1544,  saidas: 89, saldo: 550, valorTotal: (1544.65 + 89 + 550.66)},
+          { y: '17/2018', entradas: 100, saidas: 1209, saldo: 2779, valorTotal: (100 + 1209 + 2779) },
+          { y: '08/2018', entradas: 1254, saidas: 55, saldo: 100, valorTotal:  (1254 + 55.21 + 100)},
+          { y: '09/2018', entradas: 152,  saidas: 125, saldo: 205 , valorTotal: (152.54 + 125 + 205)},
+          { y: '10/2018', entradas: 50,  saidas: 454, saldo: 2120 , valorTotal: (50 + 454 + 2120)},
+          { y: '11/2018', entradas: 3678,  saidas: 3342, saldo: 490 , valorTotal: (3678.12 + 3342.67 + 490)},
+          { y: '12/2018', entradas: 242,  saidas: 2817, saldo: 809, valorTotal: (242 + 2817 + 809) },
+        ],
+        {
+          barColors: ["#4CAF50", "#2196F3", "#FF9800","#FF5722" ],
+          labels: ['Entradas', 'Saidas', 'Saldo Final','Total do Estoque'],
+  
         });
 
-        $('[data-toggle="tooltip"]').tooltip();
+        chartBarEstoqueAnual.show();
 
 
         var categoriaProduto = $("#categoria").select2({
-            placeholder: "Escolha uma opção",
-            allowClear: true,
-            theme: "bootstrap"
-        });
+          placeholder: "Categoria",
+          allowClear: true,
+          theme: "bootstrap"
+      });
 
-        $("#buscar-indicadores").off("click").on("click",function(){
-            $("#td-tipo").text($("#inputConsulta").val() != "" ? 'Produto': 'Categoria');
-            $("#td-produto").text(($("#inputConsulta").val() != "" ? 'Produto ' + Math.floor(10 * Math.random()): categoriaProduto.val()));
-            $("#indicadoresForm").bootstrapValidator('revalidateField', 'categoria');
-        });
+      $("#avaliarItem").off("click").on("click",function(){
+          $("#td-tipo").text($("#inputConsulta").val() != "" ? 'Produto': 'Categoria');
+          $("#td-produto").text(($("#inputConsulta").val() != "" ? 'Produto ' + Math.floor(10 * Math.random()): categoriaProduto.val()));
+          
+      });
 
 
-        var boostrapValidationParameters = function(obj){
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href");
 
-          obj = {
-            "message": 'Este valor não é válido',
-            "feedbackIcons": {
-              "valid": '',
-              "invalid": '',
-              "validating": ''
-            },
-            "fields": obj.fields
-        
-          }
-        
-          return obj;
-        };
+          switch (target) {
+            case "#vendas":
 
-        bootstrapParameters = boostrapValidationParameters({
-          fields: {
-              categoria: {
-                  validators: {
-                      notEmpty: {}
-                  }
-              }   
+                knobVendasDinheiro.show();
+                knobVendasCredito.show();
+                knobVendasDebito.show();
+
+                chartBarVendasSemanal.show();
+                chartBarVendasMensal.show();
+
+                donutVendasAtuais.show();
+              break;
+
+              case "#estoque":
+                
+                chartBarEstoqueAnual.show();
+
+              break;
           }
       });
 
-      var showMessageOnlyTime = function(e, data) {
-        data.element
-          .data('bv.messages')
-          // Hide all the messages
-          .find('.help-block[data-bv-for="' + data.field + '"]').hide()
-          // Show only message associated with current validator
-          .filter('[data-bv-validator="' + data.validator + '"]').show();
-      }
-
-      $("#indicadoresForm").bootstrapValidator(bootstrapParameters)
-    .on('error.validator.bv', function(e, data){ showMessageOnlyTime(e, data)});
-
-
+      $('[data-toggle="tooltip"]').tooltip();
     });
     
 
