@@ -8,7 +8,9 @@ define(function(){
         "vendas.acumulo.mes": baseUrl + "donut1",
         "vendas.semanal": baseUrl + "bar1",
         "vendas.mensal": baseUrl + "bar2",
-        "estoque.anual": baseUrl + "bar3"
+        "estoque.anual": baseUrl + "bar3",
+        "estoque.indicadores.periodo": baseUrl + "indicadorEstoque",
+        "estoque.indicadores.periodo.item": baseUrl + "indicadorItemEstoque"
     };
 
     return api;

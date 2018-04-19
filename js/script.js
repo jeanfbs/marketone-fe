@@ -21,9 +21,19 @@ define(['chart', 'api'], function(chart, api){
 
         return $.ajax(settings);
       }
-    };  
+    };
 
-    $(document).ready(function(){
+    var Utils = {
+      getFormParameters: function(form){
+        var formParams = {};
+        $.each(form.serializeArray(), function(_, kv) {
+          formParams[kv.name] = kv.value;
+        });
+        return formParams;
+      }
+    };
+
+    $(function(){
         
       $("#insertHeader").load("./fragments/header.html");
 
@@ -96,11 +106,15 @@ define(['chart', 'api'], function(chart, api){
           barColors: ["#4CAF50", "#2196F3", "#FF9800","#FF5722" ],
           labels: ['Entradas', 'Saidas', 'Saldo Final','Total do Estoque'],
         });
-        chartBarEstoqueAnual.show();
       }).fail(function(err){
         chartBarEstoqueAnual = new chart.BarChart("estoque-anual");
+      }).always(function(){
         chartBarEstoqueAnual.show();
+        var today = new Date();
+        var lbPeriodoAnual = "01/2018 até " + ("0" + (today.getMonth() + 1)).slice(-2) + "/" + today.getFullYear();
+        $("#lbPeriodoAnual").text(lbPeriodoAnual);
       });
+
 
       var categoriaProduto = $("#categoria").select2({
           placeholder: "Categoria",
@@ -108,10 +122,54 @@ define(['chart', 'api'], function(chart, api){
           theme: "bootstrap"
       });
 
+      $("#buscarIndicadoresEstoque").off("click").on("click",function(){
+
+        var formParamsObj = Utils.getFormParameters($("#indicadoresForm"));
+        var ajaxBuscaIndicadoresEstoque = Ajax.call(api["estoque.indicadores.periodo"], "GET", formParamsObj);
+        
+        ajaxBuscaIndicadoresEstoque.done(function(response){
+
+          $("#ajaxBuscaIndicadoresEstoqueError").addClass("hide");
+          $("#divIndicadores").hide().removeClass("hide").fadeIn(500);
+          $("#spanMediaEstoque").text(response.media.toLocaleString());
+          $("#spanCoberturaEstoque").text(response.cobertura);
+          $("#spanGiroEstoque").text(response.giro);
+          $("#spanTempoReposicao").text(response.tempo_reposicao);
+
+        }).fail(function(err){
+            $("#ajaxBuscaIndicadoresEstoqueError").removeClass("hide");
+            $("#divIndicadores").addClass("hide");
+        });
+
+    });
+
       $("#avaliarItem").off("click").on("click",function(){
-          $("#td-tipo").text($("#inputConsulta").val() != "" ? 'Produto': 'Categoria');
-          $("#td-produto").text(($("#inputConsulta").val() != "" ? 'Produto ' + Math.floor(10 * Math.random()): categoriaProduto.val()));
           
+          var formParamsObj = Utils.getFormParameters($("#indicadoresProdutoCategoriaForm"));
+          var ajaxBuscaIndicadoresEstoque = Ajax.call(api["estoque.indicadores.periodo.item"], "GET", formParamsObj);
+          
+          ajaxBuscaIndicadoresEstoque.done(function(response){
+
+            $("#ajaxBuscaIndicadoresEstoqueItemError").addClass("hide");
+            $("#divIndicadoresItem").hide().removeClass("hide").fadeIn(500);
+
+            $("#td-tipo").text(response.tipo);
+            $("#td-produto").text(response.item);
+            $("#td-quantidade").text(response.quantidade_atual);
+            $("#td-unidade").text(response.unidade);
+            $("#td-atualizacao").text(response.atualizacao);
+
+            $("#spanMediaEstoqueItem").text(response.media.toLocaleString());
+            $("#spanCoberturaEstoqueItem").text(response.cobertura);
+            $("#spanGiroEstoqueItem").text(response.giro);
+            $("#spanTempoReposicaoItem").text(response.tempo_reposicao);
+            
+
+          }).fail(function(err){
+              $("#ajaxBuscaIndicadoresEstoqueItemError").removeClass("hide");
+              $("#divIndicadoresItem").addClass("hide");
+          });
+
       });
 
 

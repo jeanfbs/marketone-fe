@@ -206,6 +206,7 @@
                   <!-- fim do panel body-->
                </div>
             </div>
+
             <div id="estoque" class="tab-pane in active">
                <div class="panel panel-default">
                   <div class="panel-body">
@@ -295,7 +296,7 @@
                         </div>
                      </div>
                      <div class="col-sm-12 hidden-xs">
-                        <p class="text-muted">Visão Anual - Período: <strong>01/2018 - 12/2018</strong></p>
+                        <p class="text-muted">Visão Anual - Período: <strong id="lbPeriodoAnual"></strong></p>
                         <div id="estoque-anual" class="chart-div"></div>
                      </div>
                      <div class="clearfix"></div>
@@ -328,73 +329,79 @@
                               </div>
                            </div>
                            <div class="col-sm-4">
-                              <button type="button" class="btn btn-primary" id="gerar">Avaliar</button>
+                              <button type="button" class="btn btn-primary" id="buscarIndicadoresEstoque">Avaliar</button>
                            </div>
                         </form>
                      </div>
                      <div class="clearfix"></div>
                      <br>
-                     <div class="col-sm-3 col-xs-12">
-                        <div class="panel panel-primary">
-                           <div class="panel-heading">
-                              <div class="row vertical-align">
-                                 <div class="col-xs-3">
-                                    <i class="fa fa-usd fa-4x"></i>
-                                 </div>
-                                 <div class="col-xs-9 text-right">
-                                    <br>
-                                    <div><span style="font-size: 16pt;">R$ 33.586,98</span></div>
-                                    <div>Média de Estoque</div>
-                                 </div>
+                     <div class="col-sm-12" id="divIndicadores">
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                  <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-usd fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <br>
+                                        <div style="font-size: 16pt;">R$ <span id="spanMediaEstoque">0,00</span></div>
+                                        <br>
+                                        <div>Média de Estoque</div>
+                                    </div>
+                                  </div>
                               </div>
-                           </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                  <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-cubes fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <h3><span id="spanCoberturaEstoque" class="huge">0</span> dia(s)</h3>
+                                        <div>Cobertura de Estoque</div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                  <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-cubes fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <h3><span id="spanGiroEstoque" class="huge">0</span> dia(s)</h3>
+                                        <div>Giro de Estoque</div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                  <div class="row vertical-align">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-cubes fa-4x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <h3><span id="spanTempoReposicao" class="huge">0</span> dia(s)</h3>
+                                        <div>Tempo de Reposição</div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
                         </div>
                      </div>
-                     <div class="col-sm-3 col-xs-12">
-                        <div class="panel panel-primary">
-                           <div class="panel-heading">
-                              <div class="row vertical-align">
-                                 <div class="col-xs-3">
-                                    <i class="fa fa-cubes fa-4x"></i>
-                                 </div>
-                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">27 dias</div>
-                                    <div>Cobertura de Estoque</div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-3 col-xs-12">
-                        <div class="panel panel-primary">
-                           <div class="panel-heading">
-                              <div class="row vertical-align">
-                                 <div class="col-xs-3">
-                                    <i class="fa fa-cubes fa-4x"></i>
-                                 </div>
-                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">3,5</div>
-                                    <div>Giro de Estoque</div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-3 col-xs-12">
-                        <div class="panel panel-primary">
-                           <div class="panel-heading">
-                              <div class="row vertical-align">
-                                 <div class="col-xs-3">
-                                    <i class="fa fa-cubes fa-4x"></i>
-                                 </div>
-                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">4 dias</div>
-                                    <div>Tempo de Reposição</div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                      <p class="text-danger hide col-sm-12" id="ajaxBuscaIndicadoresEstoqueError">
+                          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ocorreu um erro na requisição ao servidor, tente mais tarde!
+                      </p>
                      <div class="clearfix"></div>
                      <hr>
                      <div class="col-sm-12">
@@ -439,7 +446,7 @@
                      </div>
                      <div class="clearfix"></div>
                      <br>
-                     <div class="col-sm-12" id="conteudo-indicadores">
+                     <div class="col-sm-12" id="divIndicadoresItem">
                         <div class="col-sm-4">
                           <div class="table-responsive">
                               <table class="table table-bordered table-striped table-condensed">
@@ -459,7 +466,7 @@
                                     </tr>
                                     <tr>
                                       <td>Última Atualização</td>
-                                      <td class="text-weight-bold"><small id="td-data-atualizacao">12/04 12:35</small></td>
+                                      <td class="text-weight-bold"><small id="td-atualizacao">12/04 12:35</small></td>
                                     </tr>
                                 </tbody>
                               </table>
@@ -470,19 +477,19 @@
                           <br>
                           <div class="col-sm-3">
                               <div class="well text-center card-4">
-                                <h4 class="text-weight-bold">R$ 1.358,12</h4>
+                                <h4 class="text-weight-bold">R$ <span id="spanMediaEstoqueItem">0,00</span></h4>
                                 <span>Média de Estoque</span>
                               </div>
                           </div>
                           <div class="col-sm-3">
                               <div class="well text-center card-4">
-                                <h4 class="text-weight-bold">32 dias</h4>
+                                <h4 class="text-weight-bold"><span id="spanCoberturaEstoqueItem">0</span> dia(s)</h4>
                                 <span>Cobertura de Estoque</span>
                               </div>
                           </div>
                           <div class="col-sm-3">
                               <div class="well text-center card-4">
-                                <h4 class="text-weight-bold">1 dia</h4>
+                                <h4 class="text-weight-bold"><span id="spanGiroEstoqueItem">0</span> dia(s)</h4>
                                 <span>Giro de Estoque</span>
                                 <br>
                                 <br>
@@ -490,12 +497,15 @@
                           </div>
                           <div class="col-sm-3">
                               <div class="well text-center card-4">
-                                <h4 class="text-weight-bold">3 dia</h4>
+                                <h4 class="text-weight-bold"><span id="spanTempoReposicaoItem">0</span> dia(s)</h4>
                                 <span>Tempo de Reposição</span>
                               </div>
                           </div>
                         </div>
                      </div>
+                     <p class="text-danger hide col-sm-12" id="ajaxBuscaIndicadoresEstoqueItemError">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ocorreu um erro na requisição ao servidor, tente mais tarde!
+                    </p>
                   </div>
                   <!-- fim do panel body-->
                </div>

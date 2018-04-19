@@ -24,43 +24,43 @@
     ],
     "bar1": [  
         {  
-           "y":"02/06",
+           "x":"02/06",
            "dinheiro":1254,
            "credito":55.21,
            "debito":100
         },
         {  
-           "y":"03/06",
+           "x":"03/06",
            "dinheiro":152.54,
            "credito":125,
            "debito":205
         },
         {  
-           "y":"04/06",
+           "x":"04/06",
            "dinheiro":50,
            "credito":454,
            "debito":2120
         },
         {  
-           "y":"05/06",
+           "x":"05/06",
            "dinheiro":3678.12,
            "credito":3342.67,
            "debito":490
         },
         {  
-           "y":"08/06",
+           "x":"08/06",
            "dinheiro":242,
            "credito":2817,
            "debito":809
         },
         {  
-           "y":"09/06",
+           "x":"09/06",
            "dinheiro":1544.65,
            "credito":89,
            "debito":550.66
         },
         {  
-           "y":"10/06",
+           "x":"10/06",
            "dinheiro":100,
            "credito":1209,
            "debito":2779
@@ -68,147 +68,147 @@
      ],
      "bar2": [  
         {  
-           "y":"02/06",
+           "x":"02/06",
            "dinheiro":1254,
            "credito":55.21,
            "debito":100,
            "total":1409.21
         },
         {  
-           "y":"03/06",
+           "x":"03/06",
            "dinheiro":152.54,
            "credito":125,
            "debito":205,
            "total":482.53999999999996
         },
         {  
-           "y":"04/06",
+           "x":"04/06",
            "dinheiro":50,
            "credito":454,
            "debito":2120,
            "total":2624
         },
         {  
-           "y":"05/06",
+           "x":"05/06",
            "dinheiro":3678.12,
            "credito":3342.67,
            "debito":490,
            "total":7510.79
         },
         {  
-           "y":"08/06",
+           "x":"08/06",
            "dinheiro":242,
            "credito":2817,
            "debito":809,
            "total":3868
         },
         {  
-           "y":"09/06",
+           "x":"09/06",
            "dinheiro":1544.65,
            "credito":89,
            "debito":550.66,
            "total":2184.31
         },
         {  
-           "y":"10/06",
+           "x":"10/06",
            "dinheiro":100,
            "credito":1209,
            "debito":2779,
            "total":4088
         },
         {  
-           "y":"02/06",
+           "x":"02/06",
            "dinheiro":1254,
            "credito":55.21,
            "debito":100,
            "total":1409.21
         },
         {  
-           "y":"03/06",
+           "x":"03/06",
            "dinheiro":152.54,
            "credito":125,
            "debito":205,
            "total":482.53999999999996
         },
         {  
-           "y":"04/06",
+           "x":"04/06",
            "dinheiro":50,
            "credito":454,
            "debito":2120,
            "total":2624
         },
         {  
-           "y":"05/06",
+           "x":"05/06",
            "dinheiro":3678.12,
            "credito":3342.67,
            "debito":490,
            "total":7510.79
         },
         {  
-           "y":"08/06",
+           "x":"08/06",
            "dinheiro":242,
            "credito":2817,
            "debito":809,
            "total":3868
         },
         {  
-           "y":"09/06",
+           "x":"09/06",
            "dinheiro":1544.65,
            "credito":89,
            "debito":550.66,
            "total":2184.31
         },
         {  
-           "y":"10/06",
+           "x":"10/06",
            "dinheiro":100,
            "credito":1209,
            "debito":2779,
            "total":4088
         },
         {  
-           "y":"02/06",
+           "x":"02/06",
            "dinheiro":1254,
            "credito":55.21,
            "debito":100,
            "total":1409.21
         },
         {  
-           "y":"03/06",
+           "x":"03/06",
            "dinheiro":152.54,
            "credito":125,
            "debito":205,
            "total":482.53999999999996
         },
         {  
-           "y":"04/06",
+           "x":"04/06",
            "dinheiro":50,
            "credito":454,
            "debito":2120,
            "total":2624
         },
         {  
-           "y":"05/06",
+           "x":"05/06",
            "dinheiro":3678.12,
            "credito":3342.67,
            "debito":490,
            "total":7510.79
         },
         {  
-           "y":"08/06",
+           "x":"08/06",
            "dinheiro":242,
            "credito":2817,
            "debito":809,
            "total":3868
         },
         {  
-           "y":"09/06",
+           "x":"09/06",
            "dinheiro":1544.65,
            "credito":89,
            "debito":550.66,
            "total":2184.31
         },
         {  
-           "y":"10/06",
+           "x":"10/06",
            "dinheiro":100,
            "credito":1209,
            "debito":2779,
@@ -217,88 +217,105 @@
      ],
      "bar3": [  
         {  
-           "y":"01/2018",
+           "x":"01/2018",
            "entradas":1254,
            "saidas":55,
            "saldo":100,
            "valorTotal":1409.21
         },
         {  
-           "y":"02/2018",
+           "x":"02/2018",
            "entradas":152,
            "saidas":125,
            "saldo":205,
            "valorTotal":482.53999999999996
         },
         {  
-           "y":"03/2018",
+           "x":"03/2018",
            "entradas":50,
            "saidas":454,
            "saldo":2120,
            "valorTotal":2624
         },
         {  
-           "y":"04/2018",
+           "x":"04/2018",
            "entradas":3678,
            "saidas":3342,
            "saldo":490,
            "valorTotal":7510.79
         },
         {  
-           "y":"05/2018",
+           "x":"05/2018",
            "entradas":242,
            "saidas":2817,
            "saldo":809,
            "valorTotal":3868
         },
         {  
-           "y":"06/2018",
+           "x":"06/2018",
            "entradas":1544,
            "saidas":89,
            "saldo":550,
            "valorTotal":2184.31
         },
         {  
-           "y":"17/2018",
+           "x":"17/2018",
            "entradas":100,
            "saidas":1209,
            "saldo":2779,
            "valorTotal":4088
         },
         {  
-           "y":"08/2018",
+           "x":"08/2018",
            "entradas":1254,
            "saidas":55,
            "saldo":100,
            "valorTotal":1409.21
         },
         {  
-           "y":"09/2018",
+           "x":"09/2018",
            "entradas":152,
            "saidas":125,
            "saldo":205,
            "valorTotal":482.53999999999996
         },
         {  
-           "y":"10/2018",
+           "x":"10/2018",
            "entradas":50,
            "saidas":454,
            "saldo":2120,
            "valorTotal":2624
         },
         {  
-           "y":"11/2018",
+           "x":"11/2018",
            "entradas":3678,
            "saidas":3342,
            "saldo":490,
            "valorTotal":7510.79
         },
         {  
-           "y":"12/2018",
+           "x":"12/2018",
            "entradas":242,
            "saidas":2817,
            "saldo":809,
            "valorTotal":3868
         }
-     ]
+     ],
+     "indicadorEstoque":{
+         "media": 33586.98,
+         "cobertura": 27,
+         "giro": 3.5,
+         "tempo_reposicao": 4
+     },
+     "indicadorItemEstoque":{
+        "tipo":"Produto",
+        "item": "Leite em Pó Ninho 300g",
+        "quantidade_atual": 35,
+        "unidade": "UN",
+        "atualizacao": "12/04/2018 12:35",
+        "media": 1358.12,
+        "cobertura": 27,
+        "giro": 3.5,
+        "tempo_reposicao": 4
+    }
   }

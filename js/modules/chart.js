@@ -25,10 +25,12 @@ define(function(){
 
       var getLabel = function(dataObjectArray, rowArray){
           var newRowArray = [];
+          var rowArrayLength = rowArray.length;
+          var dataObjectArrayLength = dataObjectArray.length;
 
-          for(var i = 0; i < rowArray.length; i++){
+          for(var i = 0; i < rowArrayLength; i++){
             var index = 0;
-            for(var j = 0; j < dataObjectArray.length; j++){
+            for(var j = 0; j < dataObjectArrayLength; j++){
               if(rowArray[i] == dataObjectArray[j]){
                 index = j;
               }
@@ -41,7 +43,7 @@ define(function(){
           }
           return newRowArray;
       };
-    
+
       BarChart.prototype.show = function(){
         
         if(this.morrisObject != null){
@@ -68,7 +70,7 @@ define(function(){
       BarChart.prototype.buildCheckbox = function(){
         var divLegend = $('<div class="variables text-center"></div>');
         var _settings = this.settings;
-
+        
         $.each(this.ykeys, function(i, key){
           var legend = $('<label class="checkbox-inline text-capitalize"></label>')
           .append($('<input type="checkbox" checked class="checkLegend"></span>').val(key))
@@ -102,6 +104,7 @@ define(function(){
           .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
           return false;
         }
+        
         this.morrisObject =  Morris.Bar({
           element: this.selector,
           data: this.chartData,
@@ -113,7 +116,6 @@ define(function(){
           labels: this.settings.labels,
           hoverCallback: function(index, options, content, row){
 
-              var root = $("<div></div>");
               var morrisRowLabel = $("<div class='morris-hover-row-label'></div>").text(row.y);
               var contentTable = $("<table></table>").addClass("table table-bordered table-condensed");
               var tbody = $("<tbody></tbody>");
@@ -128,9 +130,8 @@ define(function(){
                   tbody.append(line);
               });
               contentTable.append(tbody);
-              root.append(morrisRowLabel).append(contentTable);
-              return root.html();
-            },
+              return morrisRowLabel[0].outerHTML + contentTable[0].outerHTML;
+            }
         });
       };
       return BarChart;
@@ -166,15 +167,15 @@ define(function(){
 
       Knob.prototype.create = function(){
         
-        var value = this.value;
-        var maxValue = getMaxValue(value);
-        if(value == null || value == undefined){
+        var _value = this.value;
+        var maxValue = getMaxValue(_value);
+        if(_value == null || _value == undefined){
             $(this.selector).addClass("hide");
             $(this.selector).parent("div").addClass("vertical-align").css({"width": "100%", "height": 150})
             .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
             return false;
         }
-
+        
         this.knobObject = $(this.selector).knob({
           width: 150,
           height: 150,
@@ -187,20 +188,25 @@ define(function(){
           readOnly: true,
           fontWeight: 400,
           format: this.formatter,
-          'draw': function() {
-            var size = 0;
-            if(value > 1000){
-                size = 11;
-            }else if(value > 100){
-              size = 15;
-            }else if(value > 10){
-              size = 16;
-            }
-            $(this.i).css('font-size', size + 'pt');
+          draw: function(){
+            setFont(_value, this.i[0]);
           }
       });
       
     };
+
+    var setFont = function(value, input){
+      var size = 0;
+      if(value > 1000){
+          size = 11;
+      }else if(value > 100){
+        size = 14;
+      }else if(value > 10){
+        size = 15;
+      }
+      input.style.fontSize = size + 'pt';
+      input.style.fontWeight = 'bold';
+    }
 
     Knob.prototype.show = function(){
       if(this.knobObject != null){
@@ -223,7 +229,10 @@ define(function(){
         duration: 3000,
         easing:'swing',
         progress: function(){
-          $(this).val(parseFloat($(selector).val()).toFixed(2)).trigger('change').removeClass("hide");
+          $(this).val(parseFloat($(selector).val()).toFixed(2)).trigger('change');
+          if($(this).hasClass("hide")){
+            $(this).removeClass("hide");
+          }
         }
       });
     };
