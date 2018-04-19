@@ -20,94 +20,99 @@
 
          <h1><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</h1>
          <ul class="nav nav-tabs" id="tabs">
-            <li><a data-toggle="tab" href="#vendas">Vendas</a></li>
-            <li class="active"><a data-toggle="tab" href="#estoque">Estoque</a></li>
-            <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+            <li><a data-toggle="tab" href="#vendas"> <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Vendas</a></li>
+            <li class="active"><a data-toggle="tab" href="#estoque"> <i class="fa fa-cubes fa-fw" aria-hidden="true"></i> Estoque</a></li>
+            <li><a data-toggle="tab" href="#financeiro"><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Financeiro</a></li>
          </ul>
 
          <div class="tab-content">
-            <div id="vendas" class="tab-pane fade">
+            <div id="vendas" class="tab-pane">
                <div class="panel panel-default">
                   <div class="panel-body">
-                     <p>
+                    <p>
                         <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Quinta Feira 12 de Abril de 2018
                         <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
                           <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                         </a>
                      </p>
-                     <div class="col-sm-4 col-xs-12 text-center">
-                        <div class="knob-slider">
-                           <input id="vendas-dinheiro" class="knob hide" data-step=".1" />
+                     <h2><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Visão Geral Vendas</h2>
+                     <br>
+                     <div class="col-sm-12">
+                        <p class="text-muted">Vendas por Tipo de Recebimento</p>
+                        <div class="col-sm-4 col-xs-12 text-center">
+                           <div class="knob-slider">
+                              <input id="vendas-dinheiro" class="knob hide" data-step=".1" />
+                           </div>
+                           <h4 class="text-muted"><i class="fa fa-money fa-fw" aria-hidden="true"></i> Dinheiro</h4>
                         </div>
-                        <h4 class="text-muted"><i class="fa fa-money fa-fw" aria-hidden="true"></i> Dinheiro</h4>
-                     </div>
-                     <div class="col-sm-4 col-xs-12 text-center">
-                        <div class="knob-slider">
-                           <input id="vendas-credito" class="knob hide" data-step=".1">
+                        <div class="col-sm-4 col-xs-12 text-center">
+                           <div class="knob-slider">
+                              <input id="vendas-credito" class="knob hide" data-step=".1">
+                           </div>
+                           <h4 class="text-muted"> <i class="fa fa-credit-card-alt fa-fw" aria-hidden="true"></i> Cartão de Crédito</h4>
                         </div>
-                        <h4 class="text-muted"> <i class="fa fa-credit-card-alt fa-fw" aria-hidden="true"></i> Cartão de Crédito</h4>
-                     </div>
-                     <div class="col-sm-4 col-xs-12 text-center">
-                        <div class="knob-slider">
-                           <input id="vendas-debito" class="knob hide" data-step=".1">
+                        <div class="col-sm-4 col-xs-12 text-center">
+                           <div class="knob-slider">
+                              <input id="vendas-debito" class="knob hide" data-step=".1">
+                           </div>
+                           <h4 class="text-muted"> <i class="fa fa-credit-card fa-fw" aria-hidden="true"></i> Cartão de Débito</h4>
                         </div>
-                        <h4 class="text-muted"> <i class="fa fa-credit-card fa-fw" aria-hidden="true"></i> Cartão de Débito</h4>
-                     </div>
-                     <div class="clearfix"></div>
-                     <hr>
-                     <div class="col-sm-8 hidden-xs">
-                        <div id="vendas-semanal" class="chart-div"></div>
-                     </div>
-                     <div class="col-sm-4 col-xs-12">
-                        <table class="table table-bordered table-hover">
-                           <caption>Resumo da Semana</caption>
-                           <tbody>
-                              <tr>
-                                 <td>Total em Dinheiro</td>
-                                 <td>
-                                    <span class="label label-default">R$ 9.129,00</span>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>Total em Cartão de Crédito</td>
-                                 <td>
-                                    <span class="label label-default">R$ 2.129,00</span>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>Total em Cartão de Débito</td>
-                                 <td>
-                                    <span class="label label-default">R$ 4.129,00</span>
-                                 </td>
-                              </tr>
-                              <tr class="bg-warning">
-                                 <td><strong>Valor Total</strong></td>
-                                 <td>
-                                    <span class="label label-primary">R$ 23.559,00</span>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>Período Maior Venda <i class="fa fa-arrow-up fa-fw pull-right text-success" aria-hidden="true"></i></td>
-                                 <td>05/06/2018</td>
-                              </tr>
-                              <tr>
-                                 <td>Valor Maior Venda <i class="fa fa-arrow-up fa-fw pull-right text-success" aria-hidden="true"></i></td>
-                                 <td>
-                                    <span class="label label-default">R$ 2.341,00</span>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>Período Menor Venda <i class="fa fa-arrow-down fa-fw pull-right text-danger" aria-hidden="true"></i></td>
-                                 <td>02/06/2018</td>
-                              </tr>
-                              <tr>
-                                 <td>Valor Menor Venda <i class="fa fa-arrow-down fa-fw pull-right text-danger" aria-hidden="true"></i></td>
-                                 <td>
-                                    <span class="label label-default">R$ 341,00</span>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="col-sm-8 hidden-xs">
+                           <div id="vendas-semanal" class="chart-div"></div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                           <table class="table table-bordered table-hover">
+                              <caption>Resumo da Semana</caption>
+                              <tbody>
+                                 <tr>
+                                    <td>Total em Dinheiro</td>
+                                    <td>
+                                       <span class="label label-default">R$ 9.129,00</span>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>Total em Cartão de Crédito</td>
+                                    <td>
+                                       <span class="label label-default">R$ 2.129,00</span>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>Total em Cartão de Débito</td>
+                                    <td>
+                                       <span class="label label-default">R$ 4.129,00</span>
+                                    </td>
+                                 </tr>
+                                 <tr class="bg-warning">
+                                    <td><strong>Valor Total</strong></td>
+                                    <td>
+                                       <span class="label label-primary">R$ 23.559,00</span>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>Período Maior Venda <i class="fa fa-arrow-up fa-fw pull-right text-success" aria-hidden="true"></i></td>
+                                    <td>05/06/2018</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Valor Maior Venda <i class="fa fa-arrow-up fa-fw pull-right text-success" aria-hidden="true"></i></td>
+                                    <td>
+                                       <span class="label label-default">R$ 2.341,00</span>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>Período Menor Venda <i class="fa fa-arrow-down fa-fw pull-right text-danger" aria-hidden="true"></i></td>
+                                    <td>02/06/2018</td>
+                                 </tr>
+                                 <tr>
+                                    <td>Valor Menor Venda <i class="fa fa-arrow-down fa-fw pull-right text-danger" aria-hidden="true"></i></td>
+                                    <td>
+                                       <span class="label label-default">R$ 341,00</span>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
                      </div>
                      <div class="clearfix"></div>
                      <hr>
@@ -149,7 +154,7 @@
                                        <th></th>
                                        <th>Vl. Bruto</th>
                                        <th>Impostos</th>
-                                       <th>Lucro</th>
+                                       <th>Vl. Líquido</th>
                                        <th>% Lucro <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Referente ao último mês"></i></th>
                                        <th>% Produtividade</th>
                                        <th>Meta do Mês</th>
@@ -201,7 +206,7 @@
                   <!-- fim do panel body-->
                </div>
             </div>
-            <div id="estoque" class="tab-pane fade in active">
+            <div id="estoque" class="tab-pane in active">
                <div class="panel panel-default">
                   <div class="panel-body">
                      <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
@@ -491,15 +496,11 @@
                           </div>
                         </div>
                      </div>
-                     <div class="clearfix"></div>
-                     <hr>
-
-
                   </div>
                   <!-- fim do panel body-->
                </div>
             </div>
-            <div id="menu3" class="tab-pane fade ">
+            <div id="financeiro" class="tab-pane ">
                <h3>Menu 3</h3>
                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
             </div>

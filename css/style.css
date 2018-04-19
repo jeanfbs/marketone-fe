@@ -1,5 +1,5 @@
 body{
-  background-color: #dedede;
+  background: transparent url("../img/overlay.png") repeat;
 }
 .navbar-upsale {
 	background-color:#FB8C00;

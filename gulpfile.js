@@ -56,11 +56,18 @@ gulp.task('appScripts', function(){
     .pipe(gulp.dest('dist/js'))
 });
 
-gulp.task('copyIndex', ['copyPages', 'copyFragments', 'fonts'], function(){
+gulp.task('copyIndex', ['copyPages', 'copyFragments', 'fonts', 'img'], function(){
     return gulp.src([
         'index.html',
     ])
     .pipe(gulp.dest('dist/'))
+});
+
+gulp.task('img', function(){
+    return gulp.src([
+        'img/*',
+    ])
+    .pipe(gulp.dest('dist/img'))
 });
 
 gulp.task('copyPages', function(){

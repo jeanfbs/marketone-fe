@@ -97,7 +97,7 @@ define(function(){
       BarChart.prototype.buildChart = function(){
         $("#" + this.selector).empty();
         var _ykeys = this.ykeys;
-        if(this.chartData != null && this.chartData.length ==0){
+        if(this.chartData != null && this.chartData.length == 0){
           $("#" + this.selector).addClass("vertical-align")
           .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
           return false;
@@ -145,6 +145,7 @@ define(function(){
       var value = null;
       var knobObject = null;
       var formatter = null;
+
       function Knob(selector, value, formatter){
         this.selector = selector;
         this.value = value;
@@ -164,14 +165,14 @@ define(function(){
       };
 
       Knob.prototype.create = function(){
+        
         var value = this.value;
         var maxValue = getMaxValue(value);
-        
-        $(this.selector).empty();
-        if(value == null || value == 'undefined'){
-          $(this.selector).parent("div").addClass("vertical-align").css({"width": "100%", "height": 150})
-          .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
-          return false;
+        if(value == null || value == undefined){
+            $(this.selector).addClass("hide");
+            $(this.selector).parent("div").addClass("vertical-align").css({"width": "100%", "height": 150})
+            .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
+            return false;
         }
 
         this.knobObject = $(this.selector).knob({
@@ -211,6 +212,11 @@ define(function(){
     Knob.prototype.animate = function(){
       var selector = this.selector;
       var value = this.value;
+      
+      if(value == null || value == undefined){
+        return false;
+      }
+
       $(selector).animate({
         value: value
       }, {
@@ -221,9 +227,7 @@ define(function(){
         }
       });
     };
-
       return Knob;
-
     })();
 
 

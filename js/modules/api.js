@@ -4,7 +4,11 @@ define(function(){
     var api = {
         "vendas.atual.dinheiro": baseUrl + "knob1",
         "vendas.atual.credito": baseUrl + "knob2",
-        "vendas.atual.debito": baseUrl + "knob3"
+        "vendas.atual.debito": baseUrl + "knob3",
+        "vendas.acumulo.mes": baseUrl + "donut1",
+        "vendas.semanal": baseUrl + "bar1",
+        "vendas.mensal": baseUrl + "bar2",
+        "estoque.anual": baseUrl + "bar3"
     };
 
     return api;
