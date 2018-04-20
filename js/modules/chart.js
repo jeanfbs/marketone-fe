@@ -137,8 +137,6 @@ define(function(){
       return BarChart;
     })();
 
-     
-
 
     var Knob = (function(){
 
@@ -281,10 +279,157 @@ define(function(){
 
     })();
 
+
+    var LineChart = (function(){
+        
+      var selector = null;
+      var ykeys = null;
+      var xkey = null;
+      var chartData = [];
+      var settings = {};
+
+
+      function LineChart(elem, data, opts){
+
+        this.chartData = data;
+        this.settings = opts;
+        this.selector = elem;
+        this.morrisObject = null;
+
+        if(this.chartData.length > 0){
+          this.xkey = Object.keys(this.chartData[0])[0];
+          this.ykeys = Object.keys(this.chartData[0]).slice(1);
+        }
+      }
+
+      var getLabel = function(dataObjectArray, rowArray){
+          var newRowArray = [];
+          var rowArrayLength = rowArray.length;
+          var dataObjectArrayLength = dataObjectArray.length;
+
+          for(var i = 0; i < rowArrayLength; i++){
+            var index = 0;
+            for(var j = 0; j < dataObjectArrayLength; j++){
+              if(rowArray[i] == dataObjectArray[j]){
+                index = j;
+              }
+            }
+
+            var obj = {};
+            obj.key = rowArray[i];
+            obj.index = index;
+            newRowArray.push(obj);
+          }
+          return newRowArray;
+      };
+
+      LineChart.prototype.show = function(){
+        
+        if(this.morrisObject != null){
+          this.redraw();
+          return false;
+        }
+        $.when(this).then(this.buildChart());
+        $.when(this).then(this.buildCheckbox()).then(this.addHandlerLegend());
+      };
+    
+      LineChart.prototype.reload =  function(fields){
+        tempDataList = [];
+        $.each(this.chartData, function(i, chartObjectData){
+            other = Object.assign({}, chartObjectData);
+    
+            $.each(fields, function(i, field){
+              delete other[field];
+            });
+            tempDataList.push(other);
+          });
+          this.morrisObject.setData(tempDataList);
+      };
+    
+      LineChart.prototype.buildCheckbox = function(){
+        var divLegend = $('<div class="variables text-center"></div>');
+        var _settings = this.settings;
+        
+        $.each(this.ykeys, function(i, key){
+          var legend = $('<label class="checkbox-inline text-capitalize"></label>')
+          .append($('<input type="checkbox" checked class="checkLegend"></span>').val(key))
+          .append(_settings.labels[i]).append($('<span class="legend">').css({"background-color" : _settings.lineColors[i]}));
+          
+          divLegend.append(legend);
+        });
+        $("#" + this.selector).parent("div").append(divLegend);
+      };
+      
+      LineChart.prototype.redraw = function(){
+        this.morrisObject.redraw();
+      };
+
+      LineChart.prototype.addHandlerLegend = function(){
+        var _this = this;
+        $("#" + this.selector).parent("div").find(".checkLegend").off("click").on("click",function(e){
+          var fields = [];
+          var array = $(".checkLegend:not(:checked)").each(function(){
+              fields.push($(this).val());
+          });
+          _this.reload(fields);
+        });
+      };
+    
+      LineChart.prototype.buildChart = function(){
+        $("#" + this.selector).empty();
+        var _ykeys = this.ykeys;
+        if(this.chartData != null && this.chartData.length == 0){
+          $("#" + this.selector).addClass("vertical-align")
+          .append('<h4 class="text-danger"><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i> Não conseguimos encontrar nenhum resultados para exibir!</h4>');
+          return false;
+        }
+        
+        this.morrisObject = Morris.Line({
+            element: this.selector,
+            data: this.chartData,
+            xkey: this.xkey,
+            lineWidth: 2,
+            verticalGrid:true,
+            hideHover: 'auto',
+            behaveLikeLine: true,
+            fillOpacity: 0.6,
+            ykeys: this.ykeys,
+            dataLabels:false,
+            trendLine:true,
+            labels: this.settings.labels,
+            parseTime: false,
+            pointFillColors:['#ffffff'],
+            pointStrokeColors: ['#222222'],
+            lineColors:this.settings.lineColors,
+            hoverCallback: function(index, options, content, row){
+
+              var morrisRowLabel = $("<div class='morris-hover-row-label'></div>").text(row.y);
+              var contentTable = $("<table></table>").addClass("table table-bordered table-condensed");
+              var tbody = $("<tbody></tbody>");
+              var rowKeys = Object.keys(row).slice(1);
+              var newRowArray = getLabel(_ykeys, rowKeys);
+              
+              $.each(newRowArray, function(i, obj){
+                  
+                  var line = $("<tr></tr>")
+                  .append("<td class='text-left text-capitalize'>"+ options.labels[obj.index] + "</td>")
+                  .append("<td><b>R$ "+ parseFloat(row[obj.key]).toLocaleString() + "</b></td>");
+                  tbody.append(line);
+              });
+              contentTable.append(tbody);
+              return morrisRowLabel[0].outerHTML + contentTable[0].outerHTML;
+            },
+          });
+
+      };
+      return LineChart;
+    })();
+
     return {
       BarChart: BarChart,
       Knob: Knob,
-      Donut: Donut
+      Donut: Donut,
+      LineChart: LineChart
     };
     
 });

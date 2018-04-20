@@ -44,6 +44,8 @@ define(['chart', 'api'], function(chart, api){
 
       }).fail(function(err){
         knobVendasDinheiro = new chart.Knob("#vendas-dinheiro");
+      }).always(function(){
+          knobVendasDinheiro.show();
       });
       
       
@@ -52,6 +54,8 @@ define(['chart', 'api'], function(chart, api){
         knobVendasCredito = new chart.Knob("#vendas-credito", json.value, formatter);
       }).fail(function(err){
         knobVendasCredito = new chart.Knob("#vendas-credito");
+      }).always(function(){
+          knobVendasCredito.show();
       });
       
 
@@ -61,6 +65,8 @@ define(['chart', 'api'], function(chart, api){
         knobVendasDebito = new chart.Knob("#vendas-debito", json.value, formatter);
       }).fail(function(err){
         knobVendasDebito = new chart.Knob("#vendas-debito");
+      }).always(function(){
+          knobVendasDebito.show();
       });
 
       var ajaxDonutAcumuloMes = Ajax.call(api["vendas.acumulo.mes"], "GET");
@@ -69,6 +75,8 @@ define(['chart', 'api'], function(chart, api){
         donutVendasAtuais = new chart.Donut('donut-vendas-atuais', data);
       }).fail(function(err){
         donutVendasAtuais = new chart.Donut('donut-vendas-atuais');
+      }).always(function(){
+          donutVendasAtuais.show();
       });
 
 
@@ -82,6 +90,8 @@ define(['chart', 'api'], function(chart, api){
         });
       }).fail(function(err){
         chartBarVendasSemanal = new chart.BarChart("vendas-semanal");
+      }).always(function(){
+          chartBarVendasSemanal.show();
       });
 
 
@@ -95,6 +105,8 @@ define(['chart', 'api'], function(chart, api){
         });
       }).fail(function(err){
         chartBarVendasMensal = new chart.BarChart("vendas-mensal");
+      }).always(function(){
+          chartBarVendasMensal.show();
       });
 
       /* Tab Estoque */
@@ -178,15 +190,13 @@ define(['chart', 'api'], function(chart, api){
       var ajaxLineMensal = Ajax.call(api["faturamento.mensal"], "GET");
 
       ajaxLineMensal.done(function(data){
-        chartLineFaturamentoMensal = new chart.BarChart("faturamento-mensal", data, {
-          barColors: ["#FFEB3B", "#FFC107"],
+        chartLineFaturamentoMensal = new chart.LineChart("faturamento-mensal", data, {
+          lineColors: ["#FFEB3B", "#FF5722"],
           labels: ['Faturamento', 'Lucro Líquido'],
   
         });
       }).fail(function(err){
-        chartLineFaturamentoMensal = new chart.BarChart("faturamento-mensal");
-      }).always(function(){
-        chartLineFaturamentoMensal.show();
+        chartLineFaturamentoMensal = new chart.LineChart("faturamento-mensal");
       });
 
 
@@ -196,14 +206,7 @@ define(['chart', 'api'], function(chart, api){
           switch (target) {
             case "#vendas":
 
-                knobVendasDinheiro.show();
-                knobVendasCredito.show();
-                knobVendasDebito.show();
-
-                chartBarVendasSemanal.show();
-                chartBarVendasMensal.show();
-
-                donutVendasAtuais.show();
+                
               break;
 
               case "#estoque":

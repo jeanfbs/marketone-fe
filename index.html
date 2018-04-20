@@ -20,13 +20,13 @@
 
          <h1><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</h1>
          <ul class="nav nav-tabs" id="tabs">
-            <li><a data-toggle="tab" href="#vendas"> <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Vendas</a></li>
+            <li class="active"><a data-toggle="tab" href="#vendas"> <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Vendas</a></li>
             <li><a data-toggle="tab" href="#estoque"> <i class="fa fa-cubes fa-fw" aria-hidden="true"></i> Estoque</a></li>
-            <li class="active"><a data-toggle="tab" href="#financeiro"><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Financeiro</a></li>
+            <li><a data-toggle="tab" href="#financeiro"><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Financeiro</a></li>
          </ul>
 
          <div class="tab-content">
-            <div id="vendas" class="tab-pane">
+            <div id="vendas" class="tab-pane in active ">
                <div class="panel panel-default">
                   <div class="panel-body">
                     <p>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <hr>
-                        <div class="col-sm-8 hidden-xs">
+                        <div class="col-sm-8">
                            <div id="vendas-semanal" class="chart-div"></div>
                         </div>
                         <div class="col-sm-4 col-xs-12">
@@ -116,7 +116,7 @@
                      </div>
                      <div class="clearfix"></div>
                      <hr>
-                     <div class="col-sm-12 hidden-xs">
+                     <div class="col-sm-12">
                         <p class="text-muted">Resumo do Mês: <strong>Abril</strong></p>
                         <div id="vendas-mensal" class="chart-div"></div>
                      </div>
@@ -218,35 +218,37 @@
                         <br>
                         <p class="text-muted">Visão Atual do Estoque</p>
                       </div>
-                     <div class="col-sm-3 col-xs-12">
-                        <div class="panel panel-yellow">
-                           <div class="panel-heading">
-                              <div class="row">
-                                 <div class="col-xs-3">
-                                    <i class="fa fa-pencil-square-o fa-5x" aria-hidden="true"></i>
-                                 </div>
-                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">89</div>
-                                    <div>Produtos em Estoque</div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-3 col-xs-12">
-                        <div class="panel panel-yellow">
-                           <div class="panel-heading">
-                              <div class="row">
-                                 <div class="col-xs-3">
-                                    <i class="fa fa-usd fa-5x" aria-hidden="true"></i>
-                                 </div>
-                                 <div class="col-xs-9 text-right">
-                                    <div><span style="font-size:25pt">12.786,78</span></div>
-                                    <div>Valor do Estoque</div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+                     <div class="col-sm-6">
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="panel panel-yellow">
+                               <div class="panel-heading">
+                                  <div class="row">
+                                     <div class="col-xs-3">
+                                        <i class="fa fa-pencil-square-o fa-5x" aria-hidden="true"></i>
+                                     </div>
+                                     <div class="col-xs-9 text-right">
+                                        <div class="huge">89</div>
+                                        <div>Produtos em Estoque</div>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="col-sm-6 col-xs-12">
+                            <div class="panel panel-yellow">
+                               <div class="panel-heading">
+                                  <div class="row">
+                                     <div class="col-xs-3">
+                                        <i class="fa fa-usd fa-5x" aria-hidden="true"></i>
+                                     </div>
+                                     <div class="col-xs-9 text-right">
+                                        <div><span style="font-size:25pt">12.786,78</span></div>
+                                        <div>Valor do Estoque</div>
+                                     </div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
                      </div>
                      <div class="col-sm-6 ">
                         <div class="col-sm-4 col-xs-12">
@@ -295,7 +297,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-sm-12 hidden-xs">
+                     <div class="col-sm-12">
                         <p class="text-muted">Visão Anual - Período: <strong id="lbPeriodoAnual"></strong></p>
                         <div id="estoque-anual" class="chart-div"></div>
                      </div>
@@ -510,20 +512,88 @@
                   <!-- fim do panel body-->
                </div>
             </div>
-            <div id="financeiro" class="tab-pane in active ">
+            <div id="financeiro" class="tab-pane">
               <div class="panel panel-default">
                 <div class="panel-body">
                     <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
                       <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                     </a>
                     <div class="col-sm-12">
-                      <h2><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Indicadores Financeiros</h2>
-                      <br>
-                      <div class="col-sm-12 hidden-xs">
-                          <div id="faturamento-mensal" class="chart-div"></div>
-                       </div>
-                    </div>
-                </div>
+                        <h2><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Visão Geral</h2>
+                        <br>
+                        <p class="text-muted">Resumo do Mês</p>
+                      </div>
+                     <div class="col-sm-3 col-xs-12">
+                        <div class="panel panel-yellow">
+                           <div class="panel-heading">
+                              <div class="row">
+                                 <div class="col-xs-3">
+                                    <i class="fa fa-pencil-square-o fa-5x" aria-hidden="true"></i>
+                                 </div>
+                                 <div class="col-xs-9 text-right">
+                                    <div class="huge">0.0 %</div>
+                                    <div>Lucratividade</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3 col-xs-12">
+                        <div class="panel panel-yellow">
+                           <div class="panel-heading">
+                              <div class="row">
+                                 <div class="col-xs-3">
+                                    <i class="fa fa-usd fa-5x" aria-hidden="true"></i>
+                                 </div>
+                                 <div class="col-xs-9 text-right">
+                                    <div class="huge">0.0 %</div>
+                                    <div>Rentabilidade</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3 col-xs-12">
+                        <div class="panel panel-yellow">
+                           <div class="panel-heading">
+                              <div class="row">
+                                 <div class="col-xs-3">
+                                    <i class="fa fa-usd fa-5x" aria-hidden="true"></i>
+                                 </div>
+                                 <div class="col-xs-9 text-right">
+                                    <div class="huge">0.0 %</div>
+                                    <div>Endividamento</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3 col-xs-12">
+                        <div class="panel panel-yellow">
+                           <div class="panel-heading">
+                              <div class="row">
+                                 <div class="col-xs-3">
+                                    <i class="fa fa-usd fa-5x" aria-hidden="true"></i>
+                                 </div>
+                                 <div class="col-xs-9 text-right">
+                                    <div class="huge">0.0 %</div>
+                                    <div>Margem de Contribuição</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="clearfix"></div>
+                      <hr>
+                     <div class="col-sm-12">
+                        <h2><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Faturamento vs Lucro Líquido - Mensal</h2>
+                        <br>
+                        <div class="col-sm-12">
+                            <div id="faturamento-mensal" class="chart-div"></div>
+                         </div>
+                     </div>
+                      
+                </div><!-- Fim body panel-->
               </div>
             </div>
          </div>
