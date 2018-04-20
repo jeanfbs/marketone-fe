@@ -5,9 +5,12 @@ var jshint = require('gulp-jshint');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+
 var cleanCSS = require('gulp-clean-css');
+var less = require('gulp-less');
+var path = require('path');
+
 var runSequence = require('run-sequence');
-var es = require('event-stream');
 var browserSync = require('browser-sync').create();
 var jsonServer = require("gulp-json-srv");
  
@@ -41,13 +44,13 @@ gulp.task('jshint', function(){
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('scripts',['appScripts'], function(){
+gulp.task('scripts', function(){
     return gulp.src(config.vendor.scripts_min)
     .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest('dist/js'))
 });
 
-gulp.task('appScripts', function(){
+gulp.task('appScripts', ['scripts'], function(){
     return gulp.src([
         'vendor/requirejs/require.js',
         'js/**/*.js'
@@ -91,32 +94,56 @@ gulp.task('fonts', function(){
     .pipe(gulp.dest('dist/fonts'))
 });
 
-gulp.task('styles', ['appStyles'], function(){
+// Stylesheets Task
+
+gulp.task('styles', function(){
     return gulp.src(config.vendor.styles)
     .pipe(concat('vendor.min.css'))
     .pipe(cleanCSS())
     .pipe(gulp.dest('dist/css'))
 });
 
-gulp.task('appStyles', function(){
-    return gulp.src('css/*.css')
+gulp.task('lessCompileApp', ['styles'], function () {
+    return gulp.src('./less/style.less')
+    .pipe(less({
+    paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
     .pipe(concat('style.min.css'))
-    // .pipe(cleanCSS())
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest('./dist/css'));
+});
+
+/** 
+ * Foi realizado um override do tema padrão do bootstrap, 
+ * sendo assim e preciso recompilar o less dele
+ * 
+ */
+gulp.task('removeBootStyleCustom', function(){
+    return gulp.src('./vendor/bootstrap/dist/css/bootstrap-custom.min.css')
+    .pipe(clean());
+});
+
+gulp.task('lessCompileBootstrap', ['removeBootStyleCustom'], function(){
+    return gulp.src('./vendor/bootstrap/less/bootstrap.less')
+    .pipe(less({
+    paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(concat('bootstrap-custom.min.css'))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest('./vendor/bootstrap/dist/css'));
 });
 
 
 gulp.task('serve', ['default'], function(){
     
     browserSync.init({
-        server:'./dist/'
+        server:'./dist/',
     });
 
-    gulp.watch(['./*.html', './js/**/*.js', './css/*.css'], function(e){
+    gulp.watch(['./*.html', './fragments/*.html', './pages/*.html', './js/**/*.js', './less/*.less'], function(e){
         if(e.path.indexOf(".js") != -1){
-            return gulp.run(["jshint","scripts"]);
-        }else if(e.path.indexOf(".css") != -1){
-            return gulp.run("styles");
+            return gulp.run(["jshint","appScripts"]);
+        }else if(e.path.indexOf(".less") != -1){
+            return gulp.run("lessCompileApp");
         }else if(e.path.indexOf(".html") != -1){
             return gulp.run("copyIndex");
         }else{
@@ -126,7 +153,7 @@ gulp.task('serve', ['default'], function(){
 });
 
 gulp.task('default', function(cb){
-    return runSequence('clean', ['jshint', 'scripts', 'styles', 'copyIndex'], cb)
+    return runSequence('clean', ['jshint', 'appScripts', 'lessCompileApp', 'copyIndex'], cb)
 });
 
 

@@ -3,7 +3,7 @@ define(['chart', 'api'], function(chart, api){
 
     var Ajax = {
 
-      call: function(url, method, data){
+      call: function _call(url, method, data){
         var settings = {
             crossDomain: true,
             headers: {
@@ -22,14 +22,24 @@ define(['chart', 'api'], function(chart, api){
         return $.ajax(settings);
       }
     };
+    
+    var COLORS = {
+      barColors: ["#009688", "#004D40", "#80CBC4","#00BFA5" ],
+      donutColors: ["#009688", "#004D40", "#80CBC4"]
+    };
 
     var Utils = {
-      getFormParameters: function(form){
+      getFormParameters: function _getFormParameters(form){
         var formParams = {};
         $.each(form.serializeArray(), function(_, kv) {
           formParams[kv.name] = kv.value;
         });
         return formParams;
+      },
+      
+      formatter: function _formatter(value) {
+        
+        return "R$ " + parseFloat(value).toLocaleString();
       }
     };
 
@@ -40,7 +50,7 @@ define(['chart', 'api'], function(chart, api){
       var ajaxKnobDinheiro = Ajax.call(api["vendas.atual.dinheiro"], "GET");
       ajaxKnobDinheiro.done(function(json){
         
-        knobVendasDinheiro = new chart.Knob("#vendas-dinheiro", json.value, formatter);
+        knobVendasDinheiro = new chart.Knob("#vendas-dinheiro", json.value, Utils.formatter);
 
       }).fail(function(err){
         knobVendasDinheiro = new chart.Knob("#vendas-dinheiro");
@@ -51,7 +61,7 @@ define(['chart', 'api'], function(chart, api){
       
       var ajaxKnobCredito = Ajax.call(api["vendas.atual.credito"], "GET");
       ajaxKnobCredito.done(function(json){
-        knobVendasCredito = new chart.Knob("#vendas-credito", json.value, formatter);
+        knobVendasCredito = new chart.Knob("#vendas-credito", json.value, Utils.formatter);
       }).fail(function(err){
         knobVendasCredito = new chart.Knob("#vendas-credito");
       }).always(function(){
@@ -62,7 +72,7 @@ define(['chart', 'api'], function(chart, api){
       var ajaxKnobDebito = Ajax.call(api["vendas.atual.debito"], "GET");
 
       ajaxKnobDebito.done(function(json){
-        knobVendasDebito = new chart.Knob("#vendas-debito", json.value, formatter);
+        knobVendasDebito = new chart.Knob("#vendas-debito", json.value, Utils.formatter);
       }).fail(function(err){
         knobVendasDebito = new chart.Knob("#vendas-debito");
       }).always(function(){
@@ -72,7 +82,7 @@ define(['chart', 'api'], function(chart, api){
       var ajaxDonutAcumuloMes = Ajax.call(api["vendas.acumulo.mes"], "GET");
 
       ajaxDonutAcumuloMes.done(function(data){
-        donutVendasAtuais = new chart.Donut('donut-vendas-atuais', data);
+        donutVendasAtuais = new chart.Donut('donut-vendas-atuais', data, COLORS.donutColors);
       }).fail(function(err){
         donutVendasAtuais = new chart.Donut('donut-vendas-atuais');
       }).always(function(){
@@ -84,7 +94,7 @@ define(['chart', 'api'], function(chart, api){
 
       ajaxBarSemanal.done(function(data){
         chartBarVendasSemanal = new chart.BarChart("vendas-semanal", data, {
-          barColors: ["#FFEB3B", "#FFC107", "#FF9800"],
+          barColors: COLORS.barColors.slice(0, 3),
           labels: ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito'],
   
         });
@@ -99,7 +109,7 @@ define(['chart', 'api'], function(chart, api){
 
       ajaxBarMensal.done(function(data){
         chartBarVendasMensal = new chart.BarChart("vendas-mensal", data, {
-          barColors: ["#FFEB3B", "#FFC107", "#FF9800","#FF5722" ],
+          barColors: COLORS.barColors,
           labels: ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito','Total'],
   
         });
@@ -115,7 +125,7 @@ define(['chart', 'api'], function(chart, api){
 
       ajaxBarEstoqueAnual.done(function(data){
         chartBarEstoqueAnual = new chart.BarChart("estoque-anual", data, {
-          barColors: ["#4CAF50", "#2196F3", "#FF9800","#FF5722" ],
+          barColors: COLORS.barColors,
           labels: ['Entradas', 'Saidas', 'Saldo Final','Total do Estoque'],
         });
       }).fail(function(err){
@@ -191,7 +201,7 @@ define(['chart', 'api'], function(chart, api){
 
       ajaxLineMensal.done(function(data){
         chartLineFaturamentoMensal = new chart.LineChart("faturamento-mensal", data, {
-          lineColors: ["#FFEB3B", "#FF5722"],
+          lineColors: COLORS.barColors.slice(0, 2),
           labels: ['Faturamento', 'Lucro Líquido'],
   
         });
@@ -204,32 +214,15 @@ define(['chart', 'api'], function(chart, api){
         var target = $(e.target).attr("href");
 
           switch (target) {
-            case "#vendas":
-
-                
-              break;
-
               case "#estoque":
-                
                 chartBarEstoqueAnual.show();
-
               break;
-
               case "#financeiro":
-                
                 chartLineFaturamentoMensal.show();
-              
               break;
           }
       });
 
       $('[data-toggle="tooltip"]').tooltip();
     });
-    
-
-
-    var formatter = function (value) {
-      return "R$ " + parseFloat(value).toLocaleString();
-    };
-
 });

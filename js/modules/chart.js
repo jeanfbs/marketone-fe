@@ -179,7 +179,7 @@ define(function(){
           height: 150,
           angleOffset: 180,
           max: maxValue,
-          fgColor: "#FFA739",
+          fgColor: "#009688",
           inputColor: "#222",
           skin: "tron",
           thickness: ".2",
@@ -204,7 +204,7 @@ define(function(){
       }
       input.style.fontSize = size + 'pt';
       input.style.fontWeight = 'bold';
-    }
+    };
 
     Knob.prototype.show = function(){
       if(this.knobObject != null){
@@ -243,24 +243,30 @@ define(function(){
       var selector = null;
       var data = null;
       var donutObject = null;
+      var colors = null;
 
-      function Donut(selector, data){
+      function Donut(selector, data, colors){
         this.selector = selector;
         this.data = data;
+        this.colors = colors;
       }
 
       Donut.prototype.create = function(){
-
-        this.donutObject = Morris.Donut({
+        var opts = {
           element: this.selector,
           data: this.data,
-          colors:["#F57F17", "#FFAB00", "#FFD600"],
           formatter: function(y, data){
             return "R$ " + data.value.toLocaleString();
           },
           resize: true,
           showPercentage: true
-        });
+        };
+
+        if(this.colors != null && this.colors != undefined){
+          opts.colors = this.colors;
+        }
+
+        this.donutObject = Morris.Donut(opts);
       };
 
       Donut.prototype.redraw = function(){

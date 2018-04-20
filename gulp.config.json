@@ -11,13 +11,14 @@
             "js/i18n/form_validation_pt_BR.js"
         ],
         "styles":[
-            "vendor/bootstrap/dist/css/bootstrap.min.css",
+            "vendor/bootstrap/dist/css/bootstrap-custom.min.css",
             "vendor/font-awesome/css/font-awesome.min.css",
             "vendor/morris.js/morris.css",
             "vendor/select2/dist/css/select2.min.css",
             "vendor/select2-bootstrap-theme/dist/select2-bootstrap.min.css",
             "vendor/formValidation/dist/css/formValidation.min.css"
         ]
+
 
     }
 }

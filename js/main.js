@@ -1,7 +1,8 @@
 requirejs.config({
-    baseUrl: "js",
+    baseUrl: "/js/",
     paths: {
         chart: "modules/chart",
-        api: "modules/api"
-    }
+        api: "modules/api",
+        profile: "profile"
+    },
 });
