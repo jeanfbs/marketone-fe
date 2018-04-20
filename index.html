@@ -21,8 +21,8 @@
          <h1><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</h1>
          <ul class="nav nav-tabs" id="tabs">
             <li><a data-toggle="tab" href="#vendas"> <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Vendas</a></li>
-            <li class="active"><a data-toggle="tab" href="#estoque"> <i class="fa fa-cubes fa-fw" aria-hidden="true"></i> Estoque</a></li>
-            <li><a data-toggle="tab" href="#financeiro"><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Financeiro</a></li>
+            <li><a data-toggle="tab" href="#estoque"> <i class="fa fa-cubes fa-fw" aria-hidden="true"></i> Estoque</a></li>
+            <li class="active"><a data-toggle="tab" href="#financeiro"><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Financeiro</a></li>
          </ul>
 
          <div class="tab-content">
@@ -207,7 +207,7 @@
                </div>
             </div>
 
-            <div id="estoque" class="tab-pane in active">
+            <div id="estoque" class="tab-pane">
                <div class="panel panel-default">
                   <div class="panel-body">
                      <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
@@ -510,9 +510,21 @@
                   <!-- fim do panel body-->
                </div>
             </div>
-            <div id="financeiro" class="tab-pane ">
-               <h3>Menu 3</h3>
-               <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            <div id="financeiro" class="tab-pane in active ">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                      <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                    <div class="col-sm-12">
+                      <h2><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Indicadores Financeiros</h2>
+                      <br>
+                      <div class="col-sm-12 hidden-xs">
+                          <div id="faturamento-mensal" class="chart-div"></div>
+                       </div>
+                    </div>
+                </div>
+              </div>
             </div>
          </div>
       </div>

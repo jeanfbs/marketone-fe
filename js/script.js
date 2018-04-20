@@ -109,7 +109,6 @@ define(['chart', 'api'], function(chart, api){
       }).fail(function(err){
         chartBarEstoqueAnual = new chart.BarChart("estoque-anual");
       }).always(function(){
-        chartBarEstoqueAnual.show();
         var today = new Date();
         var lbPeriodoAnual = "01/2018 até " + ("0" + (today.getMonth() + 1)).slice(-2) + "/" + today.getFullYear();
         $("#lbPeriodoAnual").text(lbPeriodoAnual);
@@ -173,6 +172,24 @@ define(['chart', 'api'], function(chart, api){
       });
 
 
+
+      // Tab Financeiro
+
+      var ajaxLineMensal = Ajax.call(api["faturamento.mensal"], "GET");
+
+      ajaxLineMensal.done(function(data){
+        chartLineFaturamentoMensal = new chart.BarChart("faturamento-mensal", data, {
+          barColors: ["#FFEB3B", "#FFC107"],
+          labels: ['Faturamento', 'Lucro Líquido'],
+  
+        });
+      }).fail(function(err){
+        chartLineFaturamentoMensal = new chart.BarChart("faturamento-mensal");
+      }).always(function(){
+        chartLineFaturamentoMensal.show();
+      });
+
+
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr("href");
 
@@ -193,6 +210,12 @@ define(['chart', 'api'], function(chart, api){
                 
                 chartBarEstoqueAnual.show();
 
+              break;
+
+              case "#financeiro":
+                
+                chartLineFaturamentoMensal.show();
+              
               break;
           }
       });

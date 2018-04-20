@@ -10,7 +10,8 @@ define(function(){
         "vendas.mensal": baseUrl + "bar2",
         "estoque.anual": baseUrl + "bar3",
         "estoque.indicadores.periodo": baseUrl + "indicadorEstoque",
-        "estoque.indicadores.periodo.item": baseUrl + "indicadorItemEstoque"
+        "estoque.indicadores.periodo.item": baseUrl + "indicadorItemEstoque",
+        "faturamento.mensal": baseUrl + "line4"
     };
 
     return api;
