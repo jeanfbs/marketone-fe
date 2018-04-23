@@ -210,7 +210,7 @@ define(['chart', 'api'], function(chart, api){
       });
 
 
-      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      $('#dashTabs').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr("href");
 
           switch (target) {
@@ -222,7 +222,5 @@ define(['chart', 'api'], function(chart, api){
               break;
           }
       });
-
-      $('[data-toggle="tooltip"]').tooltip();
     });
 });

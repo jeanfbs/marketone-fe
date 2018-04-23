@@ -19,7 +19,7 @@
       <div class="container">
 
          <h1><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</h1>
-         <ul class="nav nav-tabs" id="tabs">
+         <ul class="nav nav-tabs" id="dashTabs">
             <li class="active"><a data-toggle="tab" href="#vendas"> <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Vendas</a></li>
             <li><a data-toggle="tab" href="#estoque"> <i class="fa fa-cubes fa-fw" aria-hidden="true"></i> Estoque</a></li>
             <li><a data-toggle="tab" href="#financeiro"><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Financeiro</a></li>
@@ -606,7 +606,7 @@
       <script th:src="@{/vendor/js/vendor.min.js}" data-main="js/main" src="js/require.js"></script>
       <script>
          require(['main'], function(){
-               require(['script']);
+               require(['root','script']);
            });
       </script>
    </body>

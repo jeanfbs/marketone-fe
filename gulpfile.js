@@ -136,8 +136,8 @@ gulp.task('recompileBootstrap', ['cleanBootstrapStyle', 'replace'], function(){
     .pipe(less({
     paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(concat('bootstrap-custom.min.css'))
     .pipe(cleanCSS())
+    .pipe(concat('bootstrap-custom.min.css'))
     .pipe(gulp.dest('./vendor/bootstrap/dist/css'));
 });
 
