@@ -3,6 +3,7 @@ requirejs.config({
     paths: {
         chart: "modules/chart",
         api: "modules/api",
-        profile: "profile"
+        perfil: "perfil/perfil",
+        "editar-perfil": "perfil/editar"
     },
 });

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>Minha Conta</title>
+      <!-- Bootstrap Core CSS -->
+      <link th:href="@{css/vendor.min.css}" href="/css/vendor.min.css" rel="stylesheet" />
+      <link th:href="@{css/style.min.css}" href="/css/style.min.css" rel="stylesheet" />
+   </head>
+   <body>
+      <div id="insertHeader"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="thumbnail">
+                      <img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" alt="Avatar user" width="150">
+                      <div class="caption">
+                        <h3 class="text-center">Jean Fabricio</h3>
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-striped">
+                            <caption>Dados Pessoais</caption>
+                            <tbody>
+                              <tr>
+                                <td>Status</td>
+                                <td class="text-success">Ativo</td>
+                              </tr>
+                              <tr>
+                                <td>CPF</td>
+                                <td>1234124-29</td>
+                              </tr>
+                              <tr>
+                                <td>RG</td>
+                                <td>1928174-12</td>
+                              </tr>
+                              <tr>
+                                <td>Cargo</td>
+                                <td>Administrador</td>
+                              </tr>
+                              <tr>
+                                <td>Telefone Fixo</td>
+                                <td>34 3214-1212</td>
+                              </tr>
+                              <tr>
+                                <td>Celular</td>
+                                <td>34 9 9121-1241</td>
+                              </tr>
+                              <tr>
+                                <td>Email</td>
+                                <td><a href="mailto:fulano@teste.com">fulano@teste.com</a></td>
+                              </tr>
+                              <tr>
+                                <td>Endereço</td>
+                                <td>
+                                  <ul class="list-unstyled">
+                                    <li>Rua Teste X 412, Roosevelt</li>
+                                    <li>Uberlandia - MG</li>
+                                    <li>Brasil</li>
+                                  </ul>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <p>
+                          <a href="/pages/perfil/editar.html" class="btn btn-primary" role="button"> <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i> Editar</a> 
+                        </p>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8">
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                      <h3>Atividades Recentes</h3>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <tr>
+                            <td><i class="fa fa-check fa-fw" aria-hidden="true"></i></td>
+                            <td> <strong class="text-primary">Abertura de Caixa</strong></td>
+                            <td>
+                                Abriu o caixa com um total de R$ 100,00 como saldo inicial.
+                            </td>
+                            <td class="text-center text-muted">
+                              <i class="fa fa-clock-o" aria-hidden="true"></i> 11/06/2018 11:39</span>
+                            </td>
+                          </tr>
+                          <tr>
+                              <td><i class="fa fa-check fa-fw" aria-hidden="true"></i></td>
+                              <td> <strong class="text-primary">Novo Produto</strong></td>
+                              <td>
+                                  O produto <a href="#">Arroz Branco</a> foi adicionado
+                              </td>
+                              <td class="text-center text-muted">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i> 11/06/2018 13:39</span>
+                              </td>
+                            </tr>
+                        </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <script th:src="@{/vendor/js/vendor.min.js}" src="/js/vendor.min.js"></script>
+      <script th:src="@{/vendor/js/vendor.min.js}" data-main="../../js/main" src="/js/require.js"></script>
+      <script>
+         require(['main'], function(){
+               require(['perfil']);
+        });
+      </script>
+   </body>
+</html>

@@ -8,6 +8,7 @@ var uglify = require('gulp-uglify');
 
 var cleanCSS = require('gulp-clean-css');
 var less = require('gulp-less');
+var replace = require('gulp-replace');
 var path = require('path');
 
 var runSequence = require('run-sequence');
@@ -75,7 +76,7 @@ gulp.task('img', function(){
 
 gulp.task('copyPages', function(){
     return gulp.src([
-        './pages/*',
+        './pages/**/*.html',
     ])
     .pipe(gulp.dest('dist/pages'))
 });
@@ -117,12 +118,20 @@ gulp.task('lessCompileApp', ['styles'], function () {
  * sendo assim e preciso recompilar o less dele
  * 
  */
-gulp.task('removeBootStyleCustom', function(){
+gulp.task('cleanBootstrapStyle', function(){
     return gulp.src('./vendor/bootstrap/dist/css/bootstrap-custom.min.css')
     .pipe(clean());
 });
+ 
+gulp.task('replace', function(){
+  gulp.src('vendor/bootstrap/less/bootstrap.less')
+    .pipe(replace('@import "variables.less";', '@import "../../less/variables.less";'))
+    .pipe(concat('bootstrap.less'))
+    .pipe(clean())
+    .pipe(gulp.dest('vendor/bootstrap/less/'));
+});
 
-gulp.task('lessCompileBootstrap', ['removeBootStyleCustom'], function(){
+gulp.task('recompileBootstrap', ['cleanBootstrapStyle', 'replace'], function(){
     return gulp.src('./vendor/bootstrap/less/bootstrap.less')
     .pipe(less({
     paths: [ path.join(__dirname, 'less', 'includes') ]
@@ -139,7 +148,7 @@ gulp.task('serve', ['default'], function(){
         server:'./dist/',
     });
 
-    gulp.watch(['./*.html', './fragments/*.html', './pages/*.html', './js/**/*.js', './less/*.less'], function(e){
+    gulp.watch(['./*.html', './fragments/*.html', './pages/**/*.html', './js/**/*.js', './less/*.less'], function(e){
         if(e.path.indexOf(".js") != -1){
             return gulp.run(["jshint","appScripts"]);
         }else if(e.path.indexOf(".less") != -1){

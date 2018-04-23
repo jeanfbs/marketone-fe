@@ -2,7 +2,7 @@ body {
   background: transparent url("../img/overlay.png") repeat;
 }
 .navbar-upsale {
-  background-color: #00897c;
+  background-color: #00756a;
   color: #ffffff;
   border-radius: 0;
 }
@@ -16,13 +16,13 @@ body {
 .navbar-nav > .active > a:focus,
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:focus {
-  background-color: #00a394;
+  background-color: #008e81;
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:focus,
 .navbar-default .navbar-nav > .open > a:hover {
   color: #fff;
-  background-color: #00a394;
+  background-color: #008e81;
 }
 .navbar-upsale .navbar-brand,
 .navbar-default .navbar-nav > li > a:focus {
@@ -33,12 +33,12 @@ body {
 }
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .open > a:hover {
-  background-color: #00a394;
+  background-color: #008e81;
 }
 .navbar-upsale .navbar-nav > li > a:hover,
 .nav > li > a:focus,
 .navbar-upsale .navbar-nav .open > a {
-  background-color: #00a394;
+  background-color: #008e81;
 }
 .nav-tabs > li > a:focus,
 .nav-tabs > li > a:hover {

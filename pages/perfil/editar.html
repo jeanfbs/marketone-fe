@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>Editar Meus Dados</title>
+      <!-- Bootstrap Core CSS -->
+      <link th:href="@{css/vendor.min.css}" href="/css/vendor.min.css" rel="stylesheet" />
+      <link th:href="@{css/style.min.css}" href="/css/style.min.css" rel="stylesheet" />
+   </head>
+   <body>
+        <div id="insertHeader"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center">Edição de Perfil do Usúario</h2>
+                        <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                            <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <p class="text-center">
+                            <img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" alt="Avatar user" width="150">
+                        </p>
+                        <hr>
+                        <form class="form-horizontal">
+                            <p class="text-muted">Dados Pessoais</p>
+                            <div class="form-group">
+                                <label for="cpf" class="col-sm-3 control-label">CPF</label>
+                                <div class="col-sm-4">
+                                <input type="text" class="form-control" id="cpf" name="cpf">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome" class="col-sm-3 control-label">Nome Completo</label>
+                                <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nome" name="nome">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="rg" class="col-sm-3 control-label">RG</label>
+                                <div class="col-sm-4">
+                                <input type="text" class="form-control" id="rg" name="rg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nivel" class="col-sm-3 control-label">Cargo</label>
+                                <div class="col-sm-4">
+                                <input type="text" class="form-control" id="nivel" name="nivel">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="senha" class="col-sm-3 control-label">Senha</label>
+                                <div class="col-sm-4">
+                                <input type="password" class="form-control" id="senha" name="senha">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Confirmacao" class="col-sm-3 control-label">Confirmação de Senha</label>
+                                <div class="col-sm-4">
+                                <input type="password" class="form-control" id="Confirmacao" name="Confirmacao">
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="mostrar" value="true"> Mostrar Senha
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-4">
+                                <input type="text" class="form-control" id="email" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone" class="col-sm-3 control-label">Telefone</label>
+                                <div class="col-sm-4">
+                                <input type="text" class="form-control" id="telefone" name="telefone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="celular" class="col-sm-3 control-label">Celular</label>
+                                <div class="col-sm-4">
+                                <input type="text" class="form-control" id="celular" name="celular">
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <p class="text-muted">Dados do Endereço</p>
+                            <div class="form-group">
+                                <label for="cep" class="col-sm-3 control-label">CEP</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" id="cep" name="cep">
+                                </div>
+                                <div class="sm-5">
+                                    <span class="iconLoadCep">
+                                        <i class="fa fa-spinner fa-pulse"></i>
+                                        <span class="sr-only">Carregando...</span>
+                                    </span>
+                                    <small>Digite o CEP para carregar as informações do Endereço</small><br>
+                                    <small id="callback" class="text-danger">Erro ao chamar o serviço de verificação de CEP</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="logradouro" class="col-sm-3 control-label">Logradouro</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Rua, Avenida, Alameda...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="numero" class="col-sm-3 control-label">Número</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" id="numero" name="numero">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bairro" class="col-sm-3 control-label">Bairro</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="bairro" name="bairro">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="complemento" class="col-sm-3 control-label">Complemento</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="complemento" name="complemento">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cidade" class="col-sm-3 control-label">Cidade</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="cidade" name="cidade">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado" class="col-sm-3 control-label">Estado</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="estado" name="estado">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pais" class="col-sm-3 control-label">País</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="pais" name="pais">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <button type="reset" class="btn btn-default">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+      <script th:src="@{/vendor/js/vendor.min.js}" src="/js/vendor.min.js"></script>
+      <script th:src="@{/vendor/js/vendor.min.js}" data-main="../../js/main" src="/js/require.js"></script>
+      <script>
+         require(['main'], function(){
+               require(['editar-perfil']);
+        });
+      </script>
+   </body>
+</html>
