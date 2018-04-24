@@ -5,5 +5,5 @@ $(function(){
         placeholder: "Selecione uma opção",
           allowClear: true,
           theme: "bootstrap"
-    })
+    });
 });

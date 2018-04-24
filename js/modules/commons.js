@@ -1,8 +1,7 @@
 define(function(){
 
     $.fn.extend({
-        autoLoadAddress: function()
-        {
+        autoLoadAddress: function(){
             $(this).focusout(function(){
                 cep = $(this).val();
                 $.ajax({
@@ -31,5 +30,20 @@ define(function(){
             });
         }
     });
+
+    $.fn.extend({
+        validate: function(){
+            $(this).formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: '',
+                    invalid: '',
+                    validating: ''
+                },
+                locale: 'pt_BR',
+            });
+        }
+    });
+
     
 });

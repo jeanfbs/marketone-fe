@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: "/js/",
+    baseUrl: "/static/js/",
     paths: {
         chart: "modules/chart",
         api: "modules/api",

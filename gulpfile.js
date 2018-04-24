@@ -48,7 +48,7 @@ gulp.task('jshint', function(){
 gulp.task('scripts', function(){
     return gulp.src(config.vendor.scripts_min)
     .pipe(concat('vendor.min.js'))
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest('dist/static/js'))
 });
 
 gulp.task('appScripts', ['scripts'], function(){
@@ -57,42 +57,42 @@ gulp.task('appScripts', ['scripts'], function(){
         'js/**/*.js'
     ])
     .pipe(uglify())
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest('dist/static/js'))
 });
 
 gulp.task('copyIndex', ['copyPages', 'copyFragments', 'fonts', 'img'], function(){
     return gulp.src([
         'index.html',
     ])
-    .pipe(gulp.dest('dist/'))
+    .pipe(gulp.dest('dist/templates/'))
 });
 
 gulp.task('img', function(){
     return gulp.src([
         'img/*',
     ])
-    .pipe(gulp.dest('dist/img'))
+    .pipe(gulp.dest('dist/static/img'))
 });
 
 gulp.task('copyPages', function(){
     return gulp.src([
         './pages/**/*.html',
     ])
-    .pipe(gulp.dest('dist/pages'))
+    .pipe(gulp.dest('dist/templates/pages'))
 });
 
 gulp.task('copyFragments', function(){
     return gulp.src([
         './fragments/*',
     ])
-    .pipe(gulp.dest('dist/fragments'))
+    .pipe(gulp.dest('dist/templates/fragments'))
 });
 
 gulp.task('fonts', function(){
     return gulp.src([
         'vendor/font-awesome/fonts/*',
     ])
-    .pipe(gulp.dest('dist/fonts'))
+    .pipe(gulp.dest('dist/static/fonts'))
 });
 
 // Stylesheets Task
@@ -101,7 +101,7 @@ gulp.task('styles', function(){
     return gulp.src(config.vendor.styles)
     .pipe(concat('vendor.min.css'))
     .pipe(cleanCSS())
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest('dist/static/css'))
 });
 
 gulp.task('lessCompileApp', ['styles'], function () {
@@ -110,7 +110,7 @@ gulp.task('lessCompileApp', ['styles'], function () {
     paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
     .pipe(concat('style.min.css'))
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(gulp.dest('./dist/static/css'));
 });
 
 /** 
@@ -146,6 +146,7 @@ gulp.task('serve', ['default'], function(){
     
     browserSync.init({
         server:'./dist/',
+        startPath: '/templates/'
     });
 
     gulp.watch(['./*.html', './fragments/*.html', './pages/**/*.html', './js/**/*.js', './less/*.less'], function(e){

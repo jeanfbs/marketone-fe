@@ -1,0 +1,1 @@
+define(["commons"],function(e){$("#insertHeader").load("../../fragments/header.html"),$("#usuarioForm").validate(),$("#cep").autoLoadAddress()});

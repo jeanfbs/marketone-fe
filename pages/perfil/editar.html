@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" >
    <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,8 +7,8 @@
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>Editar Meus Dados</title>
       <!-- Bootstrap Core CSS -->
-      <link th:href="@{css/vendor.min.css}" href="/css/vendor.min.css" rel="stylesheet" />
-      <link th:href="@{css/style.min.css}" href="/css/style.min.css" rel="stylesheet" />
+      <link data-th-href="@{css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+      <link data-th-href="@{css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
    </head>
    <body>
         <div id="insertHeader"></div>
@@ -25,32 +25,32 @@
                             <img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" alt="Avatar user" width="150">
                         </p>
                         <hr>
-                        <div th:if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" th:classappend="${responseVo.erro} ? alert-danger : alert-success" role="alert">
+                        <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
                             <strong>
-                                <span th:if="${responseVo.erro}">
+                                <span data-th-if="${responseVo.erro}">
                                     <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
-                                    <span th:text="${responseVo.tipoErro}"></span>
+                                    <span data-th-text="${responseVo.tipoErro}"></span>
                                 </span>
-                                <span th:if="${not responseVo.erro}">
+                                <span data-th-if="${not responseVo.erro}">
                                     <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
                                 </span>
                             </strong>
                             &nbsp;&nbsp;
-                            <span th:text="${responseVo.mensagem}"></span>
+                            <span data-th-text="${responseVo.mensagem}"></span>
                         </div>
-                        <form class="form-horizontal" action="#" th:action="@{/usuario}" id="usuarioForm" th:object="${usuario}" method="post">
+                        <form class="form-horizontal" action="#" data-th-action="@{/usuario}" id="usuarioForm" data-th-object="${usuario}" method="post">
                             <p class="text-muted">Dados Pessoais</p>
                             <div class="form-group">
                                 <label for="cpf" class="col-sm-3 control-label">CPF</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="cpf" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" th:field="*{cpf}" data-fv-notempty="true"  name="cpf" />
+                                    <input type="text" class="form-control" id="cpf" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-th-field="*{cpf}" data-fv-notempty="true"  name="cpf" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nome" class="col-sm-3 control-label">Nome Completo</label>
                                 <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nome" th:field="*{nome}" data-fv-notempty="true" name="nome" />
+                                <input type="text" class="form-control" id="nome" data-th-field="*{nome}" data-fv-notempty="true" name="nome" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -67,25 +67,25 @@
                             <div class="form-group">
                                 <label for="rg" class="col-sm-3 control-label">RG</label>
                                 <div class="col-sm-4">
-                                <input type="text" class="form-control" id="rg" th:field="*{rg}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="rg" />
+                                <input type="text" class="form-control" id="rg" data-th-field="*{rg}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="rg" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nivel" class="col-sm-3 control-label">Cargo</label>
                                 <div class="col-sm-4">
-                                <input type="text" class="form-control" id="nivel" th:field="*{nivel}" data-fv-notempty="true" name="nivel" />
+                                <input type="text" class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="senha" class="col-sm-3 control-label">Senha</label>
                                 <div class="col-sm-4">
-                                <input type="password" class="form-control" id="senha" th:field="*{senha}" data-fv-notempty="true" name="senha" />
+                                <input type="password" class="form-control" id="senha" data-th-field="*{senha}" data-fv-notempty="true" name="senha" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="confirmacao" class="col-sm-3 control-label">Confirmação de Senha</label>
                                 <div class="col-sm-4">
-                                <input type="password" class="form-control" id="confirmacao" th:field="*{confirmacao}" data-fv-notempty="true" name="confirmacao" data-fv-identical="true" data-fv-identical-field="senha" />
+                                <input type="password" class="form-control" id="confirmacao" data-th-field="*{confirmacao}" data-fv-notempty="true" name="confirmacao" data-fv-identical="true" data-fv-identical-field="senha" />
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="checkbox">
@@ -98,29 +98,29 @@
                             <div class="form-group">
                                 <label for="email" class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-4">
-                                <input type="text" class="form-control" id="email" th:field="*{email}" pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])" data-fv-notempty="true" name="email" />
+                                <input type="email" class="form-control" id="email" data-th-field="*{email}" data-fv-notempty="true" name="email" placeholder="teste@teste.com"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="telefone" class="col-sm-3 control-label">Telefone</label>
                                 <div class="col-sm-4">
-                                <input type="text" class="form-control" id="telefone" th:field="*{telefone}" data-fv-notempty="true" name="telefone" />
+                                <input type="text" class="form-control" id="telefone" data-th-field="*{telefone}" data-fv-notempty="true" name="telefone" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="celular" class="col-sm-3 control-label">Celular</label>
                                 <div class="col-sm-4">
-                                <input type="text" class="form-control" id="celular" th:field="*{celular}" data-fv-notempty="true" name="celular" />
+                                <input type="text" class="form-control" id="celular" data-th-field="*{celular}" data-fv-notempty="true" name="celular" />
                                 </div>
                             </div>
                             <br>
                             <hr>
                             <p class="text-muted">Dados do Endereço</p>
-                            <div th:if="*{T(java.util.Objects).nonNull(endereco)}">
+                            <div data-th-if="*{T(java.util.Objects).nonNull(endereco)}">
                                 <div class="form-group">
                                     <label for="cep" class="col-sm-3 control-label">CEP</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="cep" th:field="*{endereco.cep}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="cep" />
+                                        <input type="text" class="form-control" id="cep" data-th-field="*{endereco.cep}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="cep" />
                                     </div>
                                     <div class="sm-5">
                                         <span class="iconLoadCep hide">
@@ -134,45 +134,45 @@
                                 <div class="form-group">
                                     <label for="logradouro" class="col-sm-3 control-label">Logradouro</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="logradouro" th:field="*{endereco.logradouro}" data-fv-notempty="true" name="logradouro" placeholder="Rua, Avenida, Alameda..." />
+                                        <input type="text" class="form-control" id="logradouro" data-th-field="*{endereco.logradouro}" data-fv-notempty="true" name="logradouro" placeholder="Rua, Avenida, Alameda..." />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="numero" class="col-sm-3 control-label">Número</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" id="numero" th:field="*{endereco.numero}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="numero" />
+                                        <input type="text" class="form-control" id="numero" data-th-field="*{endereco.numero}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="numero" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="bairro" class="col-sm-3 control-label">Bairro</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}" data-fv-notempty="true" name="bairro" />
+                                        <input type="text" class="form-control" id="bairro" data-th-field="*{endereco.bairro}" data-fv-notempty="true" name="bairro" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="complemento" class="col-sm-3 control-label">Complemento</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="complemento" th:field="*{endereco.complemento}" data-fv-notempty="true" name="complemento" />
+                                        <input type="text" class="form-control" id="complemento" data-th-field="*{endereco.complemento}" data-fv-notempty="true" name="complemento" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="cidade" class="col-sm-3 control-label">Cidade</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}" data-fv-notempty="true" name="cidade" />
+                                        <input type="text" class="form-control" id="cidade" data-th-field="*{endereco.cidade}" data-fv-notempty="true" name="cidade" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="estado" class="col-sm-3 control-label">Estado</label>
                                     <div class="col-sm-4">
-                                        <select class="form-control select2-estados" id="estado" th:field="*{endereco.estado}" data-fv-notempty="true" name="estado">
-                                            <option th:each="estado : ${T(br.com.infinity.corbus.lixo.Estados).listOrderAscEstados()}" th:value="${estado.name()}" th:text="${estado.description}"></option>
+                                        <select class="form-control select2-estados" id="estado" data-th-field="*{endereco.estado}" data-fv-notempty="true" name="estado">
+                                            <option data-th-each="estado : ${T(br.com.infinity.corbus.lixo.Estados).listOrderAscEstados()}" data-th-value="${estado.name()}" data-th-text="${estado.description}"></option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="pais" class="col-sm-3 control-label">País</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="pais" th:field="*{T(java.util.Objects).isNull(endereco.pais)} ?: '(Brasil)'" data-fv-notempty="true" name="pais" />
+                                        <input type="text" class="form-control" id="pais" data-th-field="*{T(java.util.Objects).isNull(endereco.pais)} ?: '(Brasil)'" data-fv-notempty="true" name="pais" />
                                     </div>
                                 </div>
                             </div>
@@ -188,8 +188,8 @@
                 </div>
             </div>
         </div>
-      <script th:src="@{/vendor/js/vendor.min.js}" src="/js/vendor.min.js"></script>
-      <script th:src="@{/vendor/js/vendor.min.js}" data-main="../../js/main" src="/js/require.js"></script>
+      <script data-th-src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+      <script data-th-src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
       <script>
          require(['main'], function(){
                require(['root','editar-perfil']);
