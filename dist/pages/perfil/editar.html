@@ -54,6 +54,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="nome" class="col-sm-3 control-label">Sexo</label>
+                                <div class="col-sm-6">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="sexo" id="masculino" checked value="M"> Masculino
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="sexo" id="feminino" value="F"> Feminino
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="rg" class="col-sm-3 control-label">RG</label>
                                 <div class="col-sm-4">
                                 <input type="text" class="form-control" id="rg" th:field="*{rg}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="rg" />
@@ -105,60 +116,64 @@
                             <br>
                             <hr>
                             <p class="text-muted">Dados do Endereço</p>
-                            <div class="form-group">
-                                <label for="cep" class="col-sm-3 control-label">CEP</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="cep" th:field="*{cep}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="cep" />
+                            <div th:if="*{T(java.util.Objects).nonNull(endereco)}">
+                                <div class="form-group">
+                                    <label for="cep" class="col-sm-3 control-label">CEP</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" id="cep" th:field="*{endereco.cep}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="cep" />
+                                    </div>
+                                    <div class="sm-5">
+                                        <span class="iconLoadCep hide">
+                                            <i class="fa fa-spinner fa-pulse"></i>
+                                            <span class="sr-only">Carregando...</span>
+                                        </span>
+                                        <small>Digite o CEP para carregar as informações do Endereço</small><br>
+                                        <small id="callback" class="text-danger"></small>
+                                    </div>
                                 </div>
-                                <div class="sm-5">
-                                    <span class="iconLoadCep">
-                                        <i class="fa fa-spinner fa-pulse"></i>
-                                        <span class="sr-only">Carregando...</span>
-                                    </span>
-                                    <small>Digite o CEP para carregar as informações do Endereço</small><br>
-                                    <small id="callback" class="text-danger">Erro ao chamar o serviço de verificação de CEP</small>
+                                <div class="form-group">
+                                    <label for="logradouro" class="col-sm-3 control-label">Logradouro</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="logradouro" th:field="*{endereco.logradouro}" data-fv-notempty="true" name="logradouro" placeholder="Rua, Avenida, Alameda..." />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="logradouro" class="col-sm-3 control-label">Logradouro</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="logradouro" th:field="*{logradouro}" data-fv-notempty="true" name="logradouro" placeholder="Rua, Avenida, Alameda..." />
+                                <div class="form-group">
+                                    <label for="numero" class="col-sm-3 control-label">Número</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="numero" th:field="*{endereco.numero}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="numero" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="numero" class="col-sm-3 control-label">Número</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="numero" th:field="*{numero}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="numero" />
+                                <div class="form-group">
+                                    <label for="bairro" class="col-sm-3 control-label">Bairro</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}" data-fv-notempty="true" name="bairro" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="bairro" class="col-sm-3 control-label">Bairro</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="bairro" th:field="*{bairro}" data-fv-notempty="true" name="bairro" />
+                                <div class="form-group">
+                                    <label for="complemento" class="col-sm-3 control-label">Complemento</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="complemento" th:field="*{endereco.complemento}" data-fv-notempty="true" name="complemento" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="complemento" class="col-sm-3 control-label">Complemento</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="complemento" th:field="*{complemento}" data-fv-notempty="true" name="complemento" />
+                                <div class="form-group">
+                                    <label for="cidade" class="col-sm-3 control-label">Cidade</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}" data-fv-notempty="true" name="cidade" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="cidade" class="col-sm-3 control-label">Cidade</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="cidade" th:field="*{cidade}" data-fv-notempty="true" name="cidade" />
+                                <div class="form-group">
+                                    <label for="estado" class="col-sm-3 control-label">Estado</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control select2-estados" id="estado" th:field="*{endereco.estado}" data-fv-notempty="true" name="estado">
+                                            <option th:each="estado : ${T(br.com.infinity.corbus.lixo.Estados).listOrderAscEstados()}" th:value="${estado.name()}" th:text="${estado.description}"></option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="estado" class="col-sm-3 control-label">Estado</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="estado" th:field="*{estado}" data-fv-notempty="true" name="estado" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="pais" class="col-sm-3 control-label">País</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="pais" th:field="*{pais}" data-fv-notempty="true" name="pais" />
+                                <div class="form-group">
+                                    <label for="pais" class="col-sm-3 control-label">País</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="pais" th:field="*{T(java.util.Objects).isNull(endereco.pais)} ?: '(Brasil)'" data-fv-notempty="true" name="pais" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

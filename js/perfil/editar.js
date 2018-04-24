@@ -1,4 +1,4 @@
-define(function(){
+define(['commons'],function(commons){
 
     $("#insertHeader").load("../../fragments/header.html");
 
@@ -12,5 +12,8 @@ define(function(){
         },
         locale: 'pt_BR',
     });
+
+
+    $("#cep").autoLoadAddress();
 
 });
