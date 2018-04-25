@@ -104,8 +104,14 @@ gulp.task('styles', function(){
     .pipe(gulp.dest('dist/static/css'))
 });
 
-gulp.task('lessCompileApp', ['styles'], function () {
-    return gulp.src('./less/style.less')
+
+gulp.task('appStyles', function(){
+    return gulp.src('./css/*.css')
+    .pipe(cleanCSS())
+    .pipe(gulp.dest('dist/static/css'))
+});
+gulp.task('lessCompileApp', ['styles', 'appStyles'], function () {
+    return gulp.src(['./less/style.less'])
     .pipe(less({
     paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
