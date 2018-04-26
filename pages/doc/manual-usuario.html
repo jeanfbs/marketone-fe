@@ -5,23 +5,20 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <title>Minha Conta</title>
+      <title>Manual do Usuário</title>
       <!-- Bootstrap Core CSS -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+      <link rel="stylesheet" href="/static/css/vendor.min.css">
       <link rel="stylesheet" href="/static/css/doc.min.css">
-      
    </head>
    <body id="spring-core" class="book toc2 toc-left" cz-shortcut-listen="true">
       <div id="header">
-        <h1>Core Technologies</h1>
+        <h1>Sale++</h1>
+        <h3>Sistema de Automação de Varejo e Atacado</h3>
         <div class="details">
-          <span id="revnumber">version 5.0.5.RELEASE</span>
+          <span id="revnumber">Manual do Usuário - versão 1.0.0</span>
         </div>
         <div id="toc" class="toc2">
-          <div id="toctitle">Table of Contents</div>
-          <p>
-            <a href="index.html"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;&nbsp;Back to index</a>
-          </p>
+          <div id="toctitle">Tabela de Conteúdo</div>
           <div id="tocbot" class="js-toc"></div>
         </div>
       </div>
@@ -99,6 +96,26 @@
                     among them, are reflected in the <em>configuration metadata</em> used by a container.
                   </p>
                 </div>
+                <div class="admonitionblock note">
+                  <table>
+                     <tbody>
+                        <tr>
+                           <td class="icon">
+                              <i class="fa icon-note" title="Note"></i>
+                           </td>
+                           <td class="content">
+                              <div class="paragraph">
+                                 <p>XML-based metadata is <em>not</em> the only allowed form of configuration metadata. The
+                                    Spring IoC container itself is <em>totally</em> decoupled from the format in which this
+                                    configuration metadata is actually written. These days many developers choose
+                                    <a href="#beans-java">Java-based configuration</a> for their Spring applications.
+                                 </p>
+                              </div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
               </div>
             </div>
           </div>
@@ -123,7 +140,6 @@
         </div>
       
       <script th:src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
       <script th:src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
       <script>
         var oldtoc = document.getElementById('toctitle').nextElementSibling;
@@ -157,14 +173,8 @@
         };
         window.addEventListener('resize', handleTocOnResize);
         handleTocOnResize();
-        var link = document.createElement("a");
-        link.setAttribute("href", "index.html");
-        link.innerHTML = "<i class=\"fa fa-chevron-left\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Back to index";
-        var p = document.createElement("p");
-        p.appendChild(link);
         var toc = document.getElementById('toc')
         var next = document.getElementById('toctitle').nextElementSibling;
-        toc.insertBefore(p, next);
         </script>
       <script>
          require(['main'], function(){

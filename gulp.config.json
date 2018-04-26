@@ -9,7 +9,8 @@
             "vendor/select2/dist/js/select2.min.js",
             "vendor/formValidation/dist/js/formValidation.min.js",
             "vendor/formValidation/dist/js/framework/bootstrap.min.js",
-            "js/i18n/form_validation_pt_BR.js"
+            "js/i18n/form_validation_pt_BR.js",
+            "vendor/tocbot/dist/tocbot.min.js"
         ],
         "styles":[
             "vendor/bootstrap/dist/css/bootstrap-custom.min.css",
@@ -17,7 +18,8 @@
             "vendor/morris.js/morris.css",
             "vendor/select2/dist/css/select2.min.css",
             "vendor/select2-bootstrap-theme/dist/select2-bootstrap.min.css",
-            "vendor/formValidation/dist/css/formValidation.min.css"
+            "vendor/formValidation/dist/css/formValidation.min.css",
+            "vendor/tocbot/dist/tocbot.css"
         ]
 
 

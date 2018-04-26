@@ -106,7 +106,10 @@ gulp.task('styles', function(){
 
 
 gulp.task('appStyles', function(){
-    return gulp.src('./css/*.css')
+    return gulp.src('./less/doc.min.less')
+    .pipe(less({
+        paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
     .pipe(cleanCSS())
     .pipe(gulp.dest('dist/static/css'))
 });
