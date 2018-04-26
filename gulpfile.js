@@ -128,12 +128,12 @@ gulp.task('lessCompileApp', ['styles', 'appStyles'], function () {
  * 
  */
 gulp.task('cleanBootstrapStyle', function(){
-    return gulp.src('./vendor/bootstrap/dist/css/bootstrap-custom.min.css')
+    gulp.src('./vendor/bootstrap/dist/css/bootstrap-custom.min.css')
     .pipe(clean());
 });
  
 gulp.task('replace', function(){
-  gulp.src('vendor/bootstrap/less/bootstrap.less')
+  return gulp.src('vendor/bootstrap/less/bootstrap.less')
     .pipe(replace('@import "variables.less";', '@import "../../less/variables.less";'))
     .pipe(concat('bootstrap.less'))
     .pipe(clean())

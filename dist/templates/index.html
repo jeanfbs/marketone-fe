@@ -9,8 +9,8 @@
       <title>DashBoard</title>
 
       <!-- Bootstrap Core CSS -->
-      <link th:href="@{css/vendor.min.css}" href="../static/css/vendor.min.css" rel="stylesheet" />
-      <link th:href="@{css/style.min.css}" href="../static/css/style.min.css" rel="stylesheet" />
+      <link data-th-href="@{css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+      <link data-th-href="@{css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
    </head>
    <body>
 
@@ -602,8 +602,8 @@
             </div>
          </div>
       </div>
-      <script th:src="@{/vendor/js/vendor.min.js}" src="../static/js/vendor.min.js"></script>
-      <script th:src="@{/vendor/js/vendor.min.js}" data-main="../static/js/main" src="../static/js/require.js"></script>
+      <script data-th-src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+      <script data-th-src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
       <script>
          require(['main'], function(){
                require(['root','script']);

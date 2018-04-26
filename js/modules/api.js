@@ -11,7 +11,8 @@ define(function(){
         "estoque.anual": baseUrl + "bar3",
         "estoque.indicadores.periodo": baseUrl + "indicadorEstoque",
         "estoque.indicadores.periodo.item": baseUrl + "indicadorItemEstoque",
-        "faturamento.mensal": baseUrl + "line4"
+        "faturamento.mensal": baseUrl + "line4",
+        "usuario.pesquisa": baseUrl + "buscarUsuarios"
     };
 
     return api;

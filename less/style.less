@@ -4,62 +4,67 @@ body{
     background: transparent url("../img/overlay.png") repeat;
   }
   
-  .navbar-upsale {
+  .navbar-theme {
       background-color:@brand-primary;
-      color:#ffffff;
-        border-radius:0;
+      color:@white-base;
+      border-radius:0;
+      margin-bottom: 0px;
   }
-    
-  .navbar-upsale .navbar-nav > li > a {
-        color:#fff;
+
+  .navbar-theme .navbar-nav > li > a {
+        color:@white-base;
         padding-left:20px;
         padding-right:20px;
   }
-  .navbar-upsale .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus ,
+  .navbar-theme .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus ,
   .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus{
     background-color: lighten(@brand-primary, 5%);
   }
   .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
-    color:#fff;
+    color:@white-base;
     background-color: lighten(@brand-primary, 5%);
   
   }
-  .navbar-upsale .navbar-brand, .navbar-default .navbar-nav>li>a:focus {
-    color:#fff;
+  .navbar-theme .navbar-brand, .navbar-default .navbar-nav>li>a:focus {
+    color:@white-base;
   }
   .dropdown-header{
-    color:#eee;
+    color:darken(@white-base,6.5%);
   }
   .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.open>a:hover{
     background-color: lighten(@brand-primary, 5%);
   }
   
-  .navbar-upsale .navbar-nav > li > a:hover, .nav > li > a:focus, .navbar-upsale .navbar-nav .open>a  { 
+  .navbar-theme .navbar-nav > li > a:hover, .nav > li > a:focus, .navbar-theme .navbar-nav .open>a  { 
     background-color: lighten(@brand-primary, 5%);
   }
   
   .nav-tabs > li > a:focus, .nav-tabs > li > a:hover{
-    background-color: #fff;
+    background-color: @white-base;
   }
   
   .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover,
   .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover,
-  .navbar-upsale .navbar-nav > li > a:hover{
-    color:#fff;
+  .navbar-theme .navbar-nav > li > a:hover{
+    color:@white-base;
   }
        
   /* dropdown */
-  .navbar-upsale .navbar-nav .dropdown-menu  { 
-    background-color: #fff;
+  .navbar-theme .navbar-nav .dropdown-menu  { 
+    background-color: @white-base;
   }
-  .navbar-upsale .navbar-nav .dropdown-menu>li>a  { 
+  .navbar-theme .navbar-nav .dropdown-menu>li>a  { 
     color: #222;
   }
-  .navbar-upsale .navbar-toggle {
+  .navbar-theme .navbar-toggle {
         background-color:transparent;
   }
-  .navbar-upsale .icon-bar {
-        background-color:#fff;
+  .navbar-theme .icon-bar {
+        background-color:@white-base;
+  }
+
+  .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+    background-color: darken(@brand-primary,5%);
   }
   
   
@@ -71,7 +76,7 @@ body{
   }
   
   .tab-pane{
-    background: #fff;
+    background: @white-base;
   }
   .tab-pane > .panel-default{
     border:none;
@@ -115,6 +120,12 @@ body{
     font-size: 40px;
   }
   
+  .panel-primary>.panel-heading> a{
+    color:@white-base;
+  }
+  .panel-primary>.panel-heading> a:hover{
+    color: darken(@white-base, 5%);
+  }
   .panel-yellow{
     border-color: darken(@brand-warning, 2.5%);
   }
@@ -134,3 +145,268 @@ body{
     background-color: darken(@brand-danger, 5%);
   }
   
+  .panel-heading{
+    padding: 5px 10px;
+  }
+  .white{
+    background: @breadcrumb-bg;
+  }
+
+  .table{
+    font-size: 12px;
+  }
+  .table-fixed {
+    width: 100%;
+    background-color: #f3f3f3;
+  }
+  .table-fixed tbody {
+    overflow-y: auto;
+    width: 100%;
+  }
+  .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+    display: block;
+  }
+  .table-fixed tbody td {
+    float: left;
+  }
+  .table-fixed thead tr th {
+    float: left;
+  }
+
+
+  .all{
+    top: 5px;
+    position: relative;
+  }
+  
+  
+  table.dataTable thead .sorting_asc:after {
+    content: "\f0de";
+    float: right;
+    font-family: fontawesome;
+  }
+  table.dataTable thead .sorting_desc:after {
+    content: "\f0dd";
+    float: right;
+    font-family: fontawesome;
+  }
+  table.dataTable thead .sorting:after {
+    content: "\f0dc";
+    float: right;
+    font-family: fontawesome;
+    color: rgba(50, 50, 50, 0.5);
+  }
+  
+  .table thead{
+    cursor: pointer;
+  }
+  .dataTables_wrapper th{
+    white-space: nowrap;
+  
+  }
+  .dataTables_wrapper td{
+    overflow: hidden; /* this is what fixes the expansion */
+    text-overflow: ellipsis; /* not supported in all browsers, but I accepted the tradeoff */
+    white-space: nowrap;
+    table-layout: fixed;
+  
+  }
+
+  .dataTables_scrollBody thead th.sorting:after,
+  .dataTables_scrollBody thead th.sorting_asc:after,
+  .dataTables_scrollBody thead th.sorting_desc:after {
+      position: absolute;
+      top: 14px;
+      right: 8px;
+      display: none!important;
+      font-family: FontAwesome!important;
+  }
+  .dataTables_wrapper {
+    overflow: hidden;
+  }
+  .dataTables_wrapper table.table {
+    clear: both;
+    max-width: inherit;
+    margin-bottom: -2px;
+  }
+  .table-datatable *, .table-datatable :after, .table-datatable :before {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+  }
+  .table-datatable label {
+    position: relative;
+    display: block;
+    font-weight: 400;
+  }
+  .table-datatable tbody td {
+    vertical-align: middle !important;
+  }
+  .table-datatable img {
+    margin-right: 10px;
+    border: 1px solid #F8F8F8;
+    width: 40px;
+  }
+  table.dataTable thead th {
+      position: relative;
+      padding-right:30px; 
+      background-image: none !important;
+  }
+  table.dataTable thead th.sorting:after,
+  table.dataTable thead th.sorting_asc:after,
+  table.dataTable thead th.sorting_desc:after {
+      position: absolute;
+      background: transparent;
+      top: 12px;
+      right: 8px;
+      display: block;
+      font-family: FontAwesome;
+  }
+  table.dataTable thead th.sorting:after {
+      content: "\f0dc";
+      font-size: 0.8em;
+      padding-top: 0.12em;
+  }
+  table.dataTable thead th.sorting_asc:after {
+      content: "\f0de";
+  }
+  table.dataTable thead th.sorting_desc:after {
+      content: "\f0dd";
+  }
+  div.DTTT_collection_background {
+    z-index: 2002;
+  }
+  div.DTTT .btn {
+    color: #333 !important;
+    font-size: 12px;
+  }
+  ul.DTTT_dropdown.dropdown-menu {
+    z-index: 2003;
+    background: rgba(0, 0, 0, 0.7) !important;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    min-width: 157px;
+  }
+  ul.DTTT_dropdown.dropdown-menu li {
+    position: relative;
+  }
+  ul.DTTT_dropdown.dropdown-menu > li > a {
+    position: relative;
+    display: block;
+    padding: 5px 10px !important;
+    color: #f0f0f0 !important;
+  }
+  ul.DTTT_dropdown.dropdown-menu > li:first-child > a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
+  ul.DTTT_dropdown.dropdown-menu > li:last-child > a {
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+  }
+  ul.DTTT_dropdown.dropdown-menu > li:hover > a {
+    background:rgba(0, 0, 0, 0.3);
+    color:#f0f0f0;
+  }
+
+  .dataTables_scroll{
+    border-bottom: 1px solid #dcdcdc;
+  }
+
+  .table > thead > tr > td.primary,
+  .table > tbody > tr > td.primary,
+  .table > tfoot > tr > td.primary,
+  .table > thead > tr > th.primary,
+  .table > tbody > tr > th.primary,
+  .table > tfoot > tr > th.primary,
+  .table > thead > tr.primary > td,
+  .table > tbody > tr.primary > td,
+  .table > tfoot > tr.primary > td,
+  .table > thead > tr.primary > th,
+  .table > tbody > tr.primary > th,
+  .table > tfoot > tr.primary > th{
+      color: darken(@brand-primary, 15%);
+      background-color: #f1e3fc;
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -o-transition: 0.5s;
+      transition: 0.5s;             
+  }
+  
+  .table-hover > tbody > tr > td.primary:hover,
+   .table-hover > tbody > tr > th.primary:hover,
+   .table-hover > tbody > tr.primary:hover > td,
+   .table-hover > tbody > tr.primary:hover > th{
+      background-color: fade(@white-base,10%);
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -o-transition: 0.5s;
+      transition: 0.5s;
+  }
+  
+  .rowDT{
+    margin-top: 10px;
+  }
+
+  .dataTables_paginate > .pagination{
+    margin: 0px;
+  }
+  .dataTables_paginate a{
+      padding: 3px 5px!important;
+      margin: 4px;
+      color:inherit;
+      border:1px solid darken(@white-base,13.2%);
+  }
+  .dataTables_paginate a:hover{
+    color:darken(@white-base,20%);
+    cursor: pointer;
+  }
+  
+  .dataTables_paginate > a.disabled{
+    color: #666;
+    background: darken(@white-base,6.5%);
+  }
+  
+  .pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 4px 10px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    color: @link-color;
+    text-decoration: none;
+    background-color: darken(@white-base,4.1%);
+    border: 1px solid darken(@white-base,15.2%);
+  }
+  .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus {
+    color: @link-hover-color;
+    background-color: darken(@white-base,6.5%);
+  }
+  .pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+    color: darken(@white-base,40.6%);
+    cursor: not-allowed;
+    background-color: darken(@white-base,1.2%);
+    border-color: darken(@white-base,15.2%);
+  }
+  .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: @white-base;
+    cursor: default;
+    background-color: darken(@brand-primary, 2.5%);;
+    border-color: darken(@brand-primary, 2.5%);;
+  }
+
+  .dataTables_paginate > .pagination>li:last-child>a, .dataTables_paginate > .pagination>li:first-child>a{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }

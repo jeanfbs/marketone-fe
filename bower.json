@@ -10,18 +10,12 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
+    "vendor",
     "test",
     "tests",
     "pages",
     "index.html",
     "/js"
-  ],
-  "main": [
-    "dist/css/sb-admin-2.css",
-    "dist/css/sb-admin-2.min.css",
-    "dist/js/sb-admin-2.js",
-    "dist/js/sb-admin-2.min.js"
   ],
   "dependencies": {
     "bootstrap": "~3.3.7",
@@ -36,7 +30,8 @@
     "jquery-knob": "^1.2.13",
     "requirejs": "~2.3.5",
     "select2-bootstrap-theme": "^0.1.0-beta.10",
-    "formValidation": "cyclone-formvalidation#0.6.1"
+    "formValidation": "cyclone-formvalidation#0.6.1",
+    "tocbot": "^4.3.0"
   },
   "resolutions": {
     "font-awesome": "~4.6.3"

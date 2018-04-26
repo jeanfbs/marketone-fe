@@ -10,7 +10,10 @@
             "vendor/formValidation/dist/js/formValidation.min.js",
             "vendor/formValidation/dist/js/framework/bootstrap.min.js",
             "js/i18n/form_validation_pt_BR.js",
-            "vendor/tocbot/dist/tocbot.min.js"
+            "vendor/tocbot/dist/tocbot.min.js",
+            "vendor/datatables/media/js/jquery.dataTables.min.js",
+            "vendor/datatables/media/js/dataTables.bootstrap.min.js"
+
         ],
         "styles":[
             "vendor/bootstrap/dist/css/bootstrap-custom.min.css",
