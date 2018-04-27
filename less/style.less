@@ -148,8 +148,10 @@ body{
   .panel-heading{
     padding: 5px 10px;
   }
-  .white{
+  #row-breadcrumb{
     background: @breadcrumb-bg;
+    box-shadow: 0 0 4px darken(@brand-primary, 15%);
+    
   }
 
   .table{
@@ -333,8 +335,8 @@ body{
   .table > thead > tr.primary > th,
   .table > tbody > tr.primary > th,
   .table > tfoot > tr.primary > th{
-      color: darken(@brand-primary, 15%);
-      background-color: #f1e3fc;
+      color: #000;
+      background-color: fade(@brand-primary, 10%);
       -webkit-transition: 0.5s;
       -moz-transition: 0.5s;
       -o-transition: 0.5s;

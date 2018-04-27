@@ -17,7 +17,7 @@
 <body>
 
     <div id="insertHeader"></div>
-    <div class="white">
+    <div id="row-breadcrumb">
         <ol class="breadcrumb container">
             <li>
                 <a href="/templates/" data-th-href="/cpanel/dashboard">
@@ -38,13 +38,13 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 controls">
+                        <div class="col-md-4 col-sm-4" id="controls">
                             <div class="form-group">
-                                <a href="user/save/" class="btn btn-outline btn-default btn-xs new" role="button">
+                                <a href="user/save/" class="btn btn-outline btn-default btn-xs" id="new" role="button">
                                     <i class="fa fa-plus fa-fw"></i> Novo</a>
-                                <a href="#" base-view-url="user/" class="btn btn-outline btn-default btn-xs view disabled" role="button">
+                                <a href="#" base-view-url="user/" class="btn btn-outline btn-default btn-xs disabled" id="view" role="button">
                                     <i class="fa fa-eye fa-fw"></i> Visualizar</a>
-                                <a href="#" class="btn btn-outline btn-danger btn-xs delete" role="button" data-toggle="modal" data-target=".modal">
+                                <a href="#" class="btn btn-outline btn-danger btn-xs disabled" id="delete" role="button" data-toggle="modal" data-target=".modal">
                                     <i class="fa fa-trash fa-fw"></i> Excluir</a>
                             </div>
                         </div>
@@ -68,9 +68,9 @@
                         <div class="col-md-4 col-sm-4">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-search">
+                                    <input type="text" class="form-control" id="input-search">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary btn-search" type="button">
+                                        <button class="btn btn-primary" id="btn-search" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
@@ -79,19 +79,24 @@
                         </div>
                     </div>
                     <br>
+                    
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="tabela-usuario" width="100%">
                             <thead>
                                 <tr class="text-primary">
                                     <th> 
                                         <label>
-                                            <input type="checkbox" class="all"> 
+                                            <input type="checkbox" id="all"> 
                                         </label>
                                     </th>
-                                    <th class="col-md-2">Cpf</th>
-                                    <th class="col-md-4">Nome</th>
-                                    <th class="col-md-3">E-Mail</th>
-                                    <th>Nível de Acesso</th>
+                                    <th>Código</th>
+                                    <th>Grupo</th>
+                                    <th>Descrição</th>
+                                    <th>Preço</th>
+                                    <th>Marca</th>
+                                    <th>Fornecedor</th>
+                                    <th>Unidade</th>
+                                    <th>Data de Cadastro</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -118,14 +123,14 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        <i class="fa fa-question-circle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses usuários.
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses usuários.
                         <strong>Deseja mesmo prosseguir?</strong>
                     </p>
                     <div class="deleteIds"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-primary btn-outline confirm-delete">Sim</button>
+                    <button type="button" class="btn btn-danger btn-outline confirm-delete">Sim</button>
                 </div>
             </div>
         </div>
