@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Detalhes do Produto</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link data-th-href="@{css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb">
+        <ol class="breadcrumb container">
+            <li>
+                <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
+                    <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a data-th-href="@{/cpanel/produtos/}" href="/templates/paginas/produtos/pesquisa.html">Produtos</a>
+            </li>
+            <li class="active">Detalhes</li>
+        </ol>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary card-4">
+                <div class="panel-heading">
+                    <i class="fa fa-check" aria-hidden="true"></i> Detalhes do Produto
+                    <a data-th-href="@{/docs#produtos}" href="/templates/paginas/doc/manual-usuario.html#produtos" target="_blank" class="pull-right"
+                        data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success"
+                        role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <strong>
+                            <span data-th-if="${responseVo.erro}">
+                                <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
+                                <span data-th-text="${responseVo.tipoErro}"></span>
+                            </span>
+                            <span data-th-if="${not responseVo.erro}">
+                                <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
+                            </span>
+                        </strong>
+                        &nbsp;&nbsp;
+                        <span data-th-text="${responseVo.mensagem}"></span>
+                    </div>
+
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <caption>Dados do Produto</caption>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-2">Codigo de Barras</td>
+                                        <td data-th-text="${produto.codigo}">1354951318</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2">Descrição</td>
+                                        <td data-th-text="${produto.descricao}">Arroz Branco Vasconcelos</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2">Grupo</td>
+                                        <td data-th-text="${produto.grupo}">Alimentos</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2">Marca</td>
+                                        <td data-th-text="${produto.marca}">Vasconcelos</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2">Fornecedor</td>
+                                        <td>
+                                            <a href="@{/fornecedor/}${produto.fornecedor.codigo}" data-th-text="${produto.fornecedor.nome}">Vasconcelos Industrias e Exportação LTDA</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="table-responsive col-sm-6 col-xs-12">
+                        <table class="table table-bordered table-hover table-striped">
+                            <caption>Preço e Taxas</caption>
+                            <tbody>
+                                <tr>
+                                    <td>Preço de Compra</td>
+                                    <td data-th-text="R$ ${produto.precoCompra}">R$ 9,85</td>
+                                </tr>
+                                <tr>
+                                    <td>Outros Custos</td>
+                                    <td data-th-text="R$ ${produto.outrosCustos}">R$ 1,25</td>
+                                </tr>
+                                <tr>
+                                    <td>Taxa ICMS</td>
+                                    <td data-th-text="${produto.icms}%">18%</td>
+                                </tr>
+                                <tr>
+                                    <td>Taxa PIS</td>
+                                    <td data-th-text="${produto.pis}%">1.65%</td>
+                                </tr>
+                                <tr>
+                                    <td>Taxa COFINS</td>
+                                    <td data-th-text="${produto.cofins}%">7.6%</td>
+                                </tr>
+                                <tr>
+                                    <td>Margem de Lucro</td>
+                                    <td data-th-text="${produto.lucro}%">20%</td>
+                                </tr>
+                                <tr>
+                                    <td>Preço de Venda</td>
+                                    <td data-th-text="${produto.precoVenda}%">R$ 12,57</td>
+                                </tr>
+                                <tr>
+                                    <td>Valor de Lucro</td>
+                                    <td data-th-text="${produto.valorLucro}%">R$ 1.79</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses usuários.
+                        <strong>Deseja mesmo prosseguir?</strong>
+                    </p>
+                    <div class="deleteIds"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-danger btn-outline confirm-delete">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <script>
+        require(['main'], function () {
+            require(['root', 'cadastro-produtos']);
+        });
+    </script>
+</body>
+
+</html>

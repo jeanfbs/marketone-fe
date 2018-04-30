@@ -1,0 +1,1 @@
+define(function(){return{Get:function(){function t(t,n){this.url=t,this.data=n}return t.prototype.call=function(){var t={crossDomain:!0,headers:{"content-type":"application/json","cache-control":"no-cache"},dataType:"json"};return t.url=this.url,t.method="GET",$.ajax(t)},t}()}});

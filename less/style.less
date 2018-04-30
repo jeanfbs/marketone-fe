@@ -3,7 +3,25 @@
 body{
     background: transparent url("../img/overlay.png") repeat;
   }
-  
+
+textarea{
+  resize: none;
+}
+  #black-brand{
+    background: @white-base;
+    border-radius: 4px;
+    padding: 2px;
+    color: @brand-primary;
+  }
+  #light-brand{
+    margin-left: -4px;
+  }
+  .navbar-brand{
+    font-weight: 600;
+  }
+  #navbar{
+    font-size: 12px;
+  }
   .navbar-theme {
       background-color:@brand-primary;
       color:@white-base;
@@ -11,6 +29,9 @@ body{
       margin-bottom: 0px;
   }
 
+  .navbar-right{
+    margin-right: 0px;
+  }
   .navbar-theme .navbar-nav > li > a {
         color:@white-base;
         padding-left:20px;

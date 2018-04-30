@@ -12,7 +12,9 @@ define(function(){
         "estoque.indicadores.periodo": baseUrl + "indicadorEstoque",
         "estoque.indicadores.periodo.item": baseUrl + "indicadorItemEstoque",
         "faturamento.mensal": baseUrl + "line4",
-        "produtos.pesquisa": baseUrl + "buscarProdutos"
+        "produtos.pesquisa": baseUrl + "buscarProdutos",
+
+        "produtos.taxas.pesquisa": baseUrl + "buscarTaxaPorProduto"
     };
 
     return api;

@@ -2,6 +2,7 @@ requirejs.config({
     baseUrl: "/static/js/",
     paths: {
         chart: "modulos/chart",
+        ajax: "modulos/ajax",
         api: "modulos/api",
         datatable: "modulos/datatable",
         commons: "modulos/commons",

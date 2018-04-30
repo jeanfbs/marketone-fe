@@ -51,7 +51,7 @@
                             <span data-th-text="${responseVo.mensagem}"></span>
                         </div>
                         <form class="form-horizontal" action="#" data-th-action="@{/usuario}" id="usuarioForm" data-th-object="${usuario}" method="post">
-                            <p class="text-muted">Dados Pessoais</p>
+                            <p class="text-muted"><i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Dados Pessoais</p>
                             <div class="form-group">
                                 <label for="cpf" class="col-sm-3 control-label">CPF</label>
                                 <div class="col-sm-4">
@@ -126,7 +126,7 @@
                             </div>
                             <br>
                             <hr>
-                            <p class="text-muted">Dados do Endereço</p>
+                            <p class="text-muted"><i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Dados do Endereço</p>
                             <div data-th-if="*{T(java.util.Objects).nonNull(endereco)}">
                                 <div class="form-group">
                                     <label for="cep" class="col-sm-3 control-label">CEP</label>

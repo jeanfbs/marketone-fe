@@ -1,0 +1,7 @@
+{
+    "buscarTaxaPorProduto":{
+        "icms":18,
+        "pis": 1.65,
+        "cofins": 7.6
+    }
+}
