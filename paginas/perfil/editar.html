@@ -12,12 +12,23 @@
    </head>
    <body>
         <div id="insertHeader"></div>
+        <div id="row-breadcrumb">
+            <ol class="breadcrumb container">
+                <li>
+                    <a href="/templates/" data-th-href="@{/cpanel/dashboard}">
+                        <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li><a data-th-href="@{/cpanel/perfil/1}" href="/templates/paginas/perfil/perfil.html">Minha Conta</a></li>
+                <li class="active">Edição</li>
+            </ol>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="panel panel-default card-4">
                     <div class="panel-body">
-                        <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <a data-th-href="@{/docs#perfil}" href="/templates/paginas/doc/manual-usuario.html#perfil" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
                             <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                         </a>
                         <h2 class="text-center">Edição de Perfil do Usúario</h2>
@@ -79,18 +90,18 @@
                             <div class="form-group">
                                 <label for="senha" class="col-sm-3 control-label">Senha</label>
                                 <div class="col-sm-4">
-                                <input type="password" class="form-control" id="senha" data-th-field="*{senha}" data-fv-notempty="true" name="senha" />
+                                <input type="password" class="form-control password" id="senha" data-th-field="*{senha}" data-fv-notempty="true" name="senha" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="confirmacao" class="col-sm-3 control-label">Confirmação de Senha</label>
                                 <div class="col-sm-4">
-                                <input type="password" class="form-control" id="confirmacao" data-th-field="*{confirmacao}" data-fv-notempty="true" name="confirmacao" data-fv-identical="true" data-fv-identical-field="senha" />
+                                <input type="password" class="form-control password" id="confirmacao" data-th-field="*{confirmacao}" data-fv-notempty="true" name="confirmacao" data-fv-identical="true" data-fv-identical-field="senha" />
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="mostrar" value="true"> Mostrar Senha
+                                            <input type="checkbox" id="mostrar-senha" value="true"> Mostrar Senha
                                         </label>
                                     </div>
                                 </div>

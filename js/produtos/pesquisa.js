@@ -1,6 +1,6 @@
 define(['datatable', 'api'], function(datatable, api){
 
-    $("#insertHeader").load("../../fragments/header.html");
+    $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
 
 
     

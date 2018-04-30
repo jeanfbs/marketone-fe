@@ -12,6 +12,16 @@
    </head>
    <body>
       <div id="insertHeader"></div>
+      <div id="row-breadcrumb">
+          <ol class="breadcrumb container">
+              <li>
+                  <a href="/templates/" data-th-href="@{/cpanel/dashboard}">
+                      <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                  </a>
+              </li>
+              <li class="active">Minha Conta</li>
+          </ol>
+      </div>
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
@@ -72,7 +82,7 @@
                           </table>
                         </div>
                         <p>
-                          <a href="/templates/pages/perfil/editar.html" class="btn btn-primary" role="button"> <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i> Editar</a> 
+                          <a data-th-href="@{/cpanel/perfil/1}" href="/templates/paginas/perfil/editar.html" class="btn btn-primary" role="button"> <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i> Editar</a> 
                         </p>
                       </div>
                     </div>
@@ -82,7 +92,7 @@
           <div class="col-sm-8">
               <div class="panel panel-default">
                   <div class="panel-body">
-                      <a href="/docs#client" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                      <a data-th-href="@{/docs#perfil}" href="/templates/paginas/doc/manual-usuario.html#perfil" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
                           <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                       </a>
                       <h3>Atividades Recentes</h3>

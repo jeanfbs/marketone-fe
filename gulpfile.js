@@ -76,16 +76,16 @@ gulp.task('img', function(){
 
 gulp.task('copyPages', function(){
     return gulp.src([
-        './pages/**/*.html',
+        './paginas/**/*.html',
     ])
-    .pipe(gulp.dest('dist/templates/pages'))
+    .pipe(gulp.dest('dist/templates/paginas'))
 });
 
 gulp.task('copyFragments', function(){
     return gulp.src([
-        './fragments/*',
+        './fragmentos/*',
     ])
-    .pipe(gulp.dest('dist/templates/fragments'))
+    .pipe(gulp.dest('dist/templates/fragmentos'))
 });
 
 gulp.task('fonts', function(){
@@ -158,7 +158,7 @@ gulp.task('serve', ['default'], function(){
         startPath: '/templates/'
     });
 
-    gulp.watch(['./*.html', './fragments/*.html', './pages/**/*.html', './js/**/*.js', './less/*.less'], function(e){
+    gulp.watch(['./*.html', './fragmentos/*.html', './paginas/**/*.html', './js/**/*.js', './less/*.less'], function(e){
         if(e.path.indexOf(".js") != -1){
             return gulp.run(["jshint","appScripts"]);
         }else if(e.path.indexOf(".less") != -1){

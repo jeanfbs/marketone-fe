@@ -42,83 +42,87 @@ $(function(){
             });
 
             tt_check = $(".check-id:checked").length;
-            if(tt_check == 1)
-            {
+            if(tt_check == 1){
                 btn_view.removeClass("disabled");	
             }
-            if(tt_check == 0)
-            {
+            if(tt_check == 0){
                 btn_new.removeClass("disabled");
             }
         }
     });
 
+	$("#mostrar-senha").change(function(){
+        if($(this).is(":checked")){
+            $(".password").attr("type","text");
+        }
+        else{
+            $(".password").attr("type","password");
+        }
+    });
 
     /*
 	*	Handler for each checkbox of the datatable also enable and disabled the control buttons 
 	*/
-	$(function(){
-		checkboxSelector = ".table-datatable tr td input[type=checkbox]"
-		$(document).off("click",checkboxSelector)
-		.on("click",checkboxSelector,function(e){
+	checkboxSelector = ".table-datatable tr td input[type=checkbox]";
+	$(document).off("click",checkboxSelector)
+	.on("click",checkboxSelector,function(e){
 
-				allChecks = $("tbody tr td input[type=checkbox]");
-				allChecked = $("tbody tr td input[type=checkbox]:checked");
+			allChecks = $("tbody tr td input[type=checkbox]");
+			allChecked = $("tbody tr td input[type=checkbox]:checked");
+
+			
+			if(allChecks.length != allChecked.length) {
+					$("#all").prop('checked', false);
+					$("#all").removeClass('selected');
+			}
+			else{
+				$("#all").prop('checked', true);
+				$("#all").addClass('selected');
+			}
+
+			var row = $(this).parents("tr");
+			if(allChecked.length == 1){
+				cpf = allChecked[0].value;
+				var href = $("#controls").find("#view").attr("base-view-url");
+				$("#controls").find("#view").attr("href", href + cpf);
+			}
+
+			btn_new = $("#controls").find("#new");
+			btn_view = $("#controls").find("#view");
+			btn_delete = $("#controls").find("#delete");
+			if(!row.hasClass('primary')){
+				row.addClass('primary');
+				checkbox = $(this);
+				checkbox.prop("checked",true);
 
 				
-				if(allChecks.length != allChecked.length) {
-						$("#all").prop('checked', false);
-						$("#all").removeClass('selected');
+				btn_new.addClass("disabled");
+				if(allChecked.length > 1){
+					btn_view.addClass("disabled");
 				}
 				else{
-					$("#all").prop('checked', true);
-					$("#all").addClass('selected');
-				}
-
-				var row = $(this).parents("tr");
-				if(allChecked.length == 1){
-					cpf = allChecked[0].value;
-					var href = $("#controls").find("#view").attr("base-view-url");
-					$("#controls").find("#view").attr("href", href + cpf);
-				}
-
-				btn_new = $("#controls").find("#new");
-				btn_view = $("#controls").find("#view");
-				btn_delete = $("#controls").find("#delete");
-				if(!row.hasClass('primary')){
-					row.addClass('primary');
-					checkbox = $(this);
-					checkbox.prop("checked",true);
-
-					
-					btn_new.addClass("disabled");
-					if(allChecked.length > 1){
-						btn_view.addClass("disabled");
-					}
-					else{
-						btn_view.removeClass("disabled");
-						btn_delete.removeClass("disabled");
-					}
-					
-				}
-				else{
-					
-					if(allChecked.length <= 1){
-						btn_view.removeClass("disabled");
-						btn_delete.removeClass("disabled");
-					}
-					if(allChecked.length == 0){
-						btn_new.removeClass("disabled");
-						btn_view.addClass("disabled");
-						btn_delete.addClass("disabled");
-					}
-					row.removeClass('primary');
-					checkbox = $(this);
-					checkbox.prop("checked",false);
+					btn_view.removeClass("disabled");
+					btn_delete.removeClass("disabled");
 				}
 				
+			}
+			else{
+				
+				if(allChecked.length <= 1){
+					btn_view.removeClass("disabled");
+					btn_delete.removeClass("disabled");
+				}
+				if(allChecked.length == 0){
+					btn_new.removeClass("disabled");
+					btn_view.addClass("disabled");
+					btn_delete.addClass("disabled");
+				}
+				row.removeClass('primary');
+				checkbox = $(this);
+				checkbox.prop("checked",false);
+			}
+			
 
-		});
 	});
 
 	var tableHasResults = function(table){

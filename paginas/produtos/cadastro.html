@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Cadastro de Produto</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link data-th-href="@{css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb">
+        <ol class="breadcrumb container">
+            <li>
+                <a data-th-href="@{/cpanel/dashboard}"  href="/templates/">
+                    <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li><a data-th-href="@{/cpanel/produtos/}" href="/templates/paginas/produtos/pesquisa.html">Produtos</a></li>
+            <li class="active">Cadastro</li>
+        </ol>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary card-4">
+                <div class="panel-heading">
+                    <i class="fa fa-check" aria-hidden="true"></i> Cadastro de Produto
+                    <a data-th-href="@{/docs#produtos}" href="/templates/paginas/doc/manual-usuario.html#produtos" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <strong>
+                            <span data-th-if="${responseVo.erro}">
+                                <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
+                                <span data-th-text="${responseVo.tipoErro}"></span>
+                            </span>
+                            <span data-th-if="${not responseVo.erro}">
+                                <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
+                            </span>
+                        </strong>
+                        &nbsp;&nbsp;
+                        <span data-th-text="${responseVo.mensagem}"></span>
+                    </div>
+                    <form class="form-horizontal" action="#" data-th-action="@{/produto}" id="produtoForm" data-th-object="${produto}" method="post">
+                        <p class="text-muted">Dados do Produto</p>
+                        <div class="form-group">
+                            <label for="codigo" class="col-sm-3 control-label">* Código de Barras</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="codigo" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-th-field="*{codigo}" data-fv-notempty="true"  name="codigo" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao" class="col-sm-3 control-label">* Descrição</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="descricao" data-th-field="*{descricao}" data-fv-notempty="true"  name="descricao" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="grupo" class="col-sm-3 control-label">* Grupo</label>
+                            <div class="col-sm-3">
+                                <select class="form-control select2-grupo" id="grupo" data-th-field="*{grupo}" data-fv-notempty="true" name="grupo">
+                                    <option data-th-each="grupo : ${grupos}" data-th-value="${grupo.codigo}" data-th-text="${grupo.nome}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marca" class="col-sm-3 control-label">* Marca</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="marca" data-th-field="*{marca}" data-fv-notempty="true"  name="marca" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="unidade" class="col-sm-3 control-label">* Unidade de Medida</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" id="unidade" data-th-field="*{unidade}" data-fv-notempty="true" name="unidade">
+                                    <option data-th-each="unidade : ${T(br.com.infinity.corbus.lixo.Unidade).values()}" data-th-value="${unidade.name()}" data-th-text="${unidade.name()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fornecedor" class="col-sm-3 control-label">* Fornecedor</label>
+                            <div class="col-sm-3">
+                                <select class="form-control select2-fornecedor" id="fornecedor" data-th-field="*{fornecedor}" data-fv-notempty="true" name="fornecedor">
+                                    <option data-th-each="fornecedor : ${fornecedores}" data-th-value="${fornecedor.codigo}" data-th-text="${fornecedor.nome}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <ul class="nav nav-tabs nav-tabs-form" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Preço</a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Estoque</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane tab-pane-form fade active in" role="tabpanel" id="home" aria-labelledby="home-tab">
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label for="marca" class="col-sm-6 control-label">Buscar Taxas por Produto</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="input-search">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary" id="btn-search" type="button">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-offset-3 col-sm-3 text-right">
+                                            <button type="button" class="btn btn-xs btn-primary" id="calcular-taxas"><i class="fa fa-percent fa-fw" aria-hidden="true"></i> Calcular</button>
+                                            <button type="button" class="btn btn-xs btn-default" id="limpar-taxas"><i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> Limpar</button>
+                                        </div>
+                                    </div>
+                                    <p class="text-danger" id="msg-erro-busca-taxas">Nenhum resultado encontrado</p>
+                                    <br>
+                                    <p class="text-muted">Informe as Taxas para o calculo do preço do produto</p>
+                                    <div class="form-group">
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Valor de Compra</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">R$</span>
+                                                <input type="text" class="form-control" pattern="^\d+(.\d{1,2})?$" data-fv-regexp-message="Por favor insira um valor no formato 0.00" >
+                                            </div>
+                                        </div>
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Outros Custo</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">R$</span>
+                                                <input type="text" class="form-control" pattern="^\d+(.\d{1,2})?$" data-fv-regexp-message="Por favor insira um valor no formato 0.00" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Taxa ICMS</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" pattern="^\d+(.\d{1,2})?$" data-fv-regexp-message="Por favor insira um valor no formato 0.00" >
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Taxa PIS </label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control"  pattern="^\d+(.\d{1,2})?$" data-fv-regexp-message="Por favor insira um valor no formato 0.00">
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                        <label for="fornecedor" class="col-sm-2 control-label">* COFINS</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" pattern="^\d+(.\d{1,2})?$" data-fv-regexp-message="Por favor insira um valor no formato 0.00" >
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Margem de Lucro</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" pattern="^\d+(.\d{1,2})?$" data-fv-regexp-message="Por favor insira um valor no formato 0.00" >
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Taxa IPI</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" pattern="^\d+(.\d{1,2})?$" data-fv-regexp-message="Por favor insira um valor no formato 0.00" >
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Preço Final</label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">R$</span>
+                                                <input type="text" class="form-control" pattern="^\d+(.\d{1,2})?$" readonly data-fv-regexp-message="Por favor insira um valor no formato 0.00" >
+                                            </div>
+                                        </div>
+                                        <label for="fornecedor" class="col-sm-2 control-label">* Valor de Lucro </label>
+                                        <div class="col-sm-2">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">R$</span>
+                                                <input type="text" class="form-control"  pattern="^\d+(.\d{1,2})?$" readonly data-fv-regexp-message="Por favor insira um valor no formato 0.00">
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="tab-pane tab-pane-form fade" role="tabpanel" id="profile" aria-labelledby="profile-tab">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-10">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw" aria-hidden="true"></i> Salvar</button>
+                                <button type="button" onClick="window.location.reload()" class="btn btn-default"><i class="fa fa-undo fa-fw" aria-hidden="true"></i> Limpar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses usuários.
+                        <strong>Deseja mesmo prosseguir?</strong>
+                    </p>
+                    <div class="deleteIds"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-danger btn-outline confirm-delete">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <script>
+        require(['main'], function () {
+            require(['root', 'cadastro-produtos']);
+        });
+    </script>
+</body>
+
+</html>

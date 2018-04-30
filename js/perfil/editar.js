@@ -1,6 +1,6 @@
 define(['commons'],function(commons){
-
-    $("#insertHeader").load("../../fragments/header.html");
+    
+    $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
     $("#usuarioForm").validate();
     $("#cep").autoLoadAddress();
 

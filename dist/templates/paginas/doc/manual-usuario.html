@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <title>Manual do Usuário</title>
+      <!-- Bootstrap Core CSS -->
+      <link rel="stylesheet" href="/static/css/vendor.min.css">
+      <link rel="stylesheet" href="/static/css/doc.min.css">
+   </head>
+   <body id="spring-core" class="book toc2 toc-left" cz-shortcut-listen="true">
+      <div id="header">
+        <h1>Sale++</h1>
+        <h3>Sistema de Automação de Varejo e Atacado</h3>
+        <div class="details">
+          <span id="revnumber">Manual do Usuário - versão 1.0.0</span>
+        </div>
+        <div id="toc" class="toc2">
+          <div id="toctitle">Tabela de Conteúdo</div>
+          <div id="tocbot" class="js-toc"></div>
+        </div>
+      </div>
+
+      <div id="content">
+          <div id="preamble">
+            <div class="sectionbody">
+              <div class="paragraph">
+                <p>This part of the reference documentation covers all of those technologies that are
+                  absolutely integral to the Spring Framework.
+                </p>
+              </div>
+              <div class="paragraph">
+                <p>Foremost amongst these is the Spring Framework’s Inversion of Control (IoC) container. A
+                  thorough treatment of the Spring Framework’s IoC container is closely followed by
+                  comprehensive coverage of Spring’s Aspect-Oriented Programming (AOP) technologies. The
+                  Spring Framework has its own AOP framework, which is conceptually easy to understand,
+                  and which successfully addresses the 80% sweet spot of AOP requirements in Java
+                  enterprise programming.
+                </p>
+              </div>
+              <div class="paragraph">
+                <p>Coverage of Spring’s integration with AspectJ (currently the richest - in terms of
+                  features - and certainly most mature AOP implementation in the Java enterprise space) is
+                  also provided.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="sect1">
+            <h2 id="beans"><a class="anchor" href="#beans"></a>1. The IoC container</h2>
+            <div class="sectionbody">
+              <div class="sect2">
+                <h3 id="beans-introduction"><a class="anchor" href="#beans-introduction"></a>1.1. Introduction to the Spring IoC container and beans</h3>
+                <div class="paragraph">
+                  <p>This chapter covers the Spring Framework implementation of the Inversion of Control
+                    (IoC) <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> principle. IoC
+                    is also known as <em>dependency injection</em> (DI). It is a process whereby objects define
+                    their dependencies, that is, the other objects they work with, only through constructor
+                    arguments, arguments to a factory method, or properties that are set on the object
+                    instance after it is constructed or returned from a factory method. The container then
+                    <em>injects</em> those dependencies when it creates the bean. This process is fundamentally
+                    the inverse, hence the name <em>Inversion of Control</em> (IoC), of the bean itself
+                    controlling the instantiation or location of its dependencies by using direct
+                    construction of classes, or a mechanism such as the <em>Service Locator</em> pattern.
+                  </p>
+                </div>
+                <div class="paragraph">
+                  <p>The <code>org.springframework.beans</code> and <code>org.springframework.context</code> packages are the basis
+                    for Spring Framework’s IoC container. The
+                    <a href="https://docs.spring.io/spring-framework/docs/5.0.5.RELEASE/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><code>BeanFactory</code></a>
+                    interface provides an advanced configuration mechanism capable of managing any type of
+                    object.
+                    <a href="https://docs.spring.io/spring-framework/docs/5.0.5.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"><code>ApplicationContext</code></a>
+                    is a sub-interface of <code>BeanFactory</code>. It adds easier integration with Spring’s AOP
+                    features; message resource handling (for use in internationalization), event
+                    publication; and application-layer specific contexts such as the <code>WebApplicationContext</code>
+                    for use in web applications.
+                  </p>
+                </div>
+                <div class="paragraph">
+                  <p>In short, the <code>BeanFactory</code> provides the configuration framework and basic
+                    functionality, and the <code>ApplicationContext</code> adds more enterprise-specific functionality.
+                    The <code>ApplicationContext</code> is a complete superset of the <code>BeanFactory</code>, and is used
+                    exclusively in this chapter in descriptions of Spring’s IoC container. For more
+                    information on using the <code>BeanFactory</code> instead of the <code>ApplicationContext,</code> refer to
+                    <a href="#beans-beanfactory">The BeanFactory</a>.
+                  </p>
+                </div>
+                <div class="paragraph">
+                  <p>In Spring, the objects that form the backbone of your application and that are managed
+                    by the Spring IoC <em>container</em> are called <em>beans</em>. A bean is an object that is
+                    instantiated, assembled, and otherwise managed by a Spring IoC container. Otherwise, a
+                    bean is simply one of many objects in your application. Beans, and the <em>dependencies</em>
+                    among them, are reflected in the <em>configuration metadata</em> used by a container.
+                  </p>
+                </div>
+                <div class="admonitionblock note">
+                  <table>
+                     <tbody>
+                        <tr>
+                           <td class="icon">
+                              <i class="fa icon-note" title="Note"></i>
+                           </td>
+                           <td class="content">
+                              <div class="paragraph">
+                                 <p>XML-based metadata is <em>not</em> the only allowed form of configuration metadata. The
+                                    Spring IoC container itself is <em>totally</em> decoupled from the format in which this
+                                    configuration metadata is actually written. These days many developers choose
+                                    <a href="#beans-java">Java-based configuration</a> for their Spring applications.
+                                 </p>
+                              </div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="footnotes">
+          <hr>
+          <div class="footnote" id="_footnote_1">
+            <a href="#_footnoteref_1">1</a>. See <a href="overview.html#background-ioc">Inversion of Control</a>
+          </div>
+          <div class="footnote" id="_footnote_2">
+            <a href="#_footnoteref_2">2</a>. See <a href="#beans-factory-collaborators">Dependency Injection</a>
+          </div>
+          <div class="footnote" id="_footnote_3">
+            <a href="#_footnoteref_3">3</a>. But see also <a href="#resources-filesystemresource-caveats">FileSystemResource caveats</a>.
+          </div>
+        </div>
+        <div id="footer">
+          <div id="footer-text">
+            Version 5.0.5.RELEASE<br>
+            Last updated 2018-04-03 19:40:18 UTC
+          </div>
+        </div>
+      
+      <script th:src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+      <script th:src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+      <script>
+        var oldtoc = document.getElementById('toctitle').nextElementSibling;
+        var newtoc = document.createElement('div');
+        newtoc.setAttribute('id', 'tocbot');
+        newtoc.setAttribute('class', 'js-toc');
+        oldtoc.parentNode.replaceChild(newtoc, oldtoc);    
+        tocbot.init({
+            contentSelector: '#content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            smoothScroll: false
+        });
+        var handleTocOnResize = function() {
+            var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (width < 768) {
+                tocbot.refresh({
+                    contentSelector: '#content',
+                    headingSelector: 'h1, h2, h3, h4, h5',
+                    collapseDepth: 6,
+                    activeLinkClass: 'ignoreactive',
+                    throttleTimeout: 1000,
+                    smoothScroll: false
+                });
+            } else {
+                tocbot.refresh({
+                    contentSelector: '#content',
+                    headingSelector: 'h1, h2, h3, h4, h5',
+                    smoothScroll: false
+                });
+            }
+        };
+        window.addEventListener('resize', handleTocOnResize);
+        handleTocOnResize();
+        var toc = document.getElementById('toc')
+        var next = document.getElementById('toctitle').nextElementSibling;
+        </script>
+      <script>
+         require(['main'], function(){
+          $("#insertHeader").load("../../fragments/header.html");
+        });
+      </script>
+    </body>
+</html>

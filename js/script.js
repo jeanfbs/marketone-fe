@@ -45,7 +45,7 @@ define(['chart', 'api'], function(chart, api){
 
     $(function(){
         
-      $("#insertHeader").load("./fragments/header.html");
+      $("#insertHeader").load("./fragmentos/menu-navegacao.html");
 
       var ajaxKnobDinheiro = Ajax.call(api["vendas.atual.dinheiro"], "GET");
       ajaxKnobDinheiro.done(function(json){
