@@ -76,3 +76,16 @@ CPF da nota fiscal,
 
 Para finalizar uma venda é preciso ter todos os itens da venda do cupom na tela
 Precisa permitir que seja possivel dar desconto
+
+
+
+
+
+
+observacoes importantes
+
+
+Corrigir o menu superio, para destacar apenas a pagina atual com base na url,
+como a chamada dos links esta sendo feita via html tem que ser alterado no root
+para ativar o link correto com base na rota quando integrar com o spring.
+E remover o setTimeOut.

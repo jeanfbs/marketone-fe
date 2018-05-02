@@ -1,4 +1,4 @@
-define(['commons', 'ajax', 'api'], function(datatable, Ajax, api){
+define(['ajax', 'api'], function(Ajax, api){
 
     $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
 
@@ -79,7 +79,7 @@ define(['commons', 'ajax', 'api'], function(datatable, Ajax, api){
 
             var produto = $("#input-search").val();
 
-            var ajaxTaxaPorProduto = new Ajax.Get(api["produtos.taxas.pesquisa"], { produto: produto });
+            var ajaxTaxaPorProduto = new Ajax.WebClient(api["produtos.taxas.pesquisa"], "GET", { produto: produto });
             
             ajaxTaxaPorProduto.call().done(function(data){
                 
@@ -108,6 +108,21 @@ define(['commons', 'ajax', 'api'], function(datatable, Ajax, api){
                 split = data.text.split(",");
                 return split[0];
             }
+        });
+
+
+        $(".photo").fileinput({
+            language: "pt-BR",
+            showUpload:false,
+            browseLabel:"",
+            browseIcon: "<i class=\"fa fa-picture-o fa-fw\"></i> ",
+            removeLabel:"",
+            removeIcon: "<i class=\"fa fa-trash fa-fw\"></i> ",
+            mainClass:"input-group",
+            maxImageWidth: 300,
+            maxImageHeight: 300,
+            resizeImage: true,
+            allowedFileExtensions: ["jpg", "jpeg", "png"]
         });
         
 

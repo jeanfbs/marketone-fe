@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR"  data-layout-decorate="~{layouts/base}">
    <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      
-      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>DashBoard</title>
 
       <!-- Bootstrap Core CSS -->
-      <link data-th-href="@{css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
-      <link data-th-href="@{css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+      <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+      <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
    </head>
    <body>
-
-      <div id="insertHeader"></div>
-
-      <div class="container">
+    <div id="insertHeader"></div>
+   <div class="container" data-layout-fragment="content">
 
          <h1><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</h1>
          <ul class="nav nav-tabs" id="dashTabs">
@@ -601,13 +597,16 @@
               </div>
             </div>
          </div>
-      </div>
-      <script data-th-src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
-      <script data-th-src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
-      <script>
-         require(['main'], function(){
-               require(['root','script']);
-           });
-      </script>
+       </div>
+
+       <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+       <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+       <div data-layout-fragment="script">
+           <script>
+               require(['main'], function(){
+                   require(['root','dashboard']);
+               });
+           </script>
+       </div>
    </body>
 </html>

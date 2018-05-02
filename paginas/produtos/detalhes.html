@@ -10,8 +10,8 @@
     <title>Detalhes do Produto</title>
 
     <!-- Bootstrap Core CSS -->
-    <link data-th-href="@{css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
-    <link data-th-href="@{css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -57,8 +57,11 @@
                         &nbsp;&nbsp;
                         <span data-th-text="${responseVo.mensagem}"></span>
                     </div>
-
-                    <div class="col-sm-12 col-xs-12">
+                    <div class=" col-sm-12 controls">
+                        <a href="@{/produtos/}${produto.codigo}" class="btn btn-outline btn-default btn-xs edit ${ ${T(java.util.Objects).isNull(produto)} ? 'disabled' : ''  }" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
+                        <a href="#" data-method="delete" class="btn btn-outline btn-danger btn-xs remove ${ ${T(java.util.Objects).isNull(produto)} ? 'disabled' : ''  }"  role="button" data-toggle="modal" data-target=".modal"><i class="fa fa-trash fa-fw"></i> Excluir</a>
+                    </div>
+                    <div class="col-sm-8 col-xs-8">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <caption>Dados do Produto</caption>
@@ -89,40 +92,44 @@
                             </table>
                         </div>
                     </div>
-                    <div class="table-responsive col-sm-6 col-xs-12">
+                    <div class="col-sm-4 text-center">
+                        <img src="http://www.arrozvasconcelos.com.br/assets/uploads/produtos/5eab361b0914c4a6e13d0a1fc39075dc.png" alt="Arroz Vasconcelos"/ width="50%">
+                        <p class="text-muted">Imagem do Produto</p>
+                    </div>
+                    <div class="table-responsive col-sm-12 col-xs-12">
                         <table class="table table-bordered table-hover table-striped">
                             <caption>Preço e Taxas</caption>
                             <tbody>
                                 <tr>
-                                    <td>Preço de Compra</td>
+                                    <td class="col-sm-2">Preço de Compra</td>
                                     <td data-th-text="R$ ${produto.precoCompra}">R$ 9,85</td>
                                 </tr>
                                 <tr>
-                                    <td>Outros Custos</td>
+                                    <td class="col-sm-2">Outros Custos</td>
                                     <td data-th-text="R$ ${produto.outrosCustos}">R$ 1,25</td>
                                 </tr>
                                 <tr>
-                                    <td>Taxa ICMS</td>
+                                    <td class="col-sm-2">Taxa ICMS</td>
                                     <td data-th-text="${produto.icms}%">18%</td>
                                 </tr>
                                 <tr>
-                                    <td>Taxa PIS</td>
+                                    <td class="col-sm-2">Taxa PIS</td>
                                     <td data-th-text="${produto.pis}%">1.65%</td>
                                 </tr>
                                 <tr>
-                                    <td>Taxa COFINS</td>
+                                    <td class="col-sm-2">Taxa COFINS</td>
                                     <td data-th-text="${produto.cofins}%">7.6%</td>
                                 </tr>
                                 <tr>
-                                    <td>Margem de Lucro</td>
+                                    <td class="col-sm-2">Margem de Lucro</td>
                                     <td data-th-text="${produto.lucro}%">20%</td>
                                 </tr>
                                 <tr>
-                                    <td>Preço de Venda</td>
+                                    <td class="col-sm-2">Preço de Venda</td>
                                     <td data-th-text="${produto.precoVenda}%">R$ 12,57</td>
                                 </tr>
                                 <tr>
-                                    <td>Valor de Lucro</td>
+                                    <td class="col-sm-2">Valor de Lucro</td>
                                     <td data-th-text="${produto.valorLucro}%">R$ 1.79</td>
                                 </tr>
                             </tbody>
@@ -135,33 +142,34 @@
 
     <!-- Modal -->
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertModal">
-        <div class="modal-dialog " role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão</h4>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="alertModal">Confirmação de exclusão</h4>
+            </div>
+            <div class="modal-body ">
+                <p><i class="fa fa-question-circle" aria-hidden="true"></i> 
+                    Você irá excluir permanentemente esse produto.
+                    <strong>Deseja mesmo prosseguir?</strong>
+                </p>
+                <div class="deleteIds">
+                    <input type="hidden" value="${ client.cdClient != 0 ? client.cdClient: "" }" />
                 </div>
-                <div class="modal-body">
-                    <p>
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses usuários.
-                        <strong>Deseja mesmo prosseguir?</strong>
-                    </p>
-                    <div class="deleteIds"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-danger btn-outline confirm-delete">Sim</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-danger btn-outline delete-one">Sim</button>
+            </div>
             </div>
         </div>
     </div>
-    <script data-th-src="@{/vendor/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
-    <script data-th-src="@{/vendor/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
     <script>
         require(['main'], function () {
-            require(['root', 'cadastro-produtos']);
+            require(['root', 'commons', 'detalhes-produtos']);
         });
     </script>
 </body>

@@ -33,7 +33,7 @@ gulp.task("watch-mock", function () {
 gulp.task("start-mock",['mock-server', 'watch-mock']);
 
 
-// Application Tasks
+/***        Application Tasks        ***/
 gulp.task('clean', function(){
     return gulp.src('dist/')
     .pipe(clean())
@@ -44,7 +44,7 @@ gulp.task('jshint', function(){
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
-
+/***  Task para o distribution ***/
 gulp.task('scripts', function(){
     return gulp.src(config.vendor.scripts_min)
     .pipe(concat('vendor.min.js'))
@@ -60,16 +60,17 @@ gulp.task('appScripts', ['scripts'], function(){
     .pipe(gulp.dest('dist/static/js'))
 });
 
-gulp.task('copyIndex', ['copyPages', 'copyFragments', 'fonts', 'img'], function(){
+gulp.task('copyLayouts', ['copyPages', 'copyFragments', 'fonts', 'img'], function(){
     return gulp.src([
-        'index.html',
+        './layouts/*.html',
     ])
-    .pipe(gulp.dest('dist/templates/'))
+    .pipe(gulp.dest('dist/templates/layouts'))
 });
 
 gulp.task('img', function(){
     return gulp.src([
         'img/*',
+        'vendor/bootstrap-fileinput/img/loading.gif'
     ])
     .pipe(gulp.dest('dist/static/img'))
 });
@@ -91,6 +92,7 @@ gulp.task('copyFragments', function(){
 gulp.task('fonts', function(){
     return gulp.src([
         'vendor/font-awesome/fonts/*',
+        'vendor/bootstrap/fonts/*',
     ])
     .pipe(gulp.dest('dist/static/fonts'))
 });
@@ -155,7 +157,7 @@ gulp.task('serve', ['default'], function(){
     
     browserSync.init({
         server:'./dist/',
-        startPath: '/templates/'
+        startPath: '/templates/paginas/dashboard.html'
     });
 
     gulp.watch(['./*.html', './fragmentos/*.html', './paginas/**/*.html', './js/**/*.js', './less/*.less'], function(e){
@@ -164,15 +166,14 @@ gulp.task('serve', ['default'], function(){
         }else if(e.path.indexOf(".less") != -1){
             return gulp.run("lessCompileApp");
         }else if(e.path.indexOf(".html") != -1){
-            return gulp.run("copyIndex");
+            return gulp.run("copyLayouts");
         }else{
-            return gulp.run("default");
+            return gulp.run("local");
         }
     }).on('change', browserSync.reload);
 });
 
 gulp.task('default', function(cb){
-    return runSequence('clean', ['jshint', 'appScripts', 'lessCompileApp', 'copyIndex'], cb)
+    return runSequence('clean', ['jshint','appScripts', 'lessCompileApp', 'copyLayouts'], cb)
 });
-
 

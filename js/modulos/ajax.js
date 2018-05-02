@@ -1,18 +1,20 @@
 define(function(){
 
-    var Get = (function(){
+    var WebClient = (function(){
 
         var url = null;
         var data = null;
+        var method = null;
 
-        function Get(url, data){
-
+        function WebClient(url, method, data){
+            
             this.url = url;
             this.data = data;
+            this.method = method;
 
         }
 
-        Get.prototype.call = function _call(){
+        WebClient.prototype.call = function _call(){
             var settings = {
                 crossDomain: true,
                 headers: {
@@ -23,7 +25,7 @@ define(function(){
             };
             
             settings.url = this.url;
-            settings.method = "GET";
+            settings.method = this.method;
             if(data != undefined && data != null){
               settings.data = this.data;
             }
@@ -31,11 +33,10 @@ define(function(){
             return $.ajax(settings);
           };
 
-          return Get;
+          return WebClient;
     })();
 
-
     return {
-        Get:Get
+        WebClient:WebClient
     };
 });

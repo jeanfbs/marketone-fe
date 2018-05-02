@@ -12,7 +12,9 @@
             "js/i18n/form_validation_pt_BR.js",
             "vendor/tocbot/dist/tocbot.min.js",
             "vendor/datatables/media/js/jquery.dataTables.min.js",
-            "vendor/datatables/media/js/dataTables.bootstrap.min.js"
+            "vendor/datatables/media/js/dataTables.bootstrap.min.js",
+            "vendor/bootstrap-fileinput/js/fileinput.min.js",
+            "vendor/bootstrap-fileinput/js/locales/pt-BR.js"
 
         ],
         "styles":[
@@ -22,7 +24,8 @@
             "vendor/select2/dist/css/select2.min.css",
             "vendor/select2-bootstrap-theme/dist/select2-bootstrap.min.css",
             "vendor/formValidation/dist/css/formValidation.min.css",
-            "vendor/tocbot/dist/tocbot.css"
+            "vendor/tocbot/dist/tocbot.css",
+            "vendor/bootstrap-fileinput/css/fileinput.min.css"
         ]
 
 

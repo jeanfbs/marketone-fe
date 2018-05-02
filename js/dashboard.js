@@ -1,7 +1,7 @@
 
 define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
 
-    
+  $("#insertHeader").load("../fragmentos/menu-navegacao.html");
     
     var COLORS = {
       barColors: ["#009688", "#004D40", "#80CBC4","#00BFA5" ],
@@ -25,9 +25,9 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
 
     $(function(){
         
-      $("#insertHeader").load("./fragmentos/menu-navegacao.html");
+      $("#insertHeader").load("../fragmentos/menu-navegacao.html");
 
-      var ajaxKnobDinheiro = new Ajax.Get(api["vendas.atual.dinheiro"]);
+      var ajaxKnobDinheiro = new Ajax.WebClient(api["vendas.atual.dinheiro"], "GET");
       
       ajaxKnobDinheiro.call().done(function(json){
         
@@ -40,7 +40,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
       });
       
       
-      var ajaxKnobCredito = new Ajax.Get(api["vendas.atual.credito"]);
+      var ajaxKnobCredito = new Ajax.WebClient(api["vendas.atual.credito"], "GET");
       
       ajaxKnobCredito.call().done(function(json){
         knobVendasCredito = new chart.Knob("#vendas-credito", json.value, Utils.formatter);
@@ -51,7 +51,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
       });
       
 
-      var ajaxKnobDebito = new Ajax.Get(api["vendas.atual.debito"]);
+      var ajaxKnobDebito = new Ajax.WebClient(api["vendas.atual.debito"], "GET");
       
 
       ajaxKnobDebito.call().done(function(json){
@@ -62,7 +62,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
           knobVendasDebito.show();
       });
 
-      var ajaxDonutAcumuloMes = new Ajax.Get(api["vendas.acumulo.mes"]);
+      var ajaxDonutAcumuloMes = new Ajax.WebClient(api["vendas.acumulo.mes"], "GET");
       
 
       ajaxDonutAcumuloMes.call().done(function(data){
@@ -74,7 +74,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
       });
 
 
-      var ajaxBarSemanal = new Ajax.Get(api["vendas.semanal"]);
+      var ajaxBarSemanal = new Ajax.WebClient(api["vendas.semanal"], "GET");
       
       ajaxBarSemanal.call().done(function(data){
         chartBarVendasSemanal = new chart.BarChart("vendas-semanal", data, {
@@ -89,7 +89,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
       });
 
 
-      var ajaxBarMensal = new Ajax.Get(api["vendas.mensal"]);
+      var ajaxBarMensal = new Ajax.WebClient(api["vendas.mensal"], "GET");
       
       ajaxBarMensal.call().done(function(data){
         chartBarVendasMensal = new chart.BarChart("vendas-mensal", data, {
@@ -105,7 +105,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
 
       /* Tab Estoque */
 
-      var ajaxBarEstoqueAnual = new Ajax.Get(api["estoque.anual"]);
+      var ajaxBarEstoqueAnual = new Ajax.WebClient(api["estoque.anual"], "GET");
       
       ajaxBarEstoqueAnual.call().done(function(data){
         chartBarEstoqueAnual = new chart.BarChart("estoque-anual", data, {
@@ -130,7 +130,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
       $("#buscarIndicadoresEstoque").off("click").on("click",function(){
 
         var formParamsObj = Utils.getFormParameters($("#indicadoresForm"));
-        var ajaxBuscaIndicadoresEstoque = new Ajax.Get(api["estoque.indicadores.periodo"], formParamsObj);
+        var ajaxBuscaIndicadoresEstoque = new Ajax.WebClient(api["estoque.indicadores.periodo"], "GET", formParamsObj);
         
         ajaxBuscaIndicadoresEstoque.call().done(function(response){
 
@@ -151,7 +151,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
       $("#avaliarItem").off("click").on("click",function(){
           
           var formParamsObj = Utils.getFormParameters($("#indicadoresProdutoCategoriaForm"));
-          var ajaxBuscaIndicadoresEstoque = new Ajax.Get(api["estoque.indicadores.periodo.item"], formParamsObj);
+          var ajaxBuscaIndicadoresEstoque = new Ajax.WebClient(api["estoque.indicadores.periodo.item"], "GET", formParamsObj);
           
           ajaxBuscaIndicadoresEstoque.call().done(function(response){
 
@@ -181,7 +181,7 @@ define(['chart', 'ajax', 'api'], function(chart, Ajax, api){
 
       // Tab Financeiro
 
-      var ajaxLineMensal = new Ajax.Get(api["faturamento.mensal"]);
+      var ajaxLineMensal = new Ajax.WebClient(api["faturamento.mensal"], "GET");
       
 
       ajaxLineMensal.call().done(function(data){

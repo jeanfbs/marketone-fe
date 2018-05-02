@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:layout="http://www.w3.org/1999/xhtml">
+   <head>
+       <meta charset="utf-8" />
+       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+       <title>UpSale</title>
+
+       <!-- Bootstrap Core CSS -->
+       <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+       <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+
+   </head>
+   <body>
+       <div data-th-replace="fragmentos/menu-navegacao :: navbar" />
+       <div class="container" layout:fragment="content"></div>
+
+       <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+       <script data-th-src="@{/js/require.js}" data-main="/js/main" src="/static/js/require.js"></script>
+       <div layout:fragment="script"></div>
+   </body>
+</html>

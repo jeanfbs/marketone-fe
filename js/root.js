@@ -1,5 +1,11 @@
 $(function(){
 
+	var url = window.location;
+	var element = $('ul.navbar-nav > li > a').filter(function() {
+		var index = url.href.indexOf(this.href);
+		return index == 0;
+	}).parent().addClass('active');
+
     $('[data-toggle="tooltip"]').tooltip();
     $('.select2-estados').select2({
         placeholder: "Selecione uma opção",

@@ -9,8 +9,10 @@ requirejs.config({
         root: "root",
         perfil: "perfil/perfil",
         "editar-perfil": "perfil/editar",
+        
         "cadastro-produtos": "produtos/cadastro",
-        "pesquisa-produtos": "produtos/pesquisa"
+        "pesquisa-produtos": "produtos/pesquisa",
+        "detalhes-produtos": "produtos/detalhes"
         
     },
 });
