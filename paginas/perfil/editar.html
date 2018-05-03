@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" >
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
    <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +12,7 @@
    </head>
    <body>
         <div id="insertHeader"></div>
-        <div id="row-breadcrumb">
+        <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
             <ol class="breadcrumb container">
                 <li>
                     <a href="/templates/" data-th-href="@{/cpanel/dashboard}">
@@ -23,7 +23,7 @@
                 <li class="active">Edição</li>
             </ol>
         </div>
-        <div class="container">
+        <div class="container" data-layout-fragment="content">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="panel panel-default card-4">
@@ -53,19 +53,19 @@
                         <form class="form-horizontal" action="#" data-th-action="@{/usuario}" id="usuarioForm" data-th-object="${usuario}" method="post">
                             <p class="text-muted"><i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Dados Pessoais</p>
                             <div class="form-group">
-                                <label for="cpf" class="col-sm-3 control-label">CPF</label>
+                                <label for="cpf" class="col-sm-3 control-label">* CPF</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" id="cpf" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-th-field="*{cpf}" data-fv-notempty="true"  name="cpf" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nome" class="col-sm-3 control-label">Nome Completo</label>
+                                <label for="nome" class="col-sm-3 control-label">* Nome Completo</label>
                                 <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nome" data-th-field="*{nome}" data-fv-notempty="true" name="nome" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nome" class="col-sm-3 control-label">Sexo</label>
+                                <label for="nome" class="col-sm-3 control-label">* Sexo</label>
                                 <div class="col-sm-6">
                                     <label class="radio-inline">
                                         <input type="radio" name="sexo" id="masculino" checked value="M"> Masculino
@@ -76,25 +76,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="rg" class="col-sm-3 control-label">RG</label>
+                                <label for="rg" class="col-sm-3 control-label">* RG</label>
                                 <div class="col-sm-4">
                                 <input type="text" class="form-control" id="rg" data-th-field="*{rg}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="rg" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nivel" class="col-sm-3 control-label">Cargo</label>
+                                <label for="nivel" class="col-sm-3 control-label">* Cargo</label>
                                 <div class="col-sm-4">
                                 <input type="text" class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="senha" class="col-sm-3 control-label">Senha</label>
+                                <label for="senha" class="col-sm-3 control-label">* Senha</label>
                                 <div class="col-sm-4">
                                 <input type="password" class="form-control password" id="senha" data-th-field="*{senha}" data-fv-notempty="true" name="senha" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="confirmacao" class="col-sm-3 control-label">Confirmação de Senha</label>
+                                <label for="confirmacao" class="col-sm-3 control-label">* Confirmação de Senha</label>
                                 <div class="col-sm-4">
                                 <input type="password" class="form-control password" id="confirmacao" data-th-field="*{confirmacao}" data-fv-notempty="true" name="confirmacao" data-fv-identical="true" data-fv-identical-field="senha" />
                                 </div>
@@ -107,19 +107,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-3 control-label">Email</label>
+                                <label for="email" class="col-sm-3 control-label">* Email</label>
                                 <div class="col-sm-4">
                                 <input type="email" class="form-control" id="email" data-th-field="*{email}" data-fv-notempty="true" name="email" placeholder="teste@teste.com"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telefone" class="col-sm-3 control-label">Telefone</label>
+                                <label for="telefone" class="col-sm-3 control-label">* Telefone</label>
                                 <div class="col-sm-4">
                                 <input type="text" class="form-control" id="telefone" data-th-field="*{telefone}" data-fv-notempty="true" name="telefone" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="celular" class="col-sm-3 control-label">Celular</label>
+                                <label for="celular" class="col-sm-3 control-label">* Celular</label>
                                 <div class="col-sm-4">
                                 <input type="text" class="form-control" id="celular" data-th-field="*{celular}" data-fv-notempty="true" name="celular" />
                                 </div>
@@ -131,7 +131,7 @@
                                 <div class="form-group">
                                     <label for="cep" class="col-sm-3 control-label">CEP</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="cep" data-th-field="*{endereco.cep}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="cep" />
+                                        <input type="text" class="form-control" id="cep" data-th-field="*{endereco.cep}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números"  name="cep" />
                                     </div>
                                     <div class="sm-5">
                                         <span class="iconLoadCep hide">
@@ -143,19 +143,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="logradouro" class="col-sm-3 control-label">Logradouro</label>
+                                    <label for="logradouro" class="col-sm-3 control-label">* Logradouro</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="logradouro" data-th-field="*{endereco.logradouro}" data-fv-notempty="true" name="logradouro" placeholder="Rua, Avenida, Alameda..." />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="numero" class="col-sm-3 control-label">Número</label>
+                                    <label for="numero" class="col-sm-3 control-label">* Número</label>
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control" id="numero" data-th-field="*{endereco.numero}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-fv-notempty="true" name="numero" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="bairro" class="col-sm-3 control-label">Bairro</label>
+                                    <label for="bairro" class="col-sm-3 control-label">* Bairro</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="bairro" data-th-field="*{endereco.bairro}" data-fv-notempty="true" name="bairro" />
                                     </div>
@@ -163,17 +163,17 @@
                                 <div class="form-group">
                                     <label for="complemento" class="col-sm-3 control-label">Complemento</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="complemento" data-th-field="*{endereco.complemento}" data-fv-notempty="true" name="complemento" />
+                                        <input type="text" class="form-control" id="complemento" data-th-field="*{endereco.complemento}" name="complemento" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cidade" class="col-sm-3 control-label">Cidade</label>
+                                    <label for="cidade" class="col-sm-3 control-label">* Cidade</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="cidade" data-th-field="*{endereco.cidade}" data-fv-notempty="true" name="cidade" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="estado" class="col-sm-3 control-label">Estado</label>
+                                    <label for="estado" class="col-sm-3 control-label">* Estado</label>
                                     <div class="col-sm-4">
                                         <select class="form-control select2-estados" id="estado" data-th-field="*{endereco.estado}" data-fv-notempty="true" name="estado">
                                             <option data-th-each="estado : ${T(br.com.infinity.corbus.lixo.Estados).listOrderAscEstados()}" data-th-value="${estado.name()}" data-th-text="${estado.description}"></option>
@@ -181,7 +181,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="pais" class="col-sm-3 control-label">País</label>
+                                    <label for="pais" class="col-sm-3 control-label">* País</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="pais" data-th-field="*{T(java.util.Objects).isNull(endereco.pais)} ?: '(Brasil)'" data-fv-notempty="true" name="pais" />
                                     </div>
@@ -201,10 +201,12 @@
         </div>
       <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
       <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
-      <script>
-         require(['main'], function(){
-               require(['root','editar-perfil']);
-        });
-      </script>
+      <div data-layout-fragment="script">
+        <script>
+            require(['main'], function(){
+                require(['root','editar-perfil']);
+            });
+        </script>
+      </div>
    </body>
 </html>

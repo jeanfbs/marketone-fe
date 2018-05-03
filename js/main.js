@@ -12,7 +12,9 @@ requirejs.config({
         
         "cadastro-produtos": "produtos/cadastro",
         "pesquisa-produtos": "produtos/pesquisa",
-        "detalhes-produtos": "produtos/detalhes"
+        "detalhes-produtos": "produtos/detalhes",
+
+        "cadastro-usuarios": "usuarios/cadastro"
         
     },
 });

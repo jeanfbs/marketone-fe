@@ -177,5 +177,22 @@ define(['ajax'],function(Ajax){
             });
         }
     });
+
+    $.fn.extend({
+        fileUpload: function(){
+            $(this).fileinput({
+                language: "pt-BR",
+                browseClass: "btn btn-primary btn-block",
+                showCaption: false,
+                showRemove: false,
+                showUpload: false,
+                browseLabel:"Buscar arquivo",
+                maxImageWidth: 300,
+                maxImageHeight: 300,
+                resizeImage: true,
+                allowedFileExtensions: ["jpg", "jpeg", "png"]
+            });
+        }
+    });
     
 });

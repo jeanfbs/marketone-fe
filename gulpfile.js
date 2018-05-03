@@ -168,7 +168,7 @@ gulp.task('serve', ['default'], function(){
         }else if(e.path.indexOf(".html") != -1){
             return gulp.run("copyLayouts");
         }else{
-            return gulp.run("local");
+            return gulp.run("default");
         }
     }).on('change', browserSync.reload);
 });

@@ -1,8 +1,5 @@
 define(['ajax', 'api'], function(Ajax, api){
 
-    $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
-
-
     var Impostos = {
         
         calcular: function(precoCompra, outrosCustos, impostos, taxaLucro){
@@ -63,6 +60,9 @@ define(['ajax', 'api'], function(Ajax, api){
 
 
     $(function(){
+
+        $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
+        
         $("#produtoForm").validate();
 
         var selectors = [$("#preco-compra"), $("#outros-custos"), $("#icms"), $("#pis"), $("#cofins"), $("#margem-lucro")];
@@ -111,19 +111,7 @@ define(['ajax', 'api'], function(Ajax, api){
         });
 
 
-        $(".photo").fileinput({
-            language: "pt-BR",
-            showUpload:false,
-            browseLabel:"",
-            browseIcon: "<i class=\"fa fa-picture-o fa-fw\"></i> ",
-            removeLabel:"",
-            removeIcon: "<i class=\"fa fa-trash fa-fw\"></i> ",
-            mainClass:"input-group",
-            maxImageWidth: 300,
-            maxImageHeight: 300,
-            resizeImage: true,
-            allowedFileExtensions: ["jpg", "jpeg", "png"]
-        });
+        $(".photo").fileUpload();
         
 
     });

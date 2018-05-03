@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
 
 <head>
     <meta charset="utf-8" />
@@ -17,7 +17,7 @@
 <body>
 
     <div id="insertHeader"></div>
-    <div id="row-breadcrumb">
+    <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
         <ol class="breadcrumb container">
             <li>
                 <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
@@ -27,7 +27,7 @@
             <li class="active">Produtos</li>
         </ol>
     </div>
-    <div class="container">
+    <div class="container" data-layout-fragment="content">
         <div class="row">
             <div class="panel panel-primary card-4">
                 <div class="panel-heading">
@@ -137,11 +137,13 @@
     </div>
     <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
     <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
-    <script>
-        require(['main'], function () {
-            require(['root', 'pesquisa-produtos']);
-        });
-    </script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root', 'pesquisa-produtos']);
+            });
+        </script>
+    </div>
 </body>
 
 </html>
