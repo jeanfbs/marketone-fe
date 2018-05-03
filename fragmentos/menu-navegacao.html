@@ -5,7 +5,7 @@
             <span class="sr-only">Toggle navigation</span>
             <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
         </button>
-        <a class="navbar-brand" data-th-href="@{/cpanel/dashboard}" href="/cpanel/dashboard">
+        <a class="navbar-brand" data-th-href="@{/cpanel/dashboard}" href="/templates/paginas/dashboard.html">
             <span id="black-brand">Up</span>
             <span id="light-brand">Sale</span>
             <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
@@ -14,7 +14,7 @@
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav nav-primary">
             <li>
-                <a data-th-href="@{/cpanel/dashboard/}" href="/templates/">
+                <a data-th-href="@{/cpanel/dashboard/}" href="/templates/paginas/dashboard.html">
                     <i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</a>
             </li>
             <li>
@@ -41,6 +41,10 @@
                     <li>
                         <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">
                             <i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuários</a>
+                    </li>
+                    <li>
+                        <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">
+                            <i class="fa fa-database fa-fw" aria-hidden="true"></i> Auditoria</a>
                     </li>
                 </ul>
             </li>

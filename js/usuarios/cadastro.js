@@ -4,8 +4,6 @@ define(['ajax', 'api'], function(Ajax, api){
         
         $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
 
-        $("#produtoForm").validate();
-
         $("#usuarioForm").validate();
         $("#cep").autoLoadAddress();
 

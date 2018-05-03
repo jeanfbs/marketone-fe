@@ -6,18 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Detalhes do Produto</title>
 
-    <!-- Bootstrap Core CSS -->
     <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
     <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
 </head>
 
 <body>
     <div id="insertHeader"></div>
-    <div id="row-breadcrumb">
-        <ol class="breadcrumb container" data-layout-fragment="breadcrumb">
+    <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
+        <ol class="breadcrumb container">
             <li>
                 <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
                     <i class="fa fa-home fa-fw" aria-hidden="true"></i>
@@ -64,7 +62,7 @@
                     <div class="col-sm-8 col-xs-8">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
-                                <caption>Dados do Produto</caption>
+                                <caption><h4>Dados do Produto</h4></caption>
                                 <tbody>
                                     <tr>
                                         <td class="col-sm-2">Codigo de Barras</td>
@@ -96,9 +94,9 @@
                         <img src="http://www.arrozvasconcelos.com.br/assets/uploads/produtos/5eab361b0914c4a6e13d0a1fc39075dc.png" alt="Arroz Vasconcelos"/ width="50%">
                         <p class="text-muted">Imagem do Produto</p>
                     </div>
-                    <div class="table-responsive col-sm-12 col-xs-12">
+                    <div class="table-responsive col-sm-8 col-xs-12">
                         <table class="table table-bordered table-hover table-striped">
-                            <caption>Preço e Taxas</caption>
+                            <caption><h4>Preço e Taxas</h4></caption>
                             <tbody>
                                 <tr>
                                     <td class="col-sm-2">Preço de Compra</td>
@@ -154,7 +152,7 @@
                     <strong>Deseja mesmo prosseguir?</strong>
                 </p>
                 <div class="deleteIds">
-                    <input type="hidden" value="${ client.cdClient != 0 ? client.cdClient: "" }" />
+                    <input type="hidden" data-th-field="${produto.codigo} != null ? ${produto.codigo}" />
                 </div>
             </div>
             <div class="modal-footer">

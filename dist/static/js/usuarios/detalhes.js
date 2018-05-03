@@ -1,0 +1,1 @@
+define(["api"],function(e){$(function(){$("#insertHeader").load("../../fragmentos/menu-navegacao.html"),$(".delete-one").oneDelete({redirect:e["usuarios.deletar"],url:e["usuarios.deletar"]})})});

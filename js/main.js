@@ -14,7 +14,8 @@ requirejs.config({
         "pesquisa-produtos": "produtos/pesquisa",
         "detalhes-produtos": "produtos/detalhes",
 
-        "cadastro-usuarios": "usuarios/cadastro"
-        
+        "cadastro-usuarios": "usuarios/cadastro",
+        "pesquisa-usuarios": "usuarios/pesquisa",
+        "detalhes-usuarios": "usuarios/detalhes"
     },
 });

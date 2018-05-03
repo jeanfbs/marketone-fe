@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Cadastro de Usuário</title>
 
-    <!-- Bootstrap Core CSS -->
     <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
     <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
 </head>
@@ -63,10 +61,20 @@
                         <div class="form-group">
                             <label for="file" class="col-sm-3 control-label">Imagem</label>
                             <div class="col-sm-4">
-                                <input  name="file" type="file" id="foto" class="file-loading photo" data-th-field="*{foto}">
+                                <input name="file" type="file" id="foto" class="file-loading photo" data-th-field="*{foto}">
                             </div>
                         </div>
                         <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label for="status" class="col-sm-3 control-label">* Status</label>
+                            <div class="col-sm-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="status" name="status" data-th-attrappend="*{status} ? checked" data-th-field="*{status}" /> Ativo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="cpf" class="col-sm-3 control-label">* CPF</label>
                             <div class="col-sm-3">
@@ -99,9 +107,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nivel" class="col-sm-3 control-label">* Cargo</label>
+                            <label for="nivel" class="col-sm-3 control-label">* Nível de Acesso</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel" />
+                                <select class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel">
+                                    <option data-th-each="nivel : ${T(br.com.infinity.upsale.enums.NivelAcesso).sortByAsc()}" data-th-value="${nivel.name()}"
+                                        data-th-text="${nivel.name()}"></option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -190,8 +201,7 @@
                             <div class="form-group">
                                 <label for="complemento" class="col-sm-3 control-label">Complemento</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="complemento" data-th-field="*{endereco.complemento}" 
-                                        name="complemento" />
+                                    <input type="text" class="form-control" id="complemento" data-th-field="*{endereco.complemento}" name="complemento" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -205,8 +215,7 @@
                                 <label for="estado" class="col-sm-3 control-label">* Estado</label>
                                 <div class="col-sm-3">
                                     <select class="form-control select2-estados" id="estado" data-th-field="*{endereco.estado}" data-fv-notempty="true" name="estado">
-                                        <option data-th-each="estado : ${T(br.com.infinity.corbus.lixo.Estados).listOrderAscEstados()}" data-th-value="${estado.name()}"
-                                            data-th-text="${estado.description}"></option>
+                                        <option data-th-each="estado : ${T(br.com.infinity.upsale.enums.Estados).sortByAsc()}" data-th-value="${estado.name()}" data-th-text="${estado.description}"></option>
                                     </select>
                                 </div>
                             </div>

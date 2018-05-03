@@ -82,9 +82,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nivel" class="col-sm-3 control-label">* Cargo</label>
-                                <div class="col-sm-4">
-                                <input type="text" class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel" />
+                                <label for="nivel" class="col-sm-3 control-label">* Nível de Acesso</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel">
+                                        <option data-th-each="nivel : ${T(br.com.infinity.upsale.enums.NivelAcesso).sortByAsc()}" data-th-value="${nivel.name()}"
+                                            data-th-text="${nivel.description}"></option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -176,7 +179,7 @@
                                     <label for="estado" class="col-sm-3 control-label">* Estado</label>
                                     <div class="col-sm-4">
                                         <select class="form-control select2-estados" id="estado" data-th-field="*{endereco.estado}" data-fv-notempty="true" name="estado">
-                                            <option data-th-each="estado : ${T(br.com.infinity.corbus.lixo.Estados).listOrderAscEstados()}" data-th-value="${estado.name()}" data-th-text="${estado.description}"></option>
+                                            <option data-th-each="estado : ${T(br.com.infinity.corbus.lixo.Estados).sortByAsc()}" data-th-value="${estado.name()}" data-th-text="${estado.description}"></option>
                                         </select>
                                     </div>
                                 </div>

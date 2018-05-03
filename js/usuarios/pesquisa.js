@@ -7,7 +7,7 @@ define(['datatable', 'api'], function(datatable, api){
 		var settings = {
 			"bServerSide": true,
 			"ajax":{
-				"url":api["produtos.pesquisa"],
+				"url":api["usuarios.pesquisa"],
 				"type":"GET",
 				"data":function(d){
 					d.search = [];
@@ -23,7 +23,7 @@ define(['datatable', 'api'], function(datatable, api){
 				},
 			},
 			"columnDefs": [ 
-				{"orderable": false, "targets": [0, 9]},
+				{"orderable": false, "targets": [0, 5]},
 				{
 					"targets": 0,
 					"render": function(data, type, full, meta){
@@ -35,9 +35,9 @@ define(['datatable', 'api'], function(datatable, api){
 				
 		};
 		
-		var userTable = new datatable.Table($("#tabela-produtos"), settings,[
+		var userTable = new datatable.Table($("#tabela-usuarios"), settings,[
 			null,
-			null,
+			"http://localhost:8789/download",
 			"http://localhost:8789/download"
 		]);
 		userTable.show();

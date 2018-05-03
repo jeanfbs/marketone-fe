@@ -138,29 +138,5 @@
             ]
             
         ]
-    },
-
-    "buscarUsuariosFull":[
-        {
-            "nome": "Mateus Almeida Alves",
-            "cpf": "511.486.840-34",
-            "rg": "511.486.840-34",
-            "sexo": "Masculino",
-            "cargo": "Atendente",
-            "senha": "123",
-            "email": "MateusAlmeidaAlves@teleworm.us",
-            "telefone":"(11) 4908-8248",
-            "celular":"(11) 4908-8248",
-            "endereco":{
-                "cep":"08473-770",
-                "logradouro": "Rua Padre Pereira Rocha",
-                "numero": 431,
-                "bairro": "Teste",
-                "complemento":"",
-                "cidade":"São Paulo",
-                "estado": "SP",
-                "pais":"Brasil"
-            }
-        }
-    ]
+    }
 }
