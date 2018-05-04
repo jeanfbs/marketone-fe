@@ -111,11 +111,11 @@ define(function(){
             
             _dataTable = this.dataTable;
 
-            $('.input-search').on("keyup",function(e) {
+            $('#input-search').on("keyup",function(e) {
                 _dataTable.draw();
             });
         
-            $('.btn-search').on("click",function(){
+            $('#btn-search').on("click",function(){
                 _dataTable.draw();
             });
             

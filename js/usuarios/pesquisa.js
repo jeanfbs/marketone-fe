@@ -22,6 +22,13 @@ define(['datatable', 'api'], function(datatable, api){
 					};
 				},
 			},
+			"columns": [ 
+				{ "name":"cpf" },
+				{ "name":"nome" },
+				{ "name":"email" },
+				{ "name":"perfilAcesso"},
+				{ "name":"status"},
+			],	
 			"columnDefs": [ 
 				{"orderable": false, "targets": [0, 5]},
 				{
@@ -41,14 +48,6 @@ define(['datatable', 'api'], function(datatable, api){
 			"http://localhost:8789/download"
 		]);
 		userTable.show();
-	
-		$('#input-search').on("keyup",function(e) {
-			userTable.redraw();
-		});
-	
-		$('#btn-search').on("click",function(){
-			userTable.redraw();
-		});
 		
 	});
 
