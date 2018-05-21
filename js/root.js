@@ -11,8 +11,8 @@ $(function(){
         placeholder: "Selecione uma opção",
 		allowClear: true,
 		theme: "bootstrap"
-    });
-
+	});
+		
 
     /*
     *	Select all rows of datatable with highlight, also enable and disabled the control buttons  

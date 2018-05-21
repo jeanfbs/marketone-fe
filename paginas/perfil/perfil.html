@@ -26,55 +26,55 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="panel panel-default">
-              <div class="panel-body">
+              <div class="panel-body" data-th-object="${usuario}">
                   <div class="thumbnail">
                       <img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" alt="Avatar user" width="150">
                       <div class="caption">
-                        <h3 class="text-center" data-th-text="${usuario.nome}">Jean Fabricio</h3>
+                        <h3 class="text-center" data-th-text="*{nome}">Jean Fabricio</h3>
                         <div class="table-responsive">
                           <table class="table table-bordered table-striped">
                             <caption><h4>Dados Pessoais</h4></caption>
                             <tbody>
                               <tr>
-                                <td>Status</td>
-                                <td><span class="label" data-th-classappend="${usuario.status}? label-success : label-warning"  data-th-text="${usuario.status}? Ativo: Inativo">Ativo</span></td>
+                                <td><b>Status</b></td>
+                                <td><span class="label" data-th-classappend="*{status}? label-success : label-warning"  data-th-text="*{statusDescricao()}">Ativo</span></td>
                               </tr>
                               <tr>
-                                <td>Sexo</td>
-                                <td data-th-text="${usuario.sexo}">Masculino</td>
+                                <td><b>Sexo</b></td>
+                                <td data-th-text="*{sexo}">Masculino</td>
                               </tr>
                               <tr>
-                                <td>CPF</td>
-                                <td data-th-text="${usuario.cpf}">1234124-29</td>
+                                <td><b>CPF</b></td>
+                                <td data-th-text="*{cpf}">1234124-29</td>
                               </tr>
                               <tr>
-                                <td>RG</td>
-                                <td data-th-text="${usuario.rg}">1928174-12</td>
+                                <td><b>RG</b></td>
+                                <td data-th-text="*{rg}">1928174-12</td>
                               </tr>
                               <tr>
-                                <td>Nível de Acesso</td>
-                                <td data-th-text="${usuario.nivel}">Administrador</td>
+                                <td><b>Nível de Acesso</b></td>
+                                <td data-th-text="*{nivel}">Administrador</td>
                               </tr>
                               <tr>
-                                  <td>Telefone</td>
-                                  <td data-th-text="${usuario.telefone}">(34) 3211-1111</td>
+                                  <td><b>Telefone</b></td>
+                                  <td data-th-text="*{telefone}">(34) 3211-1111</td>
                               </tr>
                               <tr>
-                                  <td>Celular</td>
-                                  <td data-th-text="${usuario.telefone}">(34) 9 9898-9898</td>
+                                  <td><b>Celular</b></td>
+                                  <td data-th-text="*{telefone}">(34) 9 9898-9898</td>
                               </tr>
                               <tr>
-                                <td>Email</td>
-                                <td><a href="emailto:${usuario.email}" data-th-text="${usuario.email}">teste@teste.com</a></td>
+                                <td><b>Email</b></td>
+                                <td><a href="emailto:*{email}" data-th-text="*{email}">teste@teste.com</a></td>
                               </tr>
                               <tr>
-                                  <td>Endereço</td>
+                                <td class="col-sm-2"><b>Endereço</b></td>
                                   <td>
                                       <ul class="list-unstyled">
-                                          <li data-th-text="${usuario.endereco.logradouro} ${usuario.endereco.numero}, ${usuario.endereco.bairro}">Rua Teste X 412, Roosevelt</li>
-                                          <li data-th-text="CEP ${usuario.endereco.cep}">CEP 38401-216</li>
-                                          <li data-th-text="${usuario.endereco.cidade} - ${usuario.endereco.estado.symbol}">Uberlandia - MG</li>
-                                          <li data-th-text="${usuario.endereco.pais}">Brasil</li>
+                                          <li data-th-text="*{endereco.logradouro} + '&nbsp;&nbsp;Nº&nbsp;' + *{endereco.numero} + ',&nbsp;&nbsp;&nbsp;' + *{endereco.bairro}">Rua Teste X 412, Roosevelt</li>
+                                          <li data-th-text="'CEP &nbsp;&nbsp;&nbsp;' + *{endereco.cep}">CEP 38401-216</li>
+                                          <li data-th-text="*{endereco.cidade} + '&nbsp;&nbsp;-&nbsp;&nbsp;' + *{endereco.estado.symbol}">Uberlandia - MG</li>
+                                          <li data-th-text="*{endereco.pais}">Brasil</li>
                                       </ul>
                                   </td>
                               </tr>
@@ -82,7 +82,7 @@
                           </table>
                         </div>
                         <p>
-                          <a data-th-href="@{/cpanel/perfil/1}" href="/templates/paginas/perfil/editar.html" class="btn btn-primary" role="button"> <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i> Editar</a> 
+                          <a data-th-href="@{/cpanel/perfil/} + *{cpf}" href="/templates/paginas/perfil/editar.html" class="btn btn-primary" role="button"> <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i> Editar</a> 
                         </p>
                       </div>
                     </div>

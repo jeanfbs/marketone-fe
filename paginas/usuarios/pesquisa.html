@@ -35,6 +35,23 @@
                     </a>
                 </div>
                 <div class="panel-body">
+                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success"
+                         role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <strong>
+                            <span data-th-if="${responseVo.erro}">
+                                <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
+                                <span data-th-text="${responseVo.tipoErro}"></span>
+                            </span>
+                            <span data-th-if="${not responseVo.erro}">
+                                <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
+                            </span>
+                        </strong>
+                        &nbsp;&nbsp;
+                        <span data-th-text="${responseVo.mensagem}"></span>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 col-sm-4" id="controls">
                             <div class="form-group">
@@ -48,7 +65,7 @@
                         </div>
                         <div class="col-md-2 col-sm-2">
                             <div class="form-group">
-                                <select class="form-control" id="filter" data-toggle="tooltip" data-placement="top" title="Filtros" data-th-field="*{endereco.estado}"
+                                <select class="form-control" id="filter" data-toggle="tooltip" data-placement="top" title="Filtros"
                                     data-fv-notempty="true" name="estado">
                                     <option data-th-each="filtro : ${filtros}" data-th-value="${filtro[1]}" data-th-text="${filtro[0]}"></option>
                                 </select>
@@ -87,11 +104,11 @@
                                             <input type="checkbox" id="all"> 
                                         </label>
                                     </th>
-                                    <th class="col-md-2" data-t-name="cpf">CPF</th>
-                                    <th class="col-md-4" data-t-name="nome">Nome</th>
-                                    <th class="col-md-3" data-t-name="email">E-Mail</th>
-                                    <th data-t-name="perfilAcesso">Nível de Acesso</th>
-                                    <th data-t-name="status">Status</th>
+                                    <th class="col-md-2">CPF</th>
+                                    <th class="col-md-4">Nome</th>
+                                    <th class="col-md-3">E-Mail</th>
+                                    <th>Nível de Acesso</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>

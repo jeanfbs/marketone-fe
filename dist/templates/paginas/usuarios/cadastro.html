@@ -55,13 +55,13 @@
                         &nbsp;&nbsp;
                         <span data-th-text="${responseVo.mensagem}"></span>
                     </div>
-                    <form class="form-horizontal" action="#" data-th-action="@{/usuario}" id="usuarioForm" data-th-object="${usuario}" method="post">
+                    <form class="form-horizontal" enctype="multipart/form-data" action="#" data-th-action="@{~/cpanel/usuarios/cadastro/}" id="usuarioForm" data-th-object="${usuario}" method="post">
                         <p class="text-muted">
                             <i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Dados Pessoais</p>
                         <div class="form-group">
-                            <label for="file" class="col-sm-3 control-label">Imagem</label>
+                            <label for="foto" class="col-sm-3 control-label">Imagem</label>
                             <div class="col-sm-4">
-                                <input name="file" type="file" id="foto" class="file-loading photo" data-th-field="*{foto}">
+                                <input name="foto" type="file" data-initial-preview='<img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" class="kv-preview-data file-preview-image />' id="foto" class="file-loading photo" data-th-field="*{foto}">
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -70,7 +70,7 @@
                             <div class="col-sm-6">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" id="status" name="status" data-th-attrappend="*{status} ? checked" data-th-field="*{status}" /> Ativo
+                                        <input type="checkbox" id="status" name="status" data-th-checked="*{status}" data-th-field="*{status}" /> Ativo
                                     </label>
                                 </div>
                             </div>
@@ -92,10 +92,10 @@
                             <label for="nome" class="col-sm-3 control-label">* Sexo</label>
                             <div class="col-sm-6">
                                 <label class="radio-inline">
-                                    <input type="radio" name="sexo" id="masculino" checked value="M"> Masculino
+                                    <input type="radio" name="sexo" id="masculino" data-th-checked="*{sexo}" value="true"> Masculino
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="sexo" id="feminino" value="F"> Feminino
+                                    <input type="radio" name="sexo" id="feminino" data-th-checked="not *{sexo}" value="false"> Feminino
                                 </label>
                             </div>
                         </div>
@@ -109,10 +109,10 @@
                         <div class="form-group">
                             <label for="nivel" class="col-sm-3 control-label">* Nível de Acesso</label>
                             <div class="col-sm-3">
-                                <select class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel">
-                                    <option data-th-each="nivel : ${T(br.com.infinity.upsale.enums.NivelAcesso).sortByAsc()}" data-th-value="${nivel.name()}"
-                                        data-th-text="${nivel.name()}"></option>
-                                </select>
+                                <!--<select class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel">-->
+                                    <!--<option data-th-each="nivel : ${T(br.com.infinity.upsale.enums.NivelAcesso).sortByAsc()}" data-th-value="${nivel.nome()}"-->
+                                        <!--data-th-text="${nivel.nome()}"></option>-->
+                                <!--</select>-->
                             </div>
                         </div>
                         <div class="form-group">
@@ -125,7 +125,7 @@
                         <div class="form-group">
                             <label for="confirmacao" class="col-sm-3 control-label">* Confirmação de Senha</label>
                             <div class="col-sm-3">
-                                <input type="password" class="form-control password" id="confirmacao" data-th-field="*{confirmacao}" data-fv-notempty="true"
+                                <input type="password" class="form-control password" id="confirmacao" data-fv-notempty="true"
                                     name="confirmacao" data-fv-identical="true" data-fv-identical-field="senha" />
                             </div>
                             <div class="col-sm-3">
@@ -222,7 +222,7 @@
                             <div class="form-group">
                                 <label for="pais" class="col-sm-3 control-label">* País</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" id="pais" data-th-field="*{T(java.util.Objects).isNull(endereco.pais)} ?: '(Brasil)'"
+                                    <input type="text" class="form-control" id="pais" data-th-field="*{endereco.pais}"
                                         data-fv-notempty="true" name="pais" />
                                 </div>
                             </div>

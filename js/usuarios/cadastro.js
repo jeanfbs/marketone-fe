@@ -6,9 +6,6 @@ define(['ajax', 'api'], function(Ajax, api){
 
         $("#usuarioForm").validate();
         $("#cep").autoLoadAddress();
-
         $(".photo").fileUpload();
-        
-
     });
 });

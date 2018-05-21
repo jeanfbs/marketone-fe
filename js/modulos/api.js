@@ -17,7 +17,7 @@ define(function(){
 
         "produtos.taxas.pesquisa": baseUrl + "buscarTaxaPorProduto",
 
-        "usuarios.pesquisa": baseUrl + "usuarios/"
+        "usuarios.pesquisa": baseUrl + "buscarUsuarios"
     };
 
     return api;

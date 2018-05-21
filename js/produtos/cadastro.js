@@ -110,9 +110,6 @@ define(['ajax', 'api'], function(Ajax, api){
             }
         });
 
-
         $(".photo").fileUpload();
-        
-
     });
 });

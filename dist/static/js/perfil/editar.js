@@ -1,1 +1,1 @@
-define(["commons"],function(a){$("#insertHeader").load("../../fragmentos/menu-navegacao.html"),$("#usuarioForm").validate(),$("#cep").autoLoadAddress()});
+define(["commons"],function(o){$("#insertHeader").load("../../fragmentos/menu-navegacao.html"),$("#usuarioForm").validate(),$("#cep").autoLoadAddress(),$(".photo").fileUpload()});

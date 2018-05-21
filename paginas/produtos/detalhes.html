@@ -37,27 +37,16 @@
                         <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="panel-body">
-                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success"
-                        role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
-                        <strong>
-                            <span data-th-if="${responseVo.erro}">
-                                <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
-                                <span data-th-text="${responseVo.tipoErro}"></span>
-                            </span>
-                            <span data-th-if="${not responseVo.erro}">
-                                <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
-                            </span>
-                        </strong>
-                        &nbsp;&nbsp;
-                        <span data-th-text="${responseVo.mensagem}"></span>
-                    </div>
+                <div class="panel-body" data-th-object="${produto}">
                     <div class=" col-sm-12 controls">
-                        <a href="@{/produtos/}${produto.codigo}" class="btn btn-outline btn-default btn-xs edit ${ ${T(java.util.Objects).isNull(produto)} ? 'disabled' : ''  }" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
+                        <a data-th-href="@{/produtos/atualizar/} + *{codigo}" class="btn btn-outline btn-default btn-xs edit ${ ${T(java.util.Objects).isNull(produto)} ? 'disabled' : ''  }" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
                         <a href="#" data-method="delete" class="btn btn-outline btn-danger btn-xs remove ${ ${T(java.util.Objects).isNull(produto)} ? 'disabled' : ''  }"  role="button" data-toggle="modal" data-target=".modal"><i class="fa fa-trash fa-fw"></i> Excluir</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="col-sm-4 text-center">
+                        <img src="http://www.arrozvasconcelos.com.br/assets/uploads/produtos/5eab361b0914c4a6e13d0a1fc39075dc.png" alt="Arroz Vasconcelos"/ width="50%">
+                        <p class="text-muted">Imagem do Produto</p>
                     </div>
                     <div class="col-sm-8 col-xs-8">
                         <div class="table-responsive">
@@ -65,70 +54,66 @@
                                 <caption><h4>Dados do Produto</h4></caption>
                                 <tbody>
                                     <tr>
-                                        <td class="col-sm-2">Codigo de Barras</td>
-                                        <td data-th-text="${produto.codigo}">1354951318</td>
+                                        <td class="col-sm-2"><b>Codigo de Barras</b></td>
+                                        <td data-th-text="*{codigo}">1354951318</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Descrição</td>
-                                        <td data-th-text="${produto.descricao}">Arroz Branco Vasconcelos</td>
+                                        <td class="col-sm-2"><b>Descrição</b></td>
+                                        <td data-th-text="*{descricao}">Arroz Branco Vasconcelos</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Grupo</td>
-                                        <td data-th-text="${produto.grupo}">Alimentos</td>
+                                        <td class="col-sm-2"><b>Grupo</b></td>
+                                        <td data-th-text="*{grupo}">Alimentos</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Marca</td>
-                                        <td data-th-text="${produto.marca}">Vasconcelos</td>
+                                        <td class="col-sm-2"><b>Marca</b></td>
+                                        <td data-th-text="*{marca}">Vasconcelos</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Fornecedor</td>
+                                        <td class="col-sm-2"><b>Fornecedor</b></td>
                                         <td>
-                                            <a href="@{/fornecedor/}${produto.fornecedor.codigo}" data-th-text="${produto.fornecedor.nome}">Vasconcelos Industrias e Exportação LTDA</a>
+                                            <a href="@{/fornecedor/} + *{fornecedor.codigo}" data-th-text="*{fornecedor.nome}">Vasconcelos Industrias e Exportação LTDA</a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="col-sm-4 text-center">
-                        <img src="http://www.arrozvasconcelos.com.br/assets/uploads/produtos/5eab361b0914c4a6e13d0a1fc39075dc.png" alt="Arroz Vasconcelos"/ width="50%">
-                        <p class="text-muted">Imagem do Produto</p>
-                    </div>
-                    <div class="table-responsive col-sm-8 col-xs-12">
+                    <div class="table-responsive col-sm-12 col-xs-12">
                         <table class="table table-bordered table-hover table-striped">
                             <caption><h4>Preço e Taxas</h4></caption>
                             <tbody>
                                 <tr>
-                                    <td class="col-sm-2">Preço de Compra</td>
-                                    <td data-th-text="R$ ${produto.precoCompra}">R$ 9,85</td>
+                                    <td class="col-sm-2"><b>Preço de Compra</b></td>
+                                    <td data-th-text="R$ + *{precoCompra}">R$ 9,85</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-2">Outros Custos</td>
-                                    <td data-th-text="R$ ${produto.outrosCustos}">R$ 1,25</td>
+                                    <td class="col-sm-2"><b>Outros Custos</b></td>
+                                    <td data-th-text="R$ + *{outrosCustos}">R$ 1,25</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-2">Taxa ICMS</td>
-                                    <td data-th-text="${produto.icms}%">18%</td>
+                                    <td class="col-sm-2"><b>Taxa ICMS</b></td>
+                                    <td data-th-text="*{icms} + %">18%</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-2">Taxa PIS</td>
-                                    <td data-th-text="${produto.pis}%">1.65%</td>
+                                    <td class="col-sm-2"><b>Taxa PIS</b></td>
+                                    <td data-th-text="*{pis} + %">1.65%</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-2">Taxa COFINS</td>
-                                    <td data-th-text="${produto.cofins}%">7.6%</td>
+                                    <td class="col-sm-2"><b>Taxa COFINS</b></td>
+                                    <td data-th-text="*{cofins} + %">7.6%</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-2">Margem de Lucro</td>
-                                    <td data-th-text="${produto.lucro}%">20%</td>
+                                    <td class="col-sm-2"><b>Margem de Lucro</b></td>
+                                    <td data-th-text="*{lucro} + %">20%</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-2">Preço de Venda</td>
-                                    <td data-th-text="${produto.precoVenda}%">R$ 12,57</td>
+                                    <td class="col-sm-2"><b>Preço de Venda</b></td>
+                                    <td data-th-text="*{precoVenda} + %">R$ 12,57</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-2">Valor de Lucro</td>
-                                    <td data-th-text="${produto.valorLucro}%">R$ 1.79</td>
+                                    <td class="col-sm-2"><b>Valor de Lucro</b></td>
+                                    <td data-th-text="*{valorLucro} + %">R$ 1.79</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -152,7 +137,7 @@
                     <strong>Deseja mesmo prosseguir?</strong>
                 </p>
                 <div class="deleteIds">
-                    <input type="hidden" data-th-field="${produto.codigo} != null ? ${produto.codigo}" />
+                    <input type="hidden" data-th-value="${produto.codigo} != null ? ${produto.codigo}" />
                 </div>
             </div>
             <div class="modal-footer">

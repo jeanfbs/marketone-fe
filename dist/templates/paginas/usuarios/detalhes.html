@@ -37,33 +37,16 @@
                         <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="panel-body">
-                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success"
-                        role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
-                        <strong>
-                            <span data-th-if="${responseVo.erro}">
-                                <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
-                                <span data-th-text="${responseVo.tipoErro}"></span>
-                            </span>
-                            <span data-th-if="${not responseVo.erro}">
-                                <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
-                            </span>
-                        </strong>
-                        &nbsp;&nbsp;
-                        <span data-th-text="${responseVo.mensagem}"></span>
-                    </div>
+                <div class="panel-body" data-th-object="${usuario}">
                     <div class=" col-sm-12 controls">
-                        <a href="@{/usuarios/}${usuario.codigo}" class="btn btn-outline btn-default btn-xs edit ${ ${T(java.util.Objects).isNull(usuario)} ? 'disabled' : ''  }" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
-                        <a href="#" data-method="delete" class="btn btn-outline btn-danger btn-xs remove ${ ${T(java.util.Objects).isNull(usuario)} ? 'disabled' : ''  }"  role="button" data-toggle="modal" data-target=".modal"><i class="fa fa-trash fa-fw"></i> Excluir</a>
+                        <a data-th-href="@{/usuarios/atualizar/} + *{cpf}" class="btn btn-outline btn-default btn-xs edit" data-th-classappend="${T(java.util.Objects).isNull(usuario)} ? disabled" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
+                        <a href="#" data-method="delete" class="btn btn-outline btn-danger btn-xs remove"  data-th-classappend="${T(java.util.Objects).isNull(usuario)} ? disabled" role="button" data-toggle="modal" data-target=".modal"><i class="fa fa-trash fa-fw"></i> Excluir</a>
                     </div>
                     <div class="col-sm-4 text-center">
                         <img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" alt="Avatar" id="avatar" width="50%">
                         <br>
                         <br>
-                        <h4  data-th-text="${usuario.nome}">Igor Carvalho Rodrigues</h4>
+                        <h4  data-th-text="*{nome}">Igor Carvalho Rodrigues</h4>
                     </div>
                     <div class="col-sm-8 col-xs-8">
                         <div class="table-responsive">
@@ -71,45 +54,45 @@
                                 <caption><h4>Dados do Usuário</h4></caption>
                                 <tbody>
                                     <tr>
-                                        <td class="col-sm-2">Status</td>
-                                        <td><span class="label" data-th-classappend="${usuario.status}? label-success : label-warning"  data-th-text="${usuario.status}? Ativo: Inativo">Ativo</span></td>
+                                        <td class="col-sm-2"><b>Status</b></td>
+                                        <td><span class="label" data-th-classappend="*{status}? label-success : label-warning"  data-th-text="*{statusDescricao()}">Ativo</span></td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">CPF</td>
-                                        <td data-th-text="${usuario.cpf}">16548978548</td>
+                                        <td class="col-sm-2"><b>CPF</b></td>
+                                        <td data-th-text="*{cpf}">16548978548</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">RG</td>
-                                        <td data-th-text="${usuario.rg}">16548978548</td>
+                                        <td class="col-sm-2"><b>RG</b></td>
+                                        <td data-th-text="*{rg}">16548978548</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Sexo</td>
-                                        <td data-th-text="${usuario.sexo}">Masculino</td>
+                                        <td class="col-sm-2"><b>Sexo</b></td>
+                                        <td data-th-text="*{sexo} ? Masculino: Feminino">Masculino</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Nível de Acesso</td>
-                                        <td data-th-text="${usuario.nivel}">Administrador</td>
+                                        <td class="col-sm-2"><b>Nível de Acesso</b></td>
+                                        <td >Administrador</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Telefone</td>
-                                        <td data-th-text="${usuario.telefone}">(34) 3211-1111</td>
+                                        <td class="col-sm-2"><b>Telefone</b></td>
+                                        <td data-th-text="*{telefone}">(34) 3211-1111</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Celular</td>
-                                        <td data-th-text="${usuario.telefone}">(34) 9 9898-9898</td>
+                                        <td class="col-sm-2"><b>Celular</b></td>
+                                        <td data-th-text="*{telefone}">(34) 9 9898-9898</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">E-Mail</td>
-                                        <td><a href="emailto:${usuario.email}" data-th-text="${usuario.email}">teste@teste.com</a></td>
+                                        <td class="col-sm-2"><b>E-Mail</b></td>
+                                        <td><a data-th-href="'emailto:' + *{email}" data-th-text="*{email}">teste22@teste.com</a></td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2">Endereço</td>
+                                        <td class="col-sm-2"><b>Endereço</b></td>
                                         <td>
                                             <ul class="list-unstyled">
-                                                <li data-th-text="${usuario.endereco.logradouro} ${usuario.endereco.numero}, ${usuario.endereco.bairro}">Rua Teste X 412, Roosevelt</li>
-                                                <li data-th-text="CEP ${usuario.endereco.cep}">CEP 38401-216</li>
-                                                <li data-th-text="${usuario.endereco.cidade} - ${usuario.endereco.estado.symbol}">Uberlandia - MG</li>
-                                                <li data-th-text="${usuario.endereco.pais}">Brasil</li>
+                                                <li data-th-text="*{endereco.logradouro} + '&nbsp;&nbsp;Nº&nbsp;' + *{endereco.numero} + ',&nbsp;&nbsp;&nbsp;' + *{endereco.bairro}">Rua Teste X 412, Roosevelt</li>
+                                                <li data-th-text="'CEP &nbsp;&nbsp;&nbsp;' + *{endereco.cep}">CEP 38401-216</li>
+                                                <li data-th-text="*{endereco.cidade} + '&nbsp;&nbsp;-&nbsp;&nbsp;' + *{endereco.estado.symbol}">Uberlandia - MG</li>
+                                                <li data-th-text="*{endereco.pais}">Brasil</li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -172,7 +155,7 @@
                     <strong>Deseja mesmo prosseguir?</strong>
                 </p>
                 <div class="deleteIds">
-                    <input type="hidden" data-th-field="${usuario.cpf} != null ? ${usuario.cpf}" />
+                    <input type="hidden" data-th-field="*{cpf} != null ? *{cpf}" />
                 </div>
             </div>
             <div class="modal-footer">

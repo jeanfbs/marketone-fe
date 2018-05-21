@@ -35,8 +35,11 @@
                     </a>
                 </div>
                 <div class="panel-body">
-                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success"
+                        role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
                         <strong>
                             <span data-th-if="${responseVo.erro}">
                                 <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
@@ -49,13 +52,23 @@
                         &nbsp;&nbsp;
                         <span data-th-text="${responseVo.mensagem}"></span>
                     </div>
-                    <form class="form-horizontal" action="#" data-th-action="@{/produto}" id="produtoForm" data-th-object="${produto}" method="post">
+                    <form class="form-horizontal" enctype="multipart/form-data" action="#" data-th-action="@{~/cpanel/produtos/cadastro/}" id="produtoForm" data-th-object="${produto}" method="post">
                         <p class="text-muted"><i class="fa fa-caret-right fa-fw" aria-hidden="true"></i> Dados do Produto</p>
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <label for="codigo" class="col-sm-3 control-label">* Código de Barras</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" id="codigo" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-th-field="*{codigo}" data-fv-notempty="true"  name="codigo" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="status" class="col-sm-3 control-label">* Status</label>
+                                <div class="col-sm-6">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="status" name="status" data-th-checked="*{status}" data-th-field="*{status}" /> Ativo
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -67,7 +80,7 @@
                             <div class="form-group">
                                 <label for="grupo" class="col-sm-3 control-label">* Grupo</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control select2-grupo" id="grupo" data-th-field="*{grupo}" data-fv-notempty="true" name="grupo">
+                                    <select class="form-control" id="grupo" data-th-field="*{grupo}" data-fv-notempty="true" name="grupo">
                                         <option data-th-each="grupo : ${grupos}" data-th-value="${grupo.codigo}" data-th-text="${grupo.nome}"></option>
                                     </select>
                                 </div>
@@ -81,7 +94,7 @@
                             <div class="form-group">
                                 <label for="fornecedor" class="col-sm-3 control-label">* Fornecedor</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control select2-fornecedor" id="fornecedor" data-th-field="*{fornecedor}" data-fv-notempty="true" name="fornecedor">
+                                    <select class="form-control" id="fornecedor" data-th-field="*{fornecedor}" data-fv-notempty="true" name="fornecedor">
                                         <option data-th-each="fornecedor : ${fornecedores}" data-th-value="${fornecedor.codigo}" data-th-text="${fornecedor.nome}"></option>
                                     </select>
                                 </div>
@@ -89,8 +102,8 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="file">Imagem</label>
-                                <input  name="file" type="file" id="foto" class="file-loading photo" data-th-field="*{foto}">
+                                <label for="foto">Imagem</label>
+                                <input  name="foto" type="file" id="foto" class="file-loading photo" data-initial-preview='<img src="http://www.arrozvasconcelos.com.br/assets/uploads/produtos/5eab361b0914c4a6e13d0a1fc39075dc.png" class="kv-preview-data file-preview-image />' data-th-field="*{foto}">
                             </div>
                         </div>
                         <br>
@@ -225,7 +238,7 @@
                                             <label for="fornecedor" class="col-sm-4 control-label">* Prioridade</label>
                                             <div class="col-sm-6">
                                                 <select class="form-control" id="prioridade" data-th-field="*{prioridade}" data-fv-notempty="true" name="prioridade">
-                                                    <option data-th-each="prioridade : ${T(br.com.infinity.corbus.lixo.PrioridadeEstoque).values()}" data-th-value="${prioridade.name()}" data-th-text="${prioridade.tipo},${prioridade.descricao}"></option>
+                                                    <option data-th-each="prioridade : ${T(br.com.infinity.upsale.enums.PrioridadeEstoque).sortByAsc()}" data-th-value="${prioridade.name()}" data-th-text="${prioridade.tipo},${prioridade.descricao}"></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -244,7 +257,7 @@
                                             <label for="unidade" class="col-sm-4 control-label">* Unidade de Medida</label>
                                             <div class="col-sm-6">
                                                 <select class="form-control" id="unidade" data-th-field="*{unidade}" data-fv-notempty="true" name="unidade">
-                                                    <option data-th-each="unidade : ${T(br.com.infinity.corbus.lixo.Unidade).values()}" data-th-value="${unidade.name()}" data-th-text="${unidade.name()}"></option>
+                                                    <option data-th-each="unidade : ${T(br.com.infinity.upsale.enums.Unidade).values()}" data-th-value="${unidade.name()}" data-th-text="${unidade.name()}"></option>
                                                 </select>
                                             </div>
                                         </div>
