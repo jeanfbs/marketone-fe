@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cadastro de Usuário</title>
+    <title>Cadastro de Fornecedor</title>
 
     <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
     <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">Usuários</a>
+                <a data-th-href="@{/cpanel/fornecedores/}" href="/templates/paginas/fornecedores/pesquisa.html">Fornecedors</a>
             </li>
             <li class="active">Cadastro</li>
         </ol>
@@ -31,8 +31,8 @@
         <div class="row">
             <div class="panel panel-primary card-4">
                 <div class="panel-heading">
-                    <i class="fa fa-check" aria-hidden="true"></i> Cadastro de Usuário
-                    <a data-th-href="@{/docs#usuarios}" href="/templates/paginas/doc/manual-usuario.html#usuarios" target="_blank" class="pull-right"
+                    <i class="fa fa-check" aria-hidden="true"></i> Cadastro de Fornecedor
+                    <a data-th-href="@{/docs#fornecedores}" href="/templates/paginas/doc/manual-usuario.html#fornecedores" target="_blank" class="pull-right"
                         data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
                         <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                     </a>
@@ -55,76 +55,52 @@
                         &nbsp;&nbsp;
                         <span data-th-text="${responseVo.mensagem}"></span>
                     </div>
-                    <form class="form-horizontal" enctype="multipart/form-data" action="#" data-th-action="@{~/cpanel/usuarios/cadastro/}" id="usuarioForm" data-th-object="${usuario}" method="post">
+                    <form class="form-horizontal" enctype="multipart/form-data" action="#" data-th-action="@{~/cpanel/fornecedores/cadastro/}" id="fornecedorForm" data-th-object="${fornecedor}" method="post">
                         <p class="text-muted">
-                            <i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Dados Pessoais</p>
+                            <i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Dados da Empresa</p>
                         <div class="form-group">
-                            <label for="foto" class="col-sm-3 control-label">Imagem</label>
+                            <label for="foto" class="col-sm-3 control-label">Logo da Empresa</label>
                             <div class="col-sm-4">
                                 <input name="foto" type="file" data-initial-preview='<img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" class="kv-preview-data file-preview-image />' id="foto" class="file-loading photo" data-th-field="*{foto}">
-                                <input type="hidden" id="status" name="status" data-th-field="*{status}" />
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group">
-                            <label for="cpf" class="col-sm-3 control-label">* CPF</label>
+                            <label for="cpfCnpj" class="col-sm-3 control-label">* CPF/CNPJ</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="cpf" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números"
-                                    data-th-field="*{cpf}" data-fv-notempty="true" name="cpf" />
+                                <input type="text" class="form-control" id="cpfCnpj" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números"
+                                    data-th-field="*{cpfCnpj}" data-fv-notempty="true" name="cpfCnpj" />
+                                <input type="hidden" id="status" name="status" data-th-field="*{status}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nome" class="col-sm-3 control-label">* Nome Completo</label>
+                            <label for="razaoSocial" class="col-sm-3 control-label">* Razão Social</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nome" data-th-field="*{nome}" data-fv-notempty="true" name="nome" />
+                                <input type="text" class="form-control" id="razaoSocial" data-th-field="*{razaoSocial}" data-fv-notempty="true" name="razaoSocial" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nome" class="col-sm-3 control-label">* Sexo</label>
+                            <label for="nomeFantasia" class="col-sm-3 control-label">* Nome Fantasia</label>
                             <div class="col-sm-6">
-                                <label class="radio-inline">
-                                    <input type="radio" name="sexo" id="masculino" data-th-checked="*{sexo}" value="true"> Masculino
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="sexo" id="feminino" data-th-checked="not *{sexo}" value="false"> Feminino
-                                </label>
+                                <input type="text" class="form-control" id="nomeFantasia" data-th-field="*{nomeFantasia}" data-fv-notempty="true" name="razaoSocial" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="rg" class="col-sm-3 control-label">* RG</label>
+                            <label for="inscricaoMunicipal" class="col-sm-3 control-label">Inscrição Municipal</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" id="rg" data-th-field="*{rg}" pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números"
-                                    data-fv-notempty="true" name="rg" />
+                                <input type="text" class="form-control" id="inscricaoMunicipal" data-th-field="*{inscricaoMunicipal}" name="inscricaoMunicipal" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nivel" class="col-sm-3 control-label">* Nível de Acesso</label>
+                            <label for="inscricaoEstadual" class="col-sm-3 control-label">Inscrição Estadual</label>
                             <div class="col-sm-3">
-                                <!--<select class="form-control" id="nivel" data-th-field="*{nivel}" data-fv-notempty="true" name="nivel">-->
-                                    <!--<option data-th-each="nivel : ${T(br.com.infinity.upsale.enums.NivelAcesso).sortByAsc()}" data-th-value="${nivel.nome()}"-->
-                                        <!--data-th-text="${nivel.nome()}"></option>-->
-                                <!--</select>-->
+                                <input type="text" class="form-control" id="inscricaoEstadual" data-th-field="*{inscricaoEstadual}" name="inscricaoEstadual" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="senha" class="col-sm-3 control-label">* Senha</label>
+                            <label for="responsavel" class="col-sm-3 control-label">Nome do Responsável</label>
                             <div class="col-sm-3">
-                                <input type="password" class="form-control password" id="senha" data-th-field="*{senha}" data-fv-notempty="true" name="senha"
-                                />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmacao" class="col-sm-3 control-label">* Confirmação de Senha</label>
-                            <div class="col-sm-3">
-                                <input type="password" class="form-control password" id="confirmacao" data-fv-notempty="true"
-                                    name="confirmacao" data-fv-identical="true" data-fv-identical-field="senha" />
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="mostrar-senha" value="true"> Mostrar Senha
-                                    </label>
-                                </div>
+                                <input type="text" class="form-control" id="responsavel" data-th-field="*{responsavel}" name="responsavel" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,6 +121,12 @@
                             <label for="celular" class="col-sm-3 control-label">* Celular</label>
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" id="celular" data-th-field="*{celular}" data-fv-notempty="true" name="celular" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label"> Site</label>
+                            <div class="col-sm-3">
+                                <input type="email" class="form-control" id="email" data-th-field="*{email}" name="email" placeholder="www.teste.com.br" />
                             </div>
                         </div>
                         <br>
@@ -244,7 +226,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses usuários.
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses fornecedores.
                         <strong>Deseja mesmo prosseguir?</strong>
                     </p>
                     <div class="deleteIds"></div>
@@ -261,7 +243,7 @@
     <div data-layout-fragment="script">
         <script>
             require(['main'], function () {
-                require(['root', 'commons', 'cadastro-usuarios']);
+                require(['root', 'commons', 'cadastro-fornecedores']);
             });
         </script>
     </div>

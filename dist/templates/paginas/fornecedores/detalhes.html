@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Detalhes do Usuário</title>
+
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
+        <ol class="breadcrumb container" >
+            <li>
+                <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
+                    <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">Usuários</a>
+            </li>
+            <li class="active">Detalhes</li>
+        </ol>
+    </div>
+    <div class="container" data-layout-fragment="content">
+        <div class="row">
+            <div class="panel panel-primary card-4">
+                <div class="panel-heading">
+                    <i class="fa fa-check" aria-hidden="true"></i> Detalhes do Usuário
+                    <a data-th-href="@{/docs#usuarios}" href="/templates/paginas/doc/manual-usuario.html#usuarios" target="_blank" class="pull-right"
+                        data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="panel-body" data-th-object="${usuario}">
+                    <div class=" col-sm-12 controls">
+                        <a data-th-href="@{/usuarios/atualizar/} + *{cpf}" class="btn btn-outline btn-default btn-xs edit" data-th-classappend="${T(java.util.Objects).isNull(usuario)} ? disabled" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
+                        <a href="#" data-method="delete" class="btn btn-outline btn-danger btn-xs remove"  data-th-classappend="${T(java.util.Objects).isNull(usuario)} ? disabled" role="button" data-toggle="modal" data-target=".modal"><i class="fa fa-trash fa-fw"></i> Excluir</a>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" alt="Avatar" id="avatar" width="50%">
+                        <br>
+                        <br>
+                        <h4  data-th-text="*{nome}">Igor Carvalho Rodrigues</h4>
+                    </div>
+                    <div class="col-sm-8 col-xs-8">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <caption><h4>Dados do Usuário</h4></caption>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Status</b></td>
+                                        <td><span class="label" data-th-classappend="*{status}? label-success : label-warning"  data-th-text="*{statusDescricao()}">Ativo</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>CPF</b></td>
+                                        <td data-th-text="*{cpf}">16548978548</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>RG</b></td>
+                                        <td data-th-text="*{rg}">16548978548</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Sexo</b></td>
+                                        <td data-th-text="*{sexo} ? Masculino: Feminino">Masculino</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Nível de Acesso</b></td>
+                                        <td >Administrador</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Telefone</b></td>
+                                        <td data-th-text="*{telefone}">(34) 3211-1111</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Celular</b></td>
+                                        <td data-th-text="*{telefone}">(34) 9 9898-9898</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>E-Mail</b></td>
+                                        <td><a data-th-href="'emailto:' + *{email}" data-th-text="*{email}">teste22@teste.com</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Endereço</b></td>
+                                        <td>
+                                            <ul class="list-unstyled">
+                                                <li data-th-text="*{endereco.logradouro} + '&nbsp;&nbsp;Nº&nbsp;' + *{endereco.numero} + ',&nbsp;&nbsp;&nbsp;' + *{endereco.bairro}">Rua Teste X 412, Roosevelt</li>
+                                                <li data-th-text="'CEP &nbsp;&nbsp;&nbsp;' + *{endereco.cep}">CEP 38401-216</li>
+                                                <li data-th-text="*{endereco.cidade} + '&nbsp;&nbsp;-&nbsp;&nbsp;' + *{endereco.estado.symbol}">Uberlandia - MG</li>
+                                                <li data-th-text="*{endereco.pais}">Brasil</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <caption><h4>Atividades Recentes</h4></caption>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-check fa-fw" aria-hidden="true"></i>
+                                    </td>
+                                    <td>
+                                        <strong class="text-primary">Abertura de Caixa</strong>
+                                    </td>
+                                    <td>
+                                        Abriu o caixa com um total de R$ 100,00 como saldo inicial.
+                                    </td>
+                                    <td class="text-center text-muted">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i> 11/06/2018 11:39</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-check fa-fw" aria-hidden="true"></i>
+                                    </td>
+                                    <td>
+                                        <strong class="text-primary">Novo Produto</strong>
+                                    </td>
+                                    <td>
+                                        O produto
+                                        <a href="#">Arroz Branco</a> foi adicionado
+                                    </td>
+                                    <td class="text-center text-muted">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i> 11/06/2018 13:39</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="alertModal">Confirmação de exclusão</h4>
+            </div>
+            <div class="modal-body ">
+                <p><i class="fa fa-question-circle" aria-hidden="true"></i> 
+                    Você irá desativar esse usuário, bloqueando seu acesso ao sistema.
+                    <strong>Deseja mesmo prosseguir?</strong>
+                </p>
+                <div class="deleteIds">
+                    <input type="hidden" data-th-field="*{cpf} != null ? *{cpf}" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-danger btn-outline delete-one">Sim</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root', 'commons', 'detalhes-fornecedores']);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

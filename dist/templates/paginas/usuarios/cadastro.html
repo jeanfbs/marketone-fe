@@ -62,19 +62,10 @@
                             <label for="foto" class="col-sm-3 control-label">Imagem</label>
                             <div class="col-sm-4">
                                 <input name="foto" type="file" data-initial-preview='<img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" class="kv-preview-data file-preview-image />' id="foto" class="file-loading photo" data-th-field="*{foto}">
+                                <input type="hidden" id="status" name="status" data-th-field="*{status}" />
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="form-group">
-                            <label for="status" class="col-sm-3 control-label">* Status</label>
-                            <div class="col-sm-6">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="status" name="status" data-th-checked="*{status}" data-th-field="*{status}" /> Ativo
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="cpf" class="col-sm-3 control-label">* CPF</label>
                             <div class="col-sm-3">

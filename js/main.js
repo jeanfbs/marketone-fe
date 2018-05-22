@@ -16,6 +16,10 @@ requirejs.config({
 
         "cadastro-usuarios": "usuarios/cadastro",
         "pesquisa-usuarios": "usuarios/pesquisa",
-        "detalhes-usuarios": "usuarios/detalhes"
+        "detalhes-usuarios": "usuarios/detalhes",
+
+        "cadastro-fornecedores": "fornecedores/cadastro",
+        "pesquisa-fornecedores": "fornecedores/pesquisa",
+        "detalhes-fornecedores": "fornecedores/detalhes"
     },
 });

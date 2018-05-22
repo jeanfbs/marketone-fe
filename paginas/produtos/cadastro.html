@@ -59,16 +59,7 @@
                                 <label for="codigo" class="col-sm-3 control-label">* Código de Barras</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" id="codigo" autofocus pattern="^[0-9]*$" data-fv-regexp-message="Digite apenas números" data-th-field="*{codigo}" data-fv-notempty="true"  name="codigo" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="status" class="col-sm-3 control-label">* Status</label>
-                                <div class="col-sm-6">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="status" name="status" data-th-checked="*{status}" data-th-field="*{status}" /> Ativo
-                                        </label>
-                                    </div>
+                                    <input type="hidden" id="status" name="status" data-th-field="*{status}" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -324,7 +315,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses usuários.
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses produtos.
                         <strong>Deseja mesmo prosseguir?</strong>
                     </p>
                     <div class="deleteIds"></div>
