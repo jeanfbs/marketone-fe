@@ -5,8 +5,8 @@ define(['api'], function(api){
         $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
         
         $(".delete-one").oneDelete({
-            redirect: api["fornecedores.deletar"],
-            url: api["fornecedores.deletar"]
+            redirect: api["produtos.deletar"],
+            url: api["produtos.deletar"]
         });
     });
 

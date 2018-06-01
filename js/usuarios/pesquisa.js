@@ -42,12 +42,12 @@ define(['datatable', 'api'], function(datatable, api){
 				
 		};
 		
-		var userTable = new datatable.Table($("#tabela-usuarios"), settings,[
+		var tabelaUsuarios = new datatable.Table($("#tabela-usuarios"), settings,[
 			null,
-			"http://localhost:8789/download",
-			"http://localhost:8789/download"
+			"http://localhost:8789/download/pdf",
+			"http://localhost:8789/download/csv"
 		]);
-		userTable.show();
+		tabelaUsuarios.show();
 		
 	});
 

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Consulta de Venda</title>
+
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
+        <ol class="breadcrumb container">
+            <li>
+                <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
+                    <i class="fa fa-home fa-fw" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Home"></i>
+                </a>
+            </li>
+            <li class="active">Vendas</li>
+        </ol>
+    </div>
+    <div class="container" data-layout-fragment="content">
+        <div class="row">
+            <div class="panel panel-primary card-4">
+                <div class="panel-heading">
+                    <i class="fa fa-search" aria-hidden="true"></i> Consulta de Vendas
+                    <a data-th-href="@{/docs#vendas}" href="/templates/paginas/doc/manual-usuario.html#vendas" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-no-padding">
+                            <div class="col-md-12">
+                                <label>Data</label>
+                            </div>
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" name="dataInicial"  id="dataInicial" placeholder="Data Inicial"/>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" name="dataFinal"  id="dataFinal" placeholder="Data Final"/>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-no-padding">
+                            <div class="col-md-12">
+                                <label>Valor de Venda</label>
+                            </div>
+                            <div class="col-md-4">	
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">R$</span>
+                                        <input type="number" class="form-control" step=".05" name="valorMinimo"  id="valorMinimo" placeholder="Valor Mínimo"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">	
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">R$</span>
+                                        <input type="number" class="form-control" step=".05" name="valorMaximo"  id="valorMaximo" placeholder="Valor Máximo"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control" name="status" id="status">
+                                    <option value="true">Realizada</option>
+                                    <option value="false">Devolvida</option>
+                                    <option value="">Cancelada</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                                <div class="form-group">
+                                    <label for="tipoPagamento">Tipo de Pagamento</label>
+                                    <select class="form-control" name="tipoPagamento" id="tipoPagamento">
+                                        <option value="true">Dinheiro</option>
+                                        <option value="false">Cartão de Crédito</option>
+                                        <option value="">Cartão de Débito</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-group">
+                                <label for="busca-cliente">Cliente</label>
+                                <input type="text" class="form-control" id="busca-cliente">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-group">
+                                <br>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="multiplosPagamentos"> Múltiplos Pagamentos
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="desconto"> Com Desconto
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-2 col-sm-2">
+                            <div class="form-group">
+                                <label for="busca-nota">Nr. Nota Fiscal</label>
+                                <input type="text" class="form-control" id="busca-nota">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label for="busca-produtos">Produtos <small class="text-muted">(separados por vírgula)</small></label>
+                                <input type="text" class="form-control" id="busca-produtos" placeholder="produto 1, produto 2, etc...">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <br>
+                            <button class="btn btn-primary" type="button" id="btn-search"><i class="fa fa-search fa-fw" aria-hidden="true"></i> Pesquisar</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4" id="controls">
+                            <div class="form-group">
+                                <a data-th-href="@{/cpanel/vendas/cadastro/}" href="/templates/paginas/vendas/cadastro.html" class="btn btn-outline btn-default btn-xs" id="new" role="button">
+                                    <i class="fa fa-plus fa-fw"></i> Novo</a>
+                                <a href="#" base-view-url="vendas/" class="btn btn-outline btn-default btn-xs disabled" id="view" role="button">
+                                    <i class="fa fa-eye fa-fw"></i> Visualizar</a>
+                                <a href="#" base-view-url="vendas/devolucao" class="btn btn-outline btn-warning btn-xs" id="view" role="button">
+                                    <i class="fa fa-reply fa-fw"></i> Estornar</a>
+                                <a href="#" base-view-url="vendas/cancelar" class="btn btn-outline btn-danger btn-xs" id="view" role="button">
+                                    <i class="fa fa-times fa-fw"></i> Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="tabela-vendas" width="100%">
+                            <thead>
+                                <tr class="text-primary">
+                                    <th> 
+                                        <label>
+                                            <input type="checkbox" id="all"> 
+                                        </label>
+                                    </th>
+                                    <th>Código</th>
+                                    <th>Data</th>
+                                    <th>Valor</th>
+                                    <th>Nota Fiscal</th>
+                                    <th>Total de Itens</th>
+                                    <th>Múltiplos Pagamentos</th>
+                                    <th>Desconto</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root', 'pesquisa-vendas']);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

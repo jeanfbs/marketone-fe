@@ -19,7 +19,13 @@ define(function(){
 
         "usuarios.pesquisa": baseUrl + "buscarUsuarios",
 
-        "fornecedores.pesquisa": baseUrl + "buscarFornecedores"
+        "fornecedores.pesquisa": baseUrl + "buscarFornecedores",
+
+        "fornecedores.deletar": baseUrl + "deletarFornecedor",
+
+        "vendas.pesquisa": baseUrl + "buscarVendas",
+
+        
     };
 
     return api;

@@ -59,7 +59,7 @@ define(function(){
                 'oLanguage': {
                     'sLengthMenu': 'Itens por página: _MENU_',
                     'sZeroRecords': 'Nenhum resultado foi encontrado',
-                    'sInfo': '<span style="margin-right:100px">Página _PAGE_</span>   _START_ - _END_ / _TOTAL_',
+                    'sInfo': '<span style="margin-right:100px">_START_ - _END_ / _TOTAL_</span>  Página _PAGE_',
                     'sInfoEmpty':' - ',
                     'sInfoFiltered': '',
                     'sProcessing':'Processando...',
@@ -82,15 +82,15 @@ define(function(){
                 '<ul class="dropdown-menu" aria-labelledby="menu-exportar">';
                 
             if(this.exportLinks[0] != undefined && this.exportLinks[0] != null){
-                exportMenu += '<li><a href=""><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel</a></li>';
+                exportMenu += '<li><a href="'+ this.exportLinks[0] +'"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel</a></li>';
             }
 
             if(this.exportLinks[1] != undefined && this.exportLinks[1] != null){
-                exportMenu += '<li><a href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a></li>';
+                exportMenu += '<li><a href="'+ this.exportLinks[1] +'"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a></li>';
             }
             
             if(this.exportLinks[2] != undefined && this.exportLinks[2] != null){
-                exportMenu += '<li><a href="http://localhost:8789/download"><i class="fa fa-file-text-o" aria-hidden="true"></i> CSV</a></li>';
+                exportMenu += '<li><a href="'+ this.exportLinks[2] +'"><i class="fa fa-file-text-o" aria-hidden="true"></i> CSV</a></li>';
             }
 
             exportMenu += '</ul></div>';

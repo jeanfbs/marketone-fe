@@ -46,12 +46,12 @@ define(['datatable', 'api'], function(datatable, api){
 				
 		};
 		
-		var userTable = new datatable.Table($("#tabela-fornecedores"), settings,[
+		var tabelaFornecedores = new datatable.Table($("#tabela-fornecedores"), settings,[
 			null,
 			"http://localhost:8789/download/pdf",
 			"http://localhost:8789/download/csv"
 		]);
-		userTable.show();
+		tabelaFornecedores.show();
 		
 	});
 

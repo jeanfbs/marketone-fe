@@ -35,19 +35,19 @@ define(['datatable', 'api'], function(datatable, api){
 				
 		};
 		
-		var userTable = new datatable.Table($("#tabela-produtos"), settings,[
+		var tabelaProdutos = new datatable.Table($("#tabela-produtos"), settings,[
 			null,
 			null,
 			"http://localhost:8789/download"
 		]);
-		userTable.show();
+		tabelaProdutos.show();
 	
 		$('#input-search').on("keyup",function(e) {
-			userTable.redraw();
+			tabelaProdutos.redraw();
 		});
 	
 		$('#btn-search').on("click",function(){
-			userTable.redraw();
+			tabelaProdutos.redraw();
 		});
 		
 	});

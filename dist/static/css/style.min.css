@@ -447,3 +447,9 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 #avatar {
   margin-top: 50px;
 }
+.col-no-padding > div {
+  padding: 0;
+}
+.col-no-padding > div > .form-group {
+  padding: 5px;
+}

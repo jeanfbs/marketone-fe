@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Detalhes do Usuário</title>
+    <title>Detalhes do Fornecedor</title>
 
     <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
     <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
@@ -18,11 +18,11 @@
         <ol class="breadcrumb container" >
             <li>
                 <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
-                    <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                    <i class="fa fa-home fa-fw" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Home"></i>
                 </a>
             </li>
             <li>
-                <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">Usuários</a>
+                <a data-th-href="@{/cpanel/fornecedores/}" href="/templates/paginas/fornecedores/pesquisa.html">Fornecedores</a>
             </li>
             <li class="active">Detalhes</li>
         </ol>
@@ -31,47 +31,59 @@
         <div class="row">
             <div class="panel panel-primary card-4">
                 <div class="panel-heading">
-                    <i class="fa fa-check" aria-hidden="true"></i> Detalhes do Usuário
-                    <a data-th-href="@{/docs#usuarios}" href="/templates/paginas/doc/manual-usuario.html#usuarios" target="_blank" class="pull-right"
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Detalhes do Fornecedor
+                    <a data-th-href="@{/docs#fornecedores}" href="/templates/paginas/doc/manual-usuario.html#fornecedores" target="_blank" class="pull-right"
                         data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
                         <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="panel-body" data-th-object="${usuario}">
+                <div class="panel-body" data-th-object="${fornecedor}">
                     <div class=" col-sm-12 controls">
-                        <a data-th-href="@{/usuarios/atualizar/} + *{cpf}" class="btn btn-outline btn-default btn-xs edit" data-th-classappend="${T(java.util.Objects).isNull(usuario)} ? disabled" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
-                        <a href="#" data-method="delete" class="btn btn-outline btn-danger btn-xs remove"  data-th-classappend="${T(java.util.Objects).isNull(usuario)} ? disabled" role="button" data-toggle="modal" data-target=".modal"><i class="fa fa-trash fa-fw"></i> Excluir</a>
+                        <a data-th-href="@{/fornecedores/atualizar/} + *{cpfCnjp}" class="btn btn-outline btn-default btn-xs edit" data-th-classappend="${T(java.util.Objects).isNull(fornecedor)} ? disabled" role="button" ><i class="fa fa-pencil-square-o fa-fw"></i> Editar</a>
+                        <a href="#" data-method="delete" class="btn btn-outline btn-danger btn-xs remove"  data-th-classappend="${T(java.util.Objects).isNull(fornecedor)} ? disabled" role="button" data-toggle="modal" data-target=".modal"><i class="fa fa-trash fa-fw"></i> Excluir</a>
                     </div>
                     <div class="col-sm-4 text-center">
-                        <img src="http://www.africanleadershipawards.com/wp-content/uploads/2017/07/no-avatar-user.jpg" alt="Avatar" id="avatar" width="50%">
+                        <img src="http://www.studioclips.com.br/imagens/logotipos/logotipo-forttrans-transportadora.jpg" alt="Avatar" id="avatar" width="50%">
                         <br>
                         <br>
-                        <h4  data-th-text="*{nome}">Igor Carvalho Rodrigues</h4>
+                        <h4  data-th-text="*{nome}">Industria LDTA London Palace</h4>
                     </div>
                     <div class="col-sm-8 col-xs-8">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
-                                <caption><h4>Dados do Usuário</h4></caption>
+                                <caption><h4>Dados do Fornecedor</h4></caption>
                                 <tbody>
                                     <tr>
                                         <td class="col-sm-2"><b>Status</b></td>
                                         <td><span class="label" data-th-classappend="*{status}? label-success : label-warning"  data-th-text="*{statusDescricao()}">Ativo</span></td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2"><b>CPF</b></td>
-                                        <td data-th-text="*{cpf}">16548978548</td>
+                                        <td class="col-sm-2"><b>CPF/CNPJ</b></td>
+                                        <td data-th-text="*{cpfCnpj}">16548978548</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2"><b>RG</b></td>
-                                        <td data-th-text="*{rg}">16548978548</td>
+                                        <td class="col-sm-2"><b>Razão Social</b></td>
+                                        <td data-th-text="*{razaoSocial}">16548978548</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2"><b>Sexo</b></td>
-                                        <td data-th-text="*{sexo} ? Masculino: Feminino">Masculino</td>
+                                        <td class="col-sm-2"><b>Nome Fantasia</b></td>
+                                        <td data-th-text="*{nomeFantasia}">16548978548</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-2"><b>Nível de Acesso</b></td>
-                                        <td >Administrador</td>
+                                        <td class="col-sm-2"><b>Inscrição Municipal</b></td>
+                                        <td data-th-text="*{inscricaoMunicipal}">16548978548</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Inscrição Estadual</b></td>
+                                        <td data-th-text="*{inscricaoEstadual}">16548978548</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>Responsável</b></td>
+                                        <td data-th-text="*{responsavel}">16548978548</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-2"><b>E-Mail</b></td>
+                                        <td><a data-th-href="'emailto:' + *{email}" data-th-text="*{email}">teste22@teste.com</a></td>
                                     </tr>
                                     <tr>
                                         <td class="col-sm-2"><b>Telefone</b></td>
@@ -80,10 +92,6 @@
                                     <tr>
                                         <td class="col-sm-2"><b>Celular</b></td>
                                         <td data-th-text="*{telefone}">(34) 9 9898-9898</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-sm-2"><b>E-Mail</b></td>
-                                        <td><a data-th-href="'emailto:' + *{email}" data-th-text="*{email}">teste22@teste.com</a></td>
                                     </tr>
                                     <tr>
                                         <td class="col-sm-2"><b>Endereço</b></td>
@@ -104,15 +112,27 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <caption><h4>Atividades Recentes</h4></caption>
+                                <thead>
+                                    <tr class="active">
+                                        <th></th>
+                                        <th>ID Nota Fiscal</th>
+                                        <th>Descrição Geral</th>
+                                        <th>Valor</th>
+                                        <th>Data Recebimento</th>
+                                    </tr>
+                                </thead>
                                 <tr>
                                     <td>
                                         <i class="fa fa-check fa-fw" aria-hidden="true"></i>
                                     </td>
                                     <td>
-                                        <strong class="text-primary">Abertura de Caixa</strong>
+                                        <strong class="text-primary"><a href="#">000.200.017</a></strong>
                                     </td>
                                     <td>
-                                        Abriu o caixa com um total de R$ 100,00 como saldo inicial.
+                                        Compra de 10 fardos de bebidas Coca-Cola.
+                                    </td>
+                                    <td>
+                                        <b>R$ 285,90</b>
                                     </td>
                                     <td class="text-center text-muted">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i> 11/06/2018 11:39</span>
@@ -123,14 +143,16 @@
                                         <i class="fa fa-check fa-fw" aria-hidden="true"></i>
                                     </td>
                                     <td>
-                                        <strong class="text-primary">Novo Produto</strong>
+                                        <strong class="text-primary"><a href="#">000.200.019</a></strong>
                                     </td>
                                     <td>
-                                        O produto
-                                        <a href="#">Arroz Branco</a> foi adicionado
+                                        Compra de 5 Monitores Led Sansung
+                                    </td>
+                                    <td>
+                                        <b>R$ 2.245,90</b>
                                     </td>
                                     <td class="text-center text-muted">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i> 11/06/2018 13:39</span>
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i> 21/06/2018 11:39</span>
                                     </td>
                                 </tr>
                             </table>
@@ -151,7 +173,7 @@
             </div>
             <div class="modal-body ">
                 <p><i class="fa fa-question-circle" aria-hidden="true"></i> 
-                    Você irá desativar esse usuário, bloqueando seu acesso ao sistema.
+                    Você irá desativar permanentemente esse fornecedor.
                     <strong>Deseja mesmo prosseguir?</strong>
                 </p>
                 <div class="deleteIds">
