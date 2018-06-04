@@ -1,35 +1,8 @@
 define(['ajax', 'api'], function(Ajax, api){
 
-    $(function(){
+    var BuscaProdutos = {
 
-        $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
-        
-        $("#busca-produto").select2({
-            
-            ajax: {
-              url: api["pdv.pesquisa.produto"],
-              dataType: 'json',
-              processResults: function (data, params) {
-                var select2data = $.map(data, function(obj) {
-                    obj.id = obj.codigoBarra;
-                    obj.text = obj.descricao;
-                    return obj;
-                  });
-
-                return {
-                    results: select2data
-                  };
-              },
-              cache: false
-            },
-            placeholder: 'Buscar Produtos',
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 1,
-            templateResult: formatItem,
-            templateSelection: formatItemSelection
-          });
-          
-          function formatItem (response) {
+        formatItem : function (response) {
             if (response.loading) {
                 return response.text;
             }
@@ -46,10 +19,68 @@ define(['ajax', 'api'], function(Ajax, api){
             "</div>"
           
             return markup;
-          }
-          function formatItemSelection (response) {
-            return response.descricao || response.text;
-          }
+          },
 
+          formatItemSelection : function (item) {
+
+            $("#spanCodigoBarra").text(item.codigoBarra);
+            item.valorUnitario = isNaN(item.valorUnitario) ? 0.0 : item.valorUnitario;
+            
+            $("#spanValorUnitario").attr("data-valor-unitario", item.valorUnitario).text(item.valorUnitario);
+
+            var totalItem = item.valorUnitario * parseInt($("#quantidade").val());
+            $("#spanTotalItem").text(totalItem);
+            
+            $("#foto-produto").attr("src", item.imagem);
+            // $("#spanCodigoBarra").text(item.codigoBarra);
+            // $("#spanCodigoBarra").text(item.codigoBarra);
+
+
+            return item.descricao || item.text;
+          },
+    }
+    
+
+    $(function(){
+
+        $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
+        
+
+        $("#quantidade").focusout(function(){
+
+            var totalItem = parseFloat($("#spanValorUnitario").attr("data-valor-unitario")) * parseInt($("#quantidade").val());
+            $("#spanTotalItem").text(totalItem.toFixed(2));
+        });
+
+        $("#busca-produto").select2({
+            theme: 'bootstrap',
+            ajax: {
+              url: api["pdv.pesquisa.produto"],
+              dataType: 'json',
+              delay: 250,
+              data: function (params) {
+                return {
+                    value: params.term
+                };
+              },
+              processResults: function (data, params) {
+                var select2data = $.map(data, function(obj) {
+                    obj.id = obj.codigoBarra;
+                    obj.text = obj.descricao;
+                    return obj;
+                  });
+
+                return {
+                    results: select2data
+                  };
+              },
+              cache: false
+            },
+            placeholder: 'Buscar Produtos',
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: BuscaProdutos.formatItem,
+            templateSelection: BuscaProdutos.formatItemSelection
+          });
     });
 });

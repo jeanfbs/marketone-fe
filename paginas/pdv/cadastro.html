@@ -30,13 +30,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-12">
-                    <select class="form-control input-lg" id="busca-produto" autofocus tabindex="-1" accesskey="p" placeholder="Buscar Produto..."></select>
-                    <!-- <div class="form-group has-feedback">
-                        
-                        <input type="text">
-                        <i class="fa fa-search form-control-feedback fa-2x text-muted" aria-hidden="true"></i>
-                    </div> -->
+                <div class="col-md-12 form-group-lg">
+                    <select class="form-control" id="busca-produto" autofocus tabindex="-1" accesskey="p" placeholder="Buscar Produto..."></select>
                 </div>
                 <div class="clearfix"></div>
                 <br>
@@ -44,15 +39,15 @@
                     <div id="dadosProduto" class="">
                         <div class="panel panel-primary card-4">
                             <div class="panel-body text-center">
-                                <img src="https://rechlanches.com.br/wp-content/uploads/2017/05/coca_cola_2lt-600x600.jpg" alt="Coca Cola" width="150px">
+                                <img id="foto-produto" width="150px">
                             </div>
                         </div>
                         <div class="col-sm-6 col-xs-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading text-center">
                                     <div class="text-uppercase">Código</div>
-                                    <div style="font-size: 12pt; margin-top: 6px;">
-                                        0124125012051
+                                    <div style="font-size: 12pt; margin-top: 6px;" >
+                                        <span id="spanCodigoBarra">0124125012051</span>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +57,7 @@
                                 <div class="panel-heading text-center">
                                     <div class="text-uppercase">Valor únitario</div>
                                     <div style="font-size: 16pt;">
-                                        R$ <span id="spanMediaEstoque">4,50</span>
+                                        R$ <span id="spanValorUnitario">4,50</span>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +67,7 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading text-center">
                                     <div class="text-uppercase">Quantidade</div>
-                                    <input type="number" class="pdv-input" name="quantidade" value="1" tabindex="0">
+                                    <input type="text" class="pdv-input" name="quantidade" id="quantidade" value="1" tabindex="0">
                                 </div>
                             </div>
                         </div>
@@ -81,7 +76,7 @@
                                 <div class="panel-heading text-center">
                                     <div class="text-uppercase">Total do Item</div>
                                     <div style="font-size: 16pt;">
-                                        R$ <span id="spanMediaEstoque">9,00</span>
+                                        R$ <span id="spanTotalItem">9,00</span>
                                     </div>
                                 </div>
                             </div>
