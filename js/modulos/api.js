@@ -25,6 +25,7 @@ define(function(){
 
         "vendas.pesquisa": baseUrl + "buscarVendas",
 
+        "pdv.pesquisa.produto": baseUrl + "buscaPDV",
         
     };
 

@@ -25,5 +25,8 @@ requirejs.config({
         "cadastro-vendas": "vendas/cadastro",
         "pesquisa-vendas": "vendas/pesquisa",
         "detalhes-vendas": "vendas/detalhes",
+
+
+        "cadastro-pdv": "pdv/cadastro",
     },
 });

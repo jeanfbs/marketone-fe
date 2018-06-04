@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Nova Venda</title>
+
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb" class="pdv-breadcrumb text-center" data-layout-fragment="breadcrumb">
+        <span class="pull-left">
+            <span id="data">Terça, 12 de Janeiro de 2018</span>   <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> <span id="horario">12:41</span>
+        </span>
+        <span>
+            <i class="fa fa-user fa-fw" aria-hidden="true"></i> <strong>Operador de Caixa:</strong> 
+            <span id="atendente" class="text-uppercase">Jean Santos</span>
+        </span>
+        <span class="pull-right">
+            <strong>Situação do Caixa:</strong> <span class="label label-success" id="status">Aberto</span>
+        </span>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <select class="form-control input-lg" id="busca-produto" autofocus tabindex="-1" accesskey="p" placeholder="Buscar Produto..."></select>
+                    <!-- <div class="form-group has-feedback">
+                        
+                        <input type="text">
+                        <i class="fa fa-search form-control-feedback fa-2x text-muted" aria-hidden="true"></i>
+                    </div> -->
+                </div>
+                <div class="clearfix"></div>
+                <br>
+                <div class="col-md-4">
+                    <div id="dadosProduto" class="">
+                        <div class="panel panel-primary card-4">
+                            <div class="panel-body text-center">
+                                <img src="https://rechlanches.com.br/wp-content/uploads/2017/05/coca_cola_2lt-600x600.jpg" alt="Coca Cola" width="150px">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading text-center">
+                                    <div class="text-uppercase">Código</div>
+                                    <div style="font-size: 12pt; margin-top: 6px;">
+                                        0124125012051
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading text-center">
+                                    <div class="text-uppercase">Valor únitario</div>
+                                    <div style="font-size: 16pt;">
+                                        R$ <span id="spanMediaEstoque">4,50</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading text-center">
+                                    <div class="text-uppercase">Quantidade</div>
+                                    <input type="number" class="pdv-input" name="quantidade" value="1" tabindex="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading text-center">
+                                    <div class="text-uppercase">Total do Item</div>
+                                    <div style="font-size: 16pt;">
+                                        R$ <span id="spanMediaEstoque">9,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pagamento" class="hide">
+                        <div class="panel panel-default card-4">
+                            <div class="panel-heading text-center">
+                               Finalizar Venda
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="form-group text-center">
+                                        <label for="cliente" class="text-uppercase">Cliente</label>
+                                        <select class="pdv-input select2-estados" data-th-field="*{endereco.estado}" data-fv-notempty="true" name="estado">
+                                            <option data-th-each="estado : ${T(br.com.infinity.upsale.enums.Estados).sortByAsc()}" data-th-value="${estado.name()}" data-th-text="${estado.description}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group text-center">
+                                        <label for="valorDeconto" class="text-uppercase">Desconto <small class="text-muted">( R$ )</small></label>
+                                        <input type="text" class="form-control" name="desconto" id="valorDeconto">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group text-center">
+                                        <label for="taxaDesconto" class="text-uppercase">Desconto <small class="text-muted">( % )</small></label>
+                                        <input type="text" class="form-control" name="desconto" id="taxaDesconto">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group text-center">
+                                        <label for="dinheiro" class="text-uppercase">Dinheiro</label>
+                                        <input type="text" class="form-control" name="dinheiro" id="dinheiro">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group text-center">
+                                        <label for="cheque" class="text-uppercase">Cheque</label>
+                                        <input type="text" class="form-control" name="cheque" id="cheque">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group text-center">
+                                        <label for="cartaoCredito" class="text-uppercase"><small>Cartão de Crédito</small></label>
+                                        <input type="text" class="form-control" name="cartaoCredito" id="cartaoCredito">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="form-group text-center">
+                                        <label for="cartaoDebito" class="text-uppercase"><small>Cartão de Débito</small></label>
+                                        <input type="text" class="form-control" name="cartaoDebito" id="cartaoDebito">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <div class="text-uppercase">Valor Total</div>
+                                <div style="font-size: 16pt;">
+                                    R$ <span id="spanMediaEstoque">149,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <div class="text-uppercase">Total Recebido</div>
+                                <div style="font-size: 16pt;">
+                                    R$ <span id="spanMediaEstoque">150,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <div class="text-uppercase">Troco</div>
+                                <div style="font-size: 16pt;">
+                                    R$ <span id="spanMediaEstoque">1,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="panel panel-primary card-4">
+                        <div class="panel-heading text-center">
+                            Lista de Produtos
+                        </div>
+                        <div class="table-responsive" id="div-table">
+                            <table class="table table-hover table-striped" id="itens">
+                                <thead>
+                                    <tr class="active">
+                                        <th class="text-center">Nr. Item</th>
+                                        <th>Código</th>
+                                        <th>Descrição</th>
+                                        <th>Qtd.</th>
+                                        <th>Vl. Unitário</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-weight-bold">
+                                    <tr>
+                                        <td class="text-center col-sm-1">1</td>
+                                        <td class="col-sm-2">0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td class="col-sm-1">1</td>
+                                        <td class="col-sm-1">4,50</td>
+                                        <td class="col-sm-1">4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">2</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">4</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">5</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>0124125012051</td>
+                                        <td>Coca Cola 2L</td>
+                                        <td>1</td>
+                                        <td>4,50</td>
+                                        <td>4,50</td>
+                                        <td class="col-sm-1 text-center">
+                                            <a href="#" class="text-danger"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default card-4">
+                        <div class="panel-body">
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-primary btn-lg disabled">Finalizar</button>
+                            </div>
+                            <div class="col-sm-10 text-muted">
+                                <div class="col-sm-12">
+                                    <p><strong>Atalhos</strong></p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <ul class="list-unstyled">
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4">
+                                    <ul class="list-unstyled">
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4">
+                                    <ul class="list-unstyled">
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                        <li>F3 - Excluir Item</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses Venda.
+                        <strong>Deseja mesmo prosseguir?</strong>
+                    </p>
+                    <div class="deleteIds"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-danger btn-outline confirm-delete">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root', 'commons', 'cadastro-pdv']);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

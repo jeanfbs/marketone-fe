@@ -453,3 +453,44 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 .col-no-padding > div > .form-group {
   padding: 5px;
 }
+#div-table {
+  overflow-y: auto;
+  max-height: 340px;
+  display: block;
+}
+.pdv-input {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 10px;
+  font-size: 26px;
+  line-height: 1.42857143;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+}
+.pdv-input:focus {
+  background-color: #005b53;
+  outline: none;
+}
+.pdv-breadcrumb {
+  padding: 5px;
+}
+#search-label {
+  border: none;
+  background-color: #fff;
+  margin-left: -20px;
+  z-index: 1000;
+}
+#select2-busca-produto-results {
+  max-height: 400px;
+}
+.select2-produto {
+  font-size: 30px;
+  color: #00756a;
+}
+.select2-info {
+  font-size: 12px;
+  margin-right: 15px;
+}
