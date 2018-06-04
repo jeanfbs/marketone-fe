@@ -35,7 +35,6 @@ define(['ajax', 'api'], function(Ajax, api){
             // $("#spanCodigoBarra").text(item.codigoBarra);
             // $("#spanCodigoBarra").text(item.codigoBarra);
 
-
             return item.descricao || item.text;
           },
     }
@@ -45,7 +44,6 @@ define(['ajax', 'api'], function(Ajax, api){
 
         $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
         
-
         $("#quantidade").focusout(function(){
 
             var totalItem = parseFloat($("#spanValorUnitario").attr("data-valor-unitario")) * parseInt($("#quantidade").val());

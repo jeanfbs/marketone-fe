@@ -7,6 +7,7 @@
             "vendor/morris.js/morris.min.js",
             "vendor/jquery-knob/dist/jquery.knob.min.js",
             "vendor/select2/dist/js/select2.min.js",
+            "js/i18n/select2_pt_BR.js",
             "vendor/formValidation/dist/js/formValidation.min.js",
             "vendor/formValidation/dist/js/framework/bootstrap.min.js",
             "js/i18n/form_validation_pt_BR.js",
