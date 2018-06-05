@@ -435,13 +435,13 @@ textarea{
   }
 
   .nav-tabs-form>li.active>a, .nav-tabs-form>li.active>a:focus, .nav-tabs-form>li.active>a:hover{
-    background: #fcfcfc;
+    background: darken(@white-base, 1.3%);
   }
   .tab-pane-form{
-    background: #fcfcfc;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    background: darken(@white-base, 1.3%);
+    border-left: 1px solid darken(@white-base, 13.5%);
+    border-right: 1px solid darken(@white-base, 13.5%);
+    border-bottom: 1px solid darken(@white-base, 13.5%);
     padding: 15px;
     margin-bottom: 25px;
   }
@@ -471,7 +471,7 @@ textarea{
     padding: 6px 10px;
     font-size: 26px;
     line-height: 1.42857143;
-    color: #fff;
+    color: @white-base;
     background-color: transparent;
     border: none;
     text-align: center;
@@ -487,7 +487,7 @@ textarea{
 #search-label{
 
   border: none;
-  background-color: #fff;
+  background-color: @white-base;
   margin-left: -20px;
   z-index: 1000;
 }
@@ -515,3 +515,8 @@ textarea{
 // [aria-labelledby=select2-busca-produto-container] > .select2-selection__arrow{
 //   content:"";
 // }
+
+#select2-busca-produto-results > .select2-results__option--highlighted{
+  background-color: #ececec;
+  color: @text-color;
+}

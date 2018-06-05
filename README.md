@@ -20,6 +20,33 @@ UpSale Front-End
 4. Relatorio de vendas por categoria
 
 
+Dicas:
+
+Aumentar o tamanho da foto para 350px
+
+Remover a complexidade da tela, de preferencia os usuarios só usam o teclado
+
+Lembrar que no supermecado existem produto de preço, ou seja no codigo de barras
+tem o codigo e o preço junto
+
+Lembrar que no supermecado existem balanças.
+
+Alterar os dados do produto para debaixo da tabela de itens e colocar os atalhos
+no lado esquerdo abaixo da foto.
+
+Cuidado com os uploads de imagens, geralmente os usuarios não gostam de cadastrar produtos
+surgiu uma ideia de criar uma base compartilhada de produtos porem cuidado com os seguintes pontos:
+ - Um usuario poderá cadastrar um produto falso, com imagem pornografica: por isso se essa for a ideia
+ deverá ser criada uma base temporária para avaliar se o produto vai ser adicionado ou nao.
+ - Existem produtos cujo codigo é proprietario de cada estabelecimento, como batata, onde cada
+   mercado coloca o codigo que quiser, nesse caso os codigos iriam conflitar: para isso sugeresse
+   separar esses produtos por categorias especificas de cada supermecado, assim para produtos dessa categoria
+   não entraria na base compartilhada
+Na busca por produtos geralmente o usuario informa: 2*Arroz Vasconcelos ou 2*015431547(codigo de barras)
+então o input de quantidade não pode existir.
+Tentar importar os produtos pelo arquivo de nota fiscal do fornecedor. Lembre-se também de usar uma descrição
+resumida dos produtos ao gerar o cupom para economizar tinta e papel.
+
 
 
 

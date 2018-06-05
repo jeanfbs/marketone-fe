@@ -12,9 +12,9 @@ define(['ajax', 'api'], function(Ajax, api){
                 "</div>"+
                 "<div class='col-sm-11'>"+
                     "<span class='select2-produto'>"+ response.descricao +"</span><br>"+
-                    "<span class='select2-info text-muted'><strong>Categoria:</strong> "+ response.categoria +"</span>"+
-                    "<span class='select2-info text-muted'><strong>Marca:</strong> "+ response.marca +"</span>"+
-                    "<span class='select2-info text-muted'><strong>Unidade:</strong> "+ response.medida +"</span>"+
+                    "<span class='select2-info'><strong>Categoria:</strong> "+ response.categoria +"</span>"+
+                    "<span class='select2-info'><strong>Marca:</strong> "+ response.marca +"</span>"+
+                    "<span class='select2-info'><strong>Unidade:</strong> "+ response.medida +"</span>"+
                 "</div>"+
             "</div>";
           
