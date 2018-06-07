@@ -96,8 +96,21 @@ define(['ajax', 'api'], function(Ajax, api){
 
     $(function(){
 
+
         $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
-        
+        $("#navbar-theme").addClass("hide");
+
+        $("#hideMenu").on("click", function(){
+            var selected = $(this).hasClass("selected");
+            if(!selected){
+                $(this).addClass("selected");
+                $("#navbar-theme").removeClass("hide").fadeOut(200);
+            }
+            else{
+                $(this).removeClass("selected");
+                $("#navbar-theme").removeClass("hide").fadeIn(200);
+            }
+        });
         $("#quantidade").on("keyup",function(){
             
             var expre = /[^0-9]/g;

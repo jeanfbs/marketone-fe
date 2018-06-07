@@ -13,9 +13,10 @@
 </head>
 
 <body>
-    <!-- <div id="insertHeader"></div> -->
+    <div id="insertHeader"></div>
     <div id="row-breadcrumb" class="pdv-breadcrumb text-center" data-layout-fragment="breadcrumb">
         <span class="pull-left">
+            <a href="#" id="hideMenu" class="selected" style="margin-right:25px;"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <span id="data">Terça, 12 de Janeiro de 2018</span>   <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> <span id="horario">12:41</span>
         </span>
         <span>
@@ -32,7 +33,7 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="input-group form-group-lg">
-                            <select class="form-control" id="busca-produto" autofocus tabindex="-1" accesskey="p" placeholder="Buscar Produto..."></select>
+                        <select class="form-control" id="busca-produto" autofocus tabindex="0" accesskey="p" placeholder="Buscar Produto..."></select>
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-primary btn-lg" id="addItem" data-toggle="tooltip" data-placement="right" title="Adicionar Produto"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
@@ -42,12 +43,6 @@
                 <br>
                 <div class="col-md-4">
                     <div id="dadosProduto" class="">
-                        <div class="panel panel-primary card-4">
-                            <div class="panel-body text-center">
-                                <img id="foto-produto" width="300px">
-                                <input type="hidden" id="produto" />
-                            </div>
-                        </div>
                         <div class="col-sm-6 col-xs-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading text-center">
@@ -245,7 +240,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+    <div class="modal fade" tabindex="2" role="dialog" aria-labelledby="alertModal">
         <div class="modal-dialog " role="document">
             <div class="modal-content">
                 <div class="modal-header">
