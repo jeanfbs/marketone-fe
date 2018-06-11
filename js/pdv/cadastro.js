@@ -111,36 +111,37 @@ define(['ajax', 'api'], function(Ajax, api){
                 $("#navbar-theme").removeClass("hide").fadeIn(200);
             }
         });
-        $("#quantidade").on("keyup",function(){
+        
+        $("#busca-produto").on("keyup", function(e){
             
-            var expre = /[^0-9]/g;
-            if ($(this).val().match(expre))
-                $(this).val($(this).val().replace(expre,''));
-        });
-        $("#quantidade").focusout(function(){
-            var quantidade = parseInt($(this).val());
+            if (e.keyCode == 13) {
+                var inputValue = $(this).val();
+                var codigoBarra = 0;
+
+                if(inputValue.indexOf("*") == 1){
+                    codigoBarra = parseInt(inputValue.split("*")[1]);
+                }else{
+                    codigoBarra = parseInt(inputValue);
+                }
+                
+                var ajaxBuscaProduto = new Ajax.WebClient(api["pdv.pesquisa.produto"] + "?codigoBarra=" + codigoBarra, "GET");
+
+                ajaxBuscaProduto.call().done(function(json){
+                    // vc parou aqui
+                    var item = {};
+                    item.codigoBarra = $("#produto").attr("data-codigo-barra");
+                    item.descricao = $("#produto").attr("data-descricao");
+                    item.quantidade = parseInt($("#produto").attr("data-quantidade"));
+                    item.valorUnitario = parseFloat($("#produto").attr("data-valor-unitario"));
+                    item.valorItem = parseFloat($("#produto").attr("data-total"));
+
+                    $.when(TableItens.addItemToTable(item)).then(TableItens.calculaValorCompra());
+                    TableItens.setTotalItens();
             
-            if(isNaN(quantidade)){
-                quantidade = 1;
-                $(this).val(1);
+                  }).fail(function(err){
+                    alert("erro");
+                  });
             }
-            var totalItem = parseFloat($("#spanValorUnitario").attr("data-valor-unitario")) * quantidade;
-            $("#spanTotalItem").text(totalItem.toLocaleString());
-            $("#produto").attr("data-quantidade", quantidade);
-            $("#produto").attr("data-total", totalItem);
-        });
-
-        $("#addItem").off("click").on("click",function(){
-            
-            var item = {};
-            item.codigoBarra = $("#produto").attr("data-codigo-barra");
-            item.descricao = $("#produto").attr("data-descricao");
-            item.quantidade = parseInt($("#produto").attr("data-quantidade"));
-            item.valorUnitario = parseFloat($("#produto").attr("data-valor-unitario"));
-            item.valorItem = parseFloat($("#produto").attr("data-total"));
-
-            $.when(TableItens.addItemToTable(item)).then(TableItens.calculaValorCompra());
-            TableItens.setTotalItens();
         });
 
 
@@ -157,35 +158,6 @@ define(['ajax', 'api'], function(Ajax, api){
             TableItens.setTotalItens();
         });
 
-        $("#busca-produto").select2({
-            theme: 'bootstrap',
-            ajax: {
-              url: api["pdv.pesquisa.produto"],
-              dataType: 'json',
-              data: function (params) {
-                return {
-                    value: params.term
-                };
-              },
-              processResults: function (data, params) {
-                var select2data = $.map(data, function(obj) {
-                    obj.id = obj.codigoBarra;
-                    obj.text = obj.descricao;
-                    return obj;
-                  });
-
-                return {
-                    results: select2data
-                  };
-              },
-              cache: false
-            },
-            placeholder: 'Buscar Produtos',
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 1,
-            templateResult: BuscaProdutos.formatItem,
-            templateSelection: BuscaProdutos.formatItemSelection
-          });
 
     });
 });
