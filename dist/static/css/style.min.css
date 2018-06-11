@@ -453,11 +453,6 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 .col-no-padding > div > .form-group {
   padding: 5px;
 }
-#div-table {
-  overflow-y: auto;
-  max-height: 340px;
-  display: block;
-}
 .pdv-input {
   display: block;
   width: 100%;

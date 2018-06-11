@@ -1,0 +1,1 @@
+define(function(){return{Registry:function(){function e(){this.keyMapsArray=[]}return e.prototype.add=function(e,n){var o={keyCode:e,callback:n},t=this.keyMapsArray;t.push(o),$(document).off("keyup").on("keyup",function(o){o.stopPropagation(),$.each(t,function(e,n){o.keyCode==n.keyCode&&n.callback()})})},e}(),Shorcut:{F9:120,F10:121,F11:122,F12:123,ENTER:13}}});

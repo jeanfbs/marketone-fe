@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-lg" id="busca-produto" autofocus placeholder="Buscar produto ( F5 )">
+                        <input type="text" class="form-control input-lg" value="2*9788570562975" id="busca-produto" autofocus placeholder="Buscar produto ( F9 )">
                         <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div id="dadosProduto" class="">
                             <div class="panel panel-primary card-4">	
                                 <div class="panel-body text-center">	
-                                    <h2>Arroz Vasconcelos Tipo A 5Kg</h2>
+                                    <h2 id="descricao"></h2>
                                     <input type="hidden" id="produto" />	
                                 </div>	
                             </div>
@@ -53,7 +53,7 @@
                                 <div class="panel-heading text-center">
                                     <div class="text-uppercase">Código</div>
                                     <div style="font-size: 12pt; margin-top: 6px;" >
-                                        <span id="spanCodigoBarra">0124125012051</span>
+                                        <span id="spanCodigoBarra"></span>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <div class="panel-heading text-center">
                                     <div class="text-uppercase">Quantidade</div>
                                     <div style="font-size: 16pt;">
-                                        <span id="spanQuantidade">1</span>
+                                        <span id="spanQuantidade">0</span>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                             Lista de Produtos
                         </div>
                         <div class="table-responsive" id="div-table">
-                            <table class="table table-hover table-striped" id="itens">
+                            <table class="table table-hover " id="itens">
                                 <thead>
                                     <tr class="active">
                                         <th class="text-center">Nr. Item</th>
@@ -190,16 +190,16 @@
                                         <th>Qtd.</th>
                                         <th>Vl. Unitário</th>
                                         <th>Total</th>
-                                        <th>
+                                        <th class="text-center">
                                             <a href="#" class="text-danger" id="clearAll" data-toggle="tooltip" data-placement="right" title="Limpar Itens"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-weight-bold"></tbody>
+                                <tbody></tbody>
                                 <tfoot>
                                     <tr class="text-primary text-weight-bold">
                                         <td colspan="5" class="text-right">Total de Itens</td>
-                                        <td colspan="2" id="totalItens">0</td>
+                                        <td colspan="2">0</td>
                                     </tr>
                                 </tfoot> 
                             </table>
@@ -218,22 +218,16 @@
                                     <ul class="list-unstyled">
                                         <li>F3 - Excluir Item</li>
                                         <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-4">
                                     <ul class="list-unstyled">
                                         <li>F3 - Excluir Item</li>
                                         <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-4">
                                     <ul class="list-unstyled">
-                                        <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
                                         <li>F3 - Excluir Item</li>
                                         <li>F3 - Excluir Item</li>
                                     </ul>

@@ -4,6 +4,7 @@ requirejs.config({
         chart: "modulos/chart",
         ajax: "modulos/ajax",
         api: "modulos/api",
+        keyevent: "modulos/keyevent",
         datatable: "modulos/datatable",
         commons: "modulos/commons",
         root: "root",
