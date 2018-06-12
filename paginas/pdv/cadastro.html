@@ -16,7 +16,7 @@
     <div id="insertHeader"></div>
     <div id="row-breadcrumb" class="pdv-breadcrumb text-center" data-layout-fragment="breadcrumb">
         <span class="pull-left">
-            <a href="#" id="hideMenu" class="selected" style="margin-right:25px;"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" id="hideMenu"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <span id="data">Terça, 12 de Janeiro de 2018</span>   <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> <span id="horario">12:41</span>
         </span>
         <span>
@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control input-lg" value="2*9788570562975" id="busca-produto" autofocus placeholder="Buscar produto ( F9 )">
+                        <input type="text" class="form-control input-lg" value="2*9788570562975" id="buscaProduto" autocomplete="off" autofocus placeholder="Buscar produto ( F6 )">
                         <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -44,8 +44,7 @@
                     <div id="dadosProduto" class="">
                             <div class="panel panel-primary card-4">	
                                 <div class="panel-body text-center">	
-                                    <h2 id="descricao"></h2>
-                                    <input type="hidden" id="produto" />	
+                                    <h2><span id="descricao"></span> <small class="text-muted" id="medida"></small></h2>
                                 </div>	
                             </div>
                         <div class="col-sm-6 col-xs-12">
@@ -176,29 +175,28 @@
                     </div>
                 </div>
                 <div class="col-md-8">
+                    <div class="alert alert-warning card-4 hide" id="messageAlert" role="alert">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Não há itens para serem excluidos 
+                    </div>
                     <div class="panel panel-primary card-4">
                         <div class="panel-heading text-center">
                             Lista de Produtos
                         </div>
-                        <div class="table-responsive" id="div-table">
+                        <div class="table-responsive">
                             <table class="table table-hover " id="itens">
                                 <thead>
                                     <tr class="active">
                                         <th class="text-center">Nr. Item</th>
                                         <th>Código</th>
-                                        <th>Descrição</th>
-                                        <th>Qtd.</th>
+                                        <th class="col-sm-6">Descrição</th>
                                         <th>Vl. Unitário</th>
                                         <th>Total</th>
-                                        <th class="text-center">
-                                            <a href="#" class="text-danger" id="clearAll" data-toggle="tooltip" data-placement="right" title="Limpar Itens"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
                                 <tfoot>
                                     <tr class="text-primary text-weight-bold">
-                                        <td colspan="5" class="text-right">Total de Itens</td>
+                                        <td colspan="3" class="text-right">Total de Itens</td>
                                         <td colspan="2">0</td>
                                     </tr>
                                 </tfoot> 
@@ -208,28 +206,23 @@
                     <div class="panel panel-default card-4">
                         <div class="panel-body">
                             <div class="col-sm-2">
-                                <button type="button" class="btn btn-primary  disabled">Finalizar ( F10 )</button>
+                                <button type="button" class="btn btn-primary  disabled">Finalizar ( F7 )</button>
                             </div>
                             <div class="col-sm-10 text-muted">
                                 <div class="col-sm-12">
                                     <p><strong>Atalhos</strong></p>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <ul class="list-unstyled">
-                                        <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
+                                        <li>F6 - Pesquisar Produto</li>
+                                        <li>F7 - Finalizar Compra</li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <ul class="list-unstyled">
-                                        <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-4">
-                                    <ul class="list-unstyled">
-                                        <li>F3 - Excluir Item</li>
-                                        <li>F3 - Excluir Item</li>
+                                        <li>F8 - Excluir Último Item</li>
+                                        <li>F9 - Excluir Item</li>
+                                        <li>F10 - Cancelar Compra</li>
                                     </ul>
                                 </div>
                             </div>
@@ -241,25 +234,41 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" tabindex="2" role="dialog" aria-labelledby="alertModal">
-        <div class="modal-dialog " role="document">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalRemoveItemByIndex" aria-labelledby="alertModal">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão</h4>
+                    <h4 class="modal-title text-primary" id="alertModal">Remover Item da Compra</h4>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses Venda.
-                        <strong>Deseja mesmo prosseguir?</strong>
-                    </p>
-                    <div class="deleteIds"></div>
+                    <input type="text" class="form-control"  id="numeroItem" placeholder="Número do item"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-danger btn-outline confirm-delete">Sim</button>
+                    <button type="button" class="btn btn-primary" id="btnRemoveItem">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalConfirmacao" aria-labelledby="alertModal">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão de item na compra</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-justify" id="message">
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-primary"  id="btnAccept">Sim</button>
                 </div>
             </div>
         </div>

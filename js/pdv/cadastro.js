@@ -9,6 +9,7 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             item.totalItem = parseFloat(json.valorUnitario) * json.quantidade;
             item.response.valorUnitario = (isNaN(item.response.valorUnitario) ? 0.0 : item.response.valorUnitario);
             $("#descricao").text(json.descricao);
+            $("#medida").text(json.medida);
             $("#spanCodigoBarra").text(json.codigoBarra);
             $("#spanValorUnitario").text(json.valorUnitario.toLocaleString());
             $("#spanQuantidade").text(json.quantidade);
@@ -18,9 +19,70 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
           }
     };
 
+    var ModalRemoveItemByIndex = {
+        selector: $("#modalRemoveItemByIndex"),
+        show: function(){
+            this.selector.modal('show');
+        },
+
+        hide: function(){
+            this.selector.modal('hide');
+        },
+        listenEvent: function(){
+            var _this = this;
+            $("#btnRemoveItem").on("click", function(){
+                _this.confirmed();
+            });
+
+            $("#numeroItem").on("keydown", function(e){
+                if(e.which == KeyEvent.Shorcut.ENTER){
+                    _this.confirmed();
+                }
+            });
+        },
+        confirmed: function(){
+            var numeroItemSelector = $("#numeroItem");
+            var index = numeroItemSelector.val();
+            TableItens.removeItem(index);
+            this.selector.modal('hide');
+            numeroItemSelector.val("");
+        }
+    };
+
+    var ModalConfirmacao = {
+        selector: $("#modalConfirmacao"),
+        show: function(message){
+            var length = $("#itens tbody tr").length;
+            $("#message").text(message);
+            this.selector.modal('show');
+            
+        },
+        hide: function(){
+            this.selector.modal('hide');
+        },
+    
+        // addListenerConfirmButton: function(){
+        //     var _this = this;
+        //     $("#btnRemoveLastItem").on("click", function(){
+        //         _this.confirmed();
+        //     });
+
+        //     this.selector.on("keydown", function(e){
+        //         if(e.which == KeyEvent.Shorcut.ENTER){
+        //             _this.confirmed();
+        //         }
+        //     });
+        // },
+
+        // confirmed: function(){
+        //     ModalRemoveLastItem.hide();
+        //     var length = $("#itens tbody tr").length;
+        //     TableItens.removeItem(length);
+        // }
+    };
+
 
     var TableItens = {
-
         addItemToTable : function(item){
             
             var deferred = $.Deferred();
@@ -30,19 +92,35 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             var row = '<tr data-item='+ jsonWrapper +'>'+
                 '<td class="text-center">'+ index +'</td>'+
                 '<td>'+ item.response.codigoBarra +'</td>'+
-                '<td>'+ item.response.descricao +'</td>'+
-                '<td>'+ item.quantidade +'</td>'+
-                '<td>'+ item.response.valorUnitario+'</td>'+
-                '<td>'+ item.totalItem +'</td>'+
-                '<td class="col-sm-1 text-center">'+
-                    '<a href="#" class="text-danger removeItem" data-toggle="tooltip" data-placement="right" title="Remover Item"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>'+
-                '</td>'+
+                '<td class="col-sm-6">'+ this.formatDescription(item.response.descricao, item.quantidade, item.response.medida) +'</td>'+
+                '<td>R$ '+ item.response.valorUnitario.toLocaleString() +'</td>'+
+                '<td>R$ '+ item.totalItem.toLocaleString() +'</td>'+
             '</tr>';
             $("#itens").append(row);
             var height = parseInt($("#itens tbody").height());
             $(".dataTables_scrollBody").scrollTop(height);
             deferred.resolve();
             return deferred;
+        },
+
+        removeItem: function(index){
+            index--;
+            var length = $("#itens tbody tr").length;
+            if(length == 0){
+                $("#messageAlert").removeClass("hide");
+                setTimeout(function(){
+                    $("#messageAlert").addClass("hide");
+                }, 5000);
+                return false;
+            }
+            $("#itens tbody tr:eq("+ index +")").remove();
+            TableItens.calculaValorCompra();
+            TableItens.reindexItens();
+            TableItens.setTotalItens();
+        },
+        
+        formatDescription: function(descricao, quantidade, medida){
+            return descricao + '&emsp;&emsp;&emsp;&emsp;' + quantidade + ' x ' + medida;
         },
 
         calculaValorCompra: function(){
@@ -69,48 +147,69 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         }
     };
     
+    var teste = function Teste(){
+
+    }
 
     $(function(){
 
 
         $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
         $("#navbar-theme").addClass("hide");
-
+        
         var datatable = $("#itens").DataTable({
             "paging":   false,
             "ordering": false,
             "info":     false,
             "searching": false,
             "scrollY":  '200px',
-            "scrollCollapse": true,
-            'oLanguage': {
-                'sZeroRecords': 'Nenhum produto foi adicionado',
-            }
+            "scrollCollapse": true
         });
         $("#itens tbody").empty();
         $("#hideMenu").on("click", function(){
             var selected = $(this).hasClass("selected");
             if(!selected){
                 $(this).addClass("selected");
-                $("#navbar-theme").removeClass("hide").fadeOut(200);
+                $("#navbar-theme").addClass("hide");
             }
             else{
                 $(this).removeClass("selected");
-                $("#navbar-theme").removeClass("hide").fadeIn(200);
+                $("#navbar-theme").removeClass("hide");
             }
         });
 
         var registry = new KeyEvent.Registry();
+
+        registry.add(KeyEvent.Shorcut.F6, function(){
+            $("#buscaProduto").focus().select();
+        });
+
+        // ModalConfirmacao.addListenerConfirmButton();
+        registry.add(KeyEvent.Shorcut.F8, function(){
+            // vc parou aqui
+            ModalConfirmacao.show("Você irá remover o item 22 da compra, deseja prosseguir?");
+        });
+
+        ModalRemoveItemByIndex.listenEvent();
         registry.add(KeyEvent.Shorcut.F9, function(){
-            $("#busca-produto").focus().select();
+            ModalRemoveItemByIndex.show();
+        });
+
+        $('#modalRemoveItemByIndex').on('shown.bs.modal', function () {
+            $("#numeroItem").focus();
+        });
+
+        registry.add(KeyEvent.Shorcut.F10, function(){
+            $("#itens tbody").empty();
+            TableItens.calculaValorCompra();
+            TableItens.setTotalItens();
         });
 
         
-        $("#busca-produto").on("keyup", function(e){
-            
+        $("#buscaProduto").on("keyup", function(e){
             if (e.keyCode == KeyEvent.Shorcut.ENTER) {
                 var inputValue = $(this).val();
-                $(this).val("");
+                // $(this).val("");
                 var codigoBarra = 0;
                 var quantidade = 1;
 
@@ -134,21 +233,6 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                   });
             }
         });
-
-
-        $(document).off("click", ".removeItem").on("click", ".removeItem",function(){
-            TableItens.calculaValorCompra();
-            $(this).parents("tr").remove();
-            TableItens.reindexItens();
-            TableItens.setTotalItens();
-        });
-
-        $("#clearAll").on("click",function(){
-            $("#itens tbody").empty();
-            TableItens.calculaValorCompra();
-            TableItens.setTotalItens();
-        });
-
 
     });
 });

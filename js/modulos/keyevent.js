@@ -1,6 +1,10 @@
 define(function(){
 
     var Shorcut = {
+        F5: 116,
+        F6: 117,
+        F7: 118,
+        F8: 119,
         F9: 120,
         F10: 121,
         F11: 122,
@@ -25,11 +29,12 @@ define(function(){
             var _keyMapsArray = this.keyMapsArray;
             _keyMapsArray.push(keyMap);
             
-            $(document).off("keyup").on("keyup", function(e){
-                e.stopPropagation();
+            $(document).off("keydown").on("keydown", function(e){
                 $.each(_keyMapsArray, function(i, keyMap){
-                    if(e.keyCode == keyMap.keyCode){
+                    if(e.which == keyMap.keyCode){
+                        e.preventDefault();
                         keyMap.callback();
+
                     }
                 });
             });

@@ -493,3 +493,10 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
   background-color: #ececec;
   color: #333333;
 }
+#itens tbody td {
+  white-space: normal;
+}
+#hideMenu {
+  margin-right: 15px;
+  margin-left: 15px;
+}
