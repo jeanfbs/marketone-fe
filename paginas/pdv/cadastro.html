@@ -16,7 +16,7 @@
     <div id="insertHeader"></div>
     <div id="row-breadcrumb" class="pdv-breadcrumb text-center" data-layout-fragment="breadcrumb">
         <span class="pull-left">
-            <a href="javascript:void(0)" id="hideMenu"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" id="hideMenu" class="selected"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <span id="data">Terça, 12 de Janeiro de 2018</span>   <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> <span id="horario">12:41</span>
         </span>
         <span>
@@ -28,7 +28,7 @@
         </span>
     </div>
     <br>
-    <div class="container">
+    <div class="container" id="content" data-layout-fragment="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12">
@@ -41,7 +41,7 @@
                 <br>
                 
                 <div class="col-md-4">
-                    <div id="dadosProduto" class="">
+                    <div id="dadosProduto">
                             <div class="panel panel-primary card-4">	
                                 <div class="panel-body text-center">	
                                     <h2><span id="descricao"></span> <small class="text-muted" id="medida"></small></h2>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div id="pagamento" class="hide">
-                        <div class="panel panel-default card-4">
+                        <div class="panel panel-primary card-4">
                             <div class="panel-heading text-center">
                                Finalizar Venda
                             </div>
@@ -98,7 +98,8 @@
                                 <div class="col-sm-12 col-xs-12">
                                     <div class="form-group text-center">
                                         <label for="cliente" class="text-uppercase">Cliente</label>
-                                        <select class="pdv-input select2-estados" data-th-field="*{endereco.estado}" data-fv-notempty="true" name="estado">
+                                        <input type="hidden" id="codigoCliente"/>
+                                        <select class="pdv-input" data-th-field="*{endereco.estado}" id="cliente" data-fv-notempty="true" name="estado">
                                             <option data-th-each="estado : ${T(br.com.infinity.upsale.enums.Estados).sortByAsc()}" data-th-value="${estado.name()}" data-th-text="${estado.description}"></option>
                                         </select>
                                     </div>
@@ -144,38 +145,18 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="col-sm-12 col-xs-12">
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary card-4">
                             <div class="panel-heading text-center">
                                 <div class="text-uppercase">Valor Total</div>
-                                <div style="font-size: 16pt;">
+                                <div style="font-size: 30pt;">
                                     R$ <span id="spanValorTotal">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading text-center">
-                                <div class="text-uppercase">Total Recebido</div>
-                                <div style="font-size: 16pt;">
-                                    R$ <span id="spanValorRecebido">150,00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading text-center">
-                                <div class="text-uppercase">Troco</div>
-                                <div style="font-size: 16pt;">
-                                    R$ <span id="spanValorTroco">1,00</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="alert alert-warning card-4 hide" id="messageAlert" role="alert">
+                    <div class="alert alert-warn    ing card-4 hide" id="messageAlert" role="alert">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Não há itens para serem excluidos 
                     </div>
                     <div class="panel panel-primary card-4">
@@ -203,23 +184,40 @@
                             </table>
                         </div>
                     </div>
-                    <div class="panel panel-default card-4">
-                        <div class="panel-body">
-                            <div class="col-sm-2">
-                                <button type="button" class="btn btn-primary  disabled">Finalizar ( F7 )</button>
-                            </div>
-                            <div class="col-sm-10 text-muted">
-                                <div class="col-sm-12">
-                                    <p><strong>Atalhos</strong></p>
+                    <div class="col-sm-4">
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading text-center">
+                                    <div class="text-uppercase">Total Recebido</div>
+                                    <div style="font-size: 16pt;">
+                                        R$ <span id="spanValorRecebido">150,00</span>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading text-center">
+                                    <div class="text-uppercase">Troco</div>
+                                    <div style="font-size: 16pt;">
+                                        R$ <span id="spanValorTroco">1,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="panel panel-default card-4">
+                            <div class="panel-body text-muted">
+                                <div class="col-sm-12">
+                                    <p>
+                                        <strong>Atalhos</strong>
+                                    </p>
+                                </div>
+                                <div class="col-sm-12">
+                                    <ul class="list-unstyled" style="font-size: 10pt;">
                                         <li>F6 - Pesquisar Produto</li>
                                         <li>F7 - Finalizar Compra</li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled">
                                         <li>F8 - Excluir Último Item</li>
                                         <li>F9 - Excluir Item</li>
                                         <li>F10 - Cancelar Compra</li>
@@ -231,44 +229,24 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalRemoveItemByIndex" aria-labelledby="alertModal">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title text-primary" id="alertModal">Remover Item da Compra</h4>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control"  id="numeroItem" placeholder="Número do item"/>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-primary" id="btnRemoveItem">Sim</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalConfirmacao" aria-labelledby="alertModal">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão de item na compra</h4>
-                </div>
-                <div class="modal-body">
-                    <p class="text-justify" id="message">
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-primary"  id="btnAccept">Sim</button>
+        <!-- Modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="modalRemoveItemByIndex" aria-labelledby="alertModal">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title text-primary" id="alertModal">Remover Item da Compra</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control"  id="numeroItem" placeholder="Número do item"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                        <button type="button" class="btn btn-primary" id="btnRemoveItem">Sim</button>
+                    </div>
                 </div>
             </div>
         </div>

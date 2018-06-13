@@ -49,38 +49,68 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         }
     };
 
-    var ModalConfirmacao = {
-        selector: $("#modalConfirmacao"),
-        show: function(message){
-            var length = $("#itens tbody tr").length;
-            $("#message").text(message);
-            this.selector.modal('show');
+    var ModalConfirmacao = (function(){
+
+        var name = null;
+        var button = null;
+
+        function ModalConfirmacao(name, callback){
+            this.name = name;
+            this.button = name + 'BtnAccept';
+            buildModal(name, this.button);
+        }
+
+        var buildModal = function _buildModal(name, button){
+            var innerHTML = '<div class="modal fade" tabindex="-1" role="dialog" id="'+ name +'" aria-labelledby="alertModal">'+
+            '        <div class="modal-dialog modal-md" role="document">'+
+            '            <div class="modal-content">'+
+            '                <div class="modal-header">'+
+            '                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+            '                        <span aria-hidden="true">×</span>'+
+            '                    </button>'+
+            '                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão de item na compra</h4>'+
+            '                </div>'+
+            '                <div class="modal-body">'+
+            '                    <p class="text-justify message">'+
+            '                    </p>'+
+            '                </div>'+
+            '                <div class="modal-footer">'+
+            '                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>'+
+            '                    <button type="button" class="btn btn-primary"  id="'+ button +'">Sim</button>'+
+            '                </div>'+
+            '            </div>'+
+            '        </div>'+
+            '    </div>';
             
-        },
-        hide: function(){
-            this.selector.modal('hide');
-        },
+            $("#content").append(innerHTML);
+        };
+
+        ModalConfirmacao.prototype.listenAccept = function _listenAccept(callback){
+            
+            $("#" + this.button).on("click", function(){
+                callback();
+            });
+
+            $("#" + this.name).on("keydown", function(e){
+                if(e.which == KeyEvent.Shorcut.ENTER){
+                    callback();
+                }
+            });
+        };
+
+        ModalConfirmacao.prototype.show = function _show(message){
+            var length = $("#itens tbody tr").length;
+            $("#" + this.name).find(".message").text(message);
+            $("#" + this.name).modal('show');
+        };
+
+        ModalConfirmacao.prototype.hide = function _hide(){
+            $("#" + this.name).modal('hide');
+        };
+
+        return ModalConfirmacao;
+    })();
     
-        // addListenerConfirmButton: function(){
-        //     var _this = this;
-        //     $("#btnRemoveLastItem").on("click", function(){
-        //         _this.confirmed();
-        //     });
-
-        //     this.selector.on("keydown", function(e){
-        //         if(e.which == KeyEvent.Shorcut.ENTER){
-        //             _this.confirmed();
-        //         }
-        //     });
-        // },
-
-        // confirmed: function(){
-        //     ModalRemoveLastItem.hide();
-        //     var length = $("#itens tbody tr").length;
-        //     TableItens.removeItem(length);
-        // }
-    };
-
 
     var TableItens = {
         addItemToTable : function(item){
@@ -146,10 +176,6 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $(".dataTables_scrollFootInner").find("td[colspan=2]").text(parseInt($("#itens tbody tr").length));
         }
     };
-    
-    var teste = function Teste(){
-
-    }
 
     $(function(){
 
@@ -162,7 +188,7 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             "ordering": false,
             "info":     false,
             "searching": false,
-            "scrollY":  '200px',
+            "scrollY":  '175px',
             "scrollCollapse": true
         });
         $("#itens tbody").empty();
@@ -184,10 +210,35 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $("#buscaProduto").focus().select();
         });
 
-        // ModalConfirmacao.addListenerConfirmButton();
+
+        registry.add(KeyEvent.Shorcut.F7, function(){
+            
+            
+            var dadosProduto = $("#dadosProduto");
+            var pagamento = $("#pagamento");
+
+            if(!dadosProduto.hasClass("hide")){
+                dadosProduto.addClass("hide");
+                pagamento.removeClass("hide");
+                $("#cliente").focus();
+                $("#buscaProduto").prop("disabled", true);
+            }else{
+                dadosProduto.removeClass("hide");
+                pagamento.addClass("hide");
+                $("#buscaProduto").prop("disabled", false);
+            }
+        });
+
+        var removeIndexModal = new ModalConfirmacao("removeIndexModal");
+        removeIndexModal.listenAccept(function(){
+            removeIndexModal.hide();
+            var length = $("#itens tbody tr").length;
+            TableItens.removeItem(length);
+        });
+
         registry.add(KeyEvent.Shorcut.F8, function(){
-            // vc parou aqui
-            ModalConfirmacao.show("Você irá remover o item 22 da compra, deseja prosseguir?");
+            var lastItem = $("#itens tbody tr").length;
+            removeIndexModal.show("Você irá remover o item "+ lastItem +" da compra, deseja prosseguir?");   
         });
 
         ModalRemoveItemByIndex.listenEvent();
@@ -199,10 +250,16 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $("#numeroItem").focus();
         });
 
-        registry.add(KeyEvent.Shorcut.F10, function(){
+        var cancelItemsModal = new ModalConfirmacao("cancelItemsModal");
+        cancelItemsModal.listenAccept(function(){
             $("#itens tbody").empty();
             TableItens.calculaValorCompra();
             TableItens.setTotalItens();
+            cancelItemsModal.hide();
+        });
+
+        registry.add(KeyEvent.Shorcut.F10, function(){
+            cancelItemsModal.show("Você irá cancelar todos os itens da compra, deseja prosseguir?");
         });
 
         
@@ -233,6 +290,52 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                   });
             }
         });
+
+        BuscaCliente = {
+
+            formatItem : function (response) {
+                if (response.loading) {
+                    return response.text;
+                }
+                return response.nome;
+              },
+    
+              formatItemSelection : function (item) {
+                $("#codigoCliente").val(item.cpfCnpj);
+                return item.nome || item.text;
+              },
+    
+        };
+
+        $("#cliente").select2({
+            theme: 'bootstrap',
+            ajax: {
+              url: api["pdv.pesquisa.cliente"],
+              dataType: 'json',
+              data: function (params) {
+                return {
+                    value: params.term
+                };
+              },
+              processResults: function (data, params) {
+                var select2data = $.map(data, function(obj) {
+                    obj.id = obj.cpfCnpj;
+                    obj.text = obj.nome;
+                    return obj;
+                  });
+
+                return {
+                    results: select2data
+                  };
+              },
+              cache: false
+            },
+            placeholder: 'Buscar Clientes',
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: BuscaCliente.formatItem,
+            templateSelection: BuscaCliente.formatItemSelection
+          });
 
     });
 });

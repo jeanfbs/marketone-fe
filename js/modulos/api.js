@@ -1,6 +1,6 @@
 define(function(){
     
-    var baseUrl = "http://localhost:3003/api/";
+    var baseUrl = "http://172.21.198.6:3003/api/";
     var api = {
         "vendas.atual.dinheiro": baseUrl + "knob1",
         "vendas.atual.credito": baseUrl + "knob2",
@@ -26,6 +26,8 @@ define(function(){
         "vendas.pesquisa": baseUrl + "buscarVendas",
 
         "pdv.pesquisa.produto": baseUrl + "buscaPDV",
+
+        "pdv.pesquisa.cliente": baseUrl + "clientePDV",
         
     };
 
