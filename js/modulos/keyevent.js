@@ -1,7 +1,7 @@
 define(function(){
 
     var Shorcut = {
-        F5: 116,
+        F2: 113,
         F6: 117,
         F7: 118,
         F8: 119,
@@ -9,7 +9,8 @@ define(function(){
         F10: 121,
         F11: 122,
         F12: 123,
-        ENTER: 13
+        ENTER: 13,
+        S: 83
     };
 
     var Registry = (function(){

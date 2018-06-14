@@ -119,25 +119,25 @@
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group text-center">
                                         <label for="dinheiro" class="text-uppercase">Dinheiro</label>
-                                        <input type="text" class="form-control" name="dinheiro" id="dinheiro">
+                                        <input type="text" class="form-control cash" name="dinheiro" id="dinheiro">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group text-center">
                                         <label for="cheque" class="text-uppercase">Cheque</label>
-                                        <input type="text" class="form-control" name="cheque" id="cheque">
+                                        <input type="text" class="form-control cash" name="cheque" id="cheque">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group text-center">
                                         <label for="cartaoCredito" class="text-uppercase"><small>Cartão de Crédito</small></label>
-                                        <input type="text" class="form-control" name="cartaoCredito" id="cartaoCredito">
+                                        <input type="text" class="form-control cash" name="cartaoCredito" id="cartaoCredito">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="form-group text-center">
                                         <label for="cartaoDebito" class="text-uppercase"><small>Cartão de Débito</small></label>
-                                        <input type="text" class="form-control" name="cartaoDebito" id="cartaoDebito">
+                                        <input type="text" class="form-control cash" name="cartaoDebito" id="cartaoDebito">
                                     </div>
                                 </div>
                             </div>
@@ -156,8 +156,8 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="alert alert-warn    ing card-4 hide" id="messageAlert" role="alert">
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Não há itens para serem excluidos 
+                    <div class="alert alert-warning card-4 hide" id="alert" role="alert">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <span id="alertMessage"></span> 
                     </div>
                     <div class="panel panel-primary card-4">
                         <div class="panel-heading text-center">
@@ -214,10 +214,15 @@
                                         <strong>Atalhos</strong>
                                     </p>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <ul class="list-unstyled" style="font-size: 10pt;">
-                                        <li>F6 - Pesquisar Produto</li>
-                                        <li>F7 - Finalizar Compra</li>
+                                        <li>F2 - Pesquisar Produto</li>
+                                        <li>F6 - Finalizar Compra</li>
+                                        <li>F7 - Pagamento</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled" style="font-size: 10pt;">
                                         <li>F8 - Excluir Último Item</li>
                                         <li>F9 - Excluir Item</li>
                                         <li>F10 - Cancelar Compra</li>
@@ -241,11 +246,11 @@
                         <h4 class="modal-title text-primary" id="alertModal">Remover Item da Compra</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="text" class="form-control"  id="numeroItem" placeholder="Número do item"/>
+                        <select class="form-control"  id="numeroItem" placeholder="Número do item"></select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-                        <button type="button" class="btn btn-primary" id="btnRemoveItem">Sim</button>
+                        <button type="button" class="btn btn-primary" accesskey="s" id="btnRemoveItem">Sim</button>
                     </div>
                 </div>
             </div>

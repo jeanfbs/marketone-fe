@@ -22,6 +22,10 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
     var ModalRemoveItemByIndex = {
         selector: $("#modalRemoveItemByIndex"),
         show: function(){
+            $("#numeroItem").empty();
+            $("#itens tbody tr").each(function(i, o){
+                $("#numeroItem").append($("<option></option>").val(i).text(i + 1));
+            });
             this.selector.modal('show');
         },
 
@@ -35,17 +39,18 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             });
 
             $("#numeroItem").on("keydown", function(e){
-                if(e.which == KeyEvent.Shorcut.ENTER){
+                // digitar S para a opcao SIM
+                if(e.which == KeyEvent.Shorcut.S){
                     _this.confirmed();
                 }
             });
         },
         confirmed: function(){
-            var numeroItemSelector = $("#numeroItem");
-            var index = numeroItemSelector.val();
+            var selector = $("#numeroItem");
+            var index = selector.find("option:selected").val();
             TableItens.removeItem(index);
             this.selector.modal('hide');
-            numeroItemSelector.val("");
+            selector.val("");
         }
     };
 
@@ -134,13 +139,9 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         },
 
         removeItem: function(index){
-            index--;
             var length = $("#itens tbody tr").length;
             if(length == 0){
-                $("#messageAlert").removeClass("hide");
-                setTimeout(function(){
-                    $("#messageAlert").addClass("hide");
-                }, 5000);
+                Alert.print("Não há itens para serem excluidos");
                 return false;
             }
             $("#itens tbody tr:eq("+ index +")").remove();
@@ -160,7 +161,7 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                 var item = JSON.parse(atob($(row).attr("data-item")));
                 valorTotal += item.totalItem;
             });
-            $("#spanValorTotal").text(valorTotal.toLocaleString());
+            $("#spanValorTotal").text(valorTotal.toLocaleString()).attr("data-total-compra", valorTotal);
 
         },
 
@@ -176,6 +177,53 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $(".dataTables_scrollFootInner").find("td[colspan=2]").text(parseInt($("#itens tbody tr").length));
         }
     };
+
+    var Alert = {
+        print: function(message){
+            var selector = $("#alert");
+            selector.find("#alertMessage").text(message);
+            selector.removeClass("hide");
+            setTimeout(function(){
+                selector.addClass("hide");
+            }, 5000);
+        }
+    };
+
+    var BuscaCliente = {
+
+        formatItem : function (response) {
+            if (response.loading) {
+                return response.text;
+            }
+            return response.nome;
+          },
+
+          formatItemSelection : function (item) {
+            $("#codigoCliente").val(item.cpfCnpj);
+            return item.nome || item.text;
+          },
+
+    };
+
+    var Pagamento = {
+
+        calculaValorTroco: function(){
+            var recebido = 0.0;
+            $(".cash").each(function(i, el){
+                recebido += isNaN($(this).val()) || $(this).val() == "" ? 0.0 : parseFloat($(this).val());
+            });
+            var total = parseFloat($("#spanValorTotal").attr("data-total-compra"));
+            var troco = recebido - total;
+            $("#spanValorRecebido").text(recebido.toLocaleString()).attr("data-valor-recebido",recebido);
+            $("#spanValorTroco").text(troco.toLocaleString()).attr("data-valor-troco", troco);
+        },
+
+        estaAtivo: function(){
+            return $("#pagamento").attr("data-ativo") === 'true';
+        }
+
+    };
+
 
     $(function(){
 
@@ -206,8 +254,12 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
 
         var registry = new KeyEvent.Registry();
 
-        registry.add(KeyEvent.Shorcut.F6, function(){
+        registry.add(KeyEvent.Shorcut.F2, function(){
             $("#buscaProduto").focus().select();
+        });
+
+        registry.add(KeyEvent.Shorcut.F6, function(){
+            alert("FInalizar Compra?");
         });
 
 
@@ -219,12 +271,12 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
 
             if(!dadosProduto.hasClass("hide")){
                 dadosProduto.addClass("hide");
-                pagamento.removeClass("hide");
+                pagamento.removeClass("hide").attr("data-ativo", true);
                 $("#cliente").focus();
                 $("#buscaProduto").prop("disabled", true);
             }else{
                 dadosProduto.removeClass("hide");
-                pagamento.addClass("hide");
+                pagamento.addClass("hide").attr("data-ativo", false);
                 $("#buscaProduto").prop("disabled", false);
             }
         });
@@ -237,12 +289,20 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         });
 
         registry.add(KeyEvent.Shorcut.F8, function(){
+            if(Pagamento.estaAtivo()){
+                Alert.print("Não é possivel remover itens durante o processo de pagamento.");
+                return false;
+            }
             var lastItem = $("#itens tbody tr").length;
             removeIndexModal.show("Você irá remover o item "+ lastItem +" da compra, deseja prosseguir?");   
         });
 
         ModalRemoveItemByIndex.listenEvent();
         registry.add(KeyEvent.Shorcut.F9, function(){
+            if(Pagamento.estaAtivo()){
+                Alert.print("Não é possivel remover itens durante o processo de pagamento.");
+                return false;
+            }
             ModalRemoveItemByIndex.show();
         });
 
@@ -255,6 +315,14 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $("#itens tbody").empty();
             TableItens.calculaValorCompra();
             TableItens.setTotalItens();
+            $("#pagamento input").each(function(){
+                $(this).val("");
+            });
+            $("#spanValorRecebido").text(0).attr("data-valor-recebido",0);
+            $("#spanValorTroco").text(0).attr("data-valor-troco", 0);
+            $("#dadosProduto").removeClass("hide");
+            $("#pagamento").addClass("hide");
+            $("#buscaProduto").prop("disabled", false);
             cancelItemsModal.hide();
         });
 
@@ -291,22 +359,6 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             }
         });
 
-        BuscaCliente = {
-
-            formatItem : function (response) {
-                if (response.loading) {
-                    return response.text;
-                }
-                return response.nome;
-              },
-    
-              formatItemSelection : function (item) {
-                $("#codigoCliente").val(item.cpfCnpj);
-                return item.nome || item.text;
-              },
-    
-        };
-
         $("#cliente").select2({
             theme: 'bootstrap',
             ajax: {
@@ -335,6 +387,13 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             minimumInputLength: 1,
             templateResult: BuscaCliente.formatItem,
             templateSelection: BuscaCliente.formatItemSelection
+          });
+
+
+          $(".cash").focusout(function(){
+
+            Pagamento.calculaValorTroco();
+
           });
 
     });
