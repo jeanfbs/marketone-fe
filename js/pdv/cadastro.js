@@ -1,5 +1,7 @@
 define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
 
+    var formato = { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' };
+
     var BuscaProdutos = {
           process : function (json) {
             
@@ -11,9 +13,9 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $("#descricao").text(json.descricao);
             $("#medida").text(json.medida);
             $("#spanCodigoBarra").text(json.codigoBarra);
-            $("#spanValorUnitario").text(json.valorUnitario.toLocaleString());
+            $("#spanValorUnitario").text(json.valorUnitario.toLocaleString('pt-BR', formato));
             $("#spanQuantidade").text(json.quantidade);
-            $("#spanTotalItem").text(item.totalItem.toLocaleString());
+            $("#spanTotalItem").text(item.totalItem.toLocaleString('pt-BR', formato));
 
             return item;
           }
@@ -48,7 +50,7 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         confirmed: function(){
             var selector = $("#numeroItem");
             var index = selector.find("option:selected").val();
-            TableItens.removeItem(index);
+            TabelaItens.removeItem(index);
             this.selector.modal('hide');
             selector.val("");
         }
@@ -117,7 +119,7 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
     })();
     
 
-    var TableItens = {
+    var TabelaItens = {
         addItemToTable : function(item){
             
             var deferred = $.Deferred();
@@ -128,8 +130,8 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                 '<td class="text-center">'+ index +'</td>'+
                 '<td>'+ item.response.codigoBarra +'</td>'+
                 '<td class="col-sm-6">'+ this.formatDescription(item.response.descricao, item.quantidade, item.response.medida) +'</td>'+
-                '<td>R$ '+ item.response.valorUnitario.toLocaleString() +'</td>'+
-                '<td>R$ '+ item.totalItem.toLocaleString() +'</td>'+
+                '<td>'+ item.response.valorUnitario.toLocaleString('pt-BR', formato) +'</td>'+
+                '<td>'+ item.totalItem.toLocaleString('pt-BR', formato) +'</td>'+
             '</tr>';
             $("#itens").append(row);
             var height = parseInt($("#itens tbody").height());
@@ -145,9 +147,9 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                 return false;
             }
             $("#itens tbody tr:eq("+ index +")").remove();
-            TableItens.calculaValorCompra();
-            TableItens.reindexItens();
-            TableItens.setTotalItens();
+            TabelaItens.calculaValorCompra();
+            TabelaItens.reindexItens();
+            TabelaItens.setTotalItens();
         },
         
         formatDescription: function(descricao, quantidade, medida){
@@ -161,10 +163,19 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                 var item = JSON.parse(atob($(row).attr("data-item")));
                 valorTotal += item.totalItem;
             });
-            $("#spanValorTotal").text(valorTotal.toLocaleString()).attr("data-total-compra", valorTotal);
+            $("#spanValorTotal").text(valorTotal.toLocaleString('pt-BR', formato)).attr("data-valor-total", valorTotal);
 
         },
 
+        getItens: function(){
+            var itens = [];
+            $("#itens tbody tr").each(function(i, row){
+                var item = JSON.parse(atob($(row).attr("data-item")));
+                itens.push(item);
+            });
+
+            return itens;
+        },
         reindexItens: function(){
             var count = 1;
             $("#itens tbody tr").each(function(i, row){
@@ -212,21 +223,101 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $(".cash").each(function(i, el){
                 recebido += isNaN($(this).val()) || $(this).val() == "" ? 0.0 : parseFloat($(this).val());
             });
-            var total = parseFloat($("#spanValorTotal").attr("data-total-compra"));
+            var total = parseFloat($("#spanValorTotal").attr("data-valor-total"));
+            var valorDesconto = 0;
+
+            if($("#valorDeconto").val() != ""){
+                valorDesconto = parseFloat($("#valorDeconto").val());
+            }else if($("#taxaDesconto").val() != ""){
+                valorDesconto = (parseFloat($("#taxaDesconto").val()) / 100) * total;
+            }
+            
+            total -= valorDesconto;
+            $("#spanValorTotal").text(total.toLocaleString('pt-BR', formato)).attr("data-valor-desconto", valorDesconto);
+            
             var troco = recebido - total;
-            $("#spanValorRecebido").text(recebido.toLocaleString()).attr("data-valor-recebido",recebido);
-            $("#spanValorTroco").text(troco.toLocaleString()).attr("data-valor-troco", troco);
+            var spanValorRecebido = $("#spanValorRecebido");
+            var spanValorTroco = $("#spanValorTroco");
+
+            if(troco < 0){
+                Pagamento.Erro.print("O valor recebido não é suficiente para completar o pagamento.");
+                recebido = 0;
+                troco = 0;
+            }else{
+                Pagamento.Erro.clear();
+            }
+            spanValorRecebido.text(recebido.toLocaleString('pt-BR', formato)).attr("data-valor-recebido",recebido);
+            spanValorTroco.text(troco.toLocaleString('pt-BR', formato)).attr("data-valor-troco", troco);
         },
 
         estaAtivo: function(){
             return $("#pagamento").attr("data-ativo") === 'true';
+        },
+
+        setValoresCompra: function(compra){
+            if($("#spanValorTotal").attr("data-valor-total") != "" && !isNaN(parseFloat($("#spanValorTotal").attr("data-valor-total")))){
+                compra.valorTotal = parseFloat($("#spanValorTotal").attr("data-valor-total"));
+                if($("#spanValorTotal").attr("data-valor-desconto") != "" && !isNaN(parseFloat($("#spanValorTotal").attr("data-valor-desconto")))){
+                    compra.desconto = parseFloat($("#spanValorTotal").attr("data-valor-desconto"));
+                }
+            }
+            if($("#spanValorRecebido").attr("data-valor-recebido") != "" && !isNaN(parseFloat($("#spanValorRecebido").attr("data-valor-recebido")))){
+                compra.valorRecebido = parseFloat($("#spanValorRecebido").attr("data-valor-recebido"));
+            }
+            if($("#spanValorTroco").attr("data-valor-troco") != "" && !isNaN(parseFloat($("#spanValorTroco").attr("data-valor-troco")))){
+                compra.valorTroco = parseFloat($("#spanValorTroco").attr("data-valor-troco"));
+            }
+        },
+
+        setValoresPagamento: function(compra){
+            
+            if($("#dinheiro").val() != "" && !isNaN(parseFloat($("#dinheiro").val()))){
+                compra.pagamento.dinheiro = parseFloat($("#dinheiro").val());
+            }
+            if($("#cheque").val() != "" && !isNaN(parseFloat($("#cheque").val()))){
+                compra.pagamento.cheque = parseFloat($("#cheque").val());
+            }
+            if($("#cartaoDebito").val() != "" && !isNaN(parseFloat($("#cartaoDebito").val()))){
+                compra.pagamento.debito = parseFloat($("#cartaoDebito").val());
+            }
+            if($("#cartaoCredito").val() != "" && !isNaN(parseFloat($("#cartaoCredito").val()))){
+                compra.pagamento.credito = parseFloat($("#cartaoCredito").val());
+            }
+        },
+
+        setItensCompra: function(compra){
+            compra.itens = TabelaItens.getItens();
+        },
+        Erro: {
+
+            print: function(message){
+                $("#erroPagamentoMessage").text(message);
+                $("#erroPagamento").removeClass("hide");
+            },
+            clear: function(){
+                $("#erroPagamentoMessage").text("");
+                $("#erroPagamento").addClass("hide");
+            } 
         }
 
     };
 
 
-    $(function(){
+    var ProgressBar = {
+        init: function(){
+           return setInterval(this.addProgress, 150);
+        },
+        addProgress: function(){
+            var selector = $(".progress-bar");
+            var width = selector.width() + 50;
+            selector.width(width);
+        },
+        stopProgress: function(loop){
+            clearInterval(loop);
+        }
+    };
 
+    $(function(){
 
         $("#insertHeader").load("../../fragmentos/menu-navegacao.html");
         $("#navbar-theme").addClass("hide");
@@ -258,14 +349,37 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             $("#buscaProduto").focus().select();
         });
 
+
         registry.add(KeyEvent.Shorcut.F6, function(){
-            alert("FInalizar Compra?");
+            
+            $("#progressoFecharCompra").modal("show");
+            var compra = {};
+            Pagamento.setValoresCompra(compra);
+            
+            compra.pagamento = {};
+            Pagamento.setValoresPagamento(compra);
+
+            compra.itens = {};
+            Pagamento.setItensCompra(compra);
+            
+            var loop = ProgressBar.init();
+
+            setTimeout(function(){
+                ProgressBar.stopProgress(loop);
+            },2000);
+
+            compra.caixa = parseInt($("#caixa").attr("data-id-caixa"));
+            compra.timestamp = new Date().getTime();
+            // a chamada ajax vai aqui
         });
 
 
         registry.add(KeyEvent.Shorcut.F7, function(){
             
-            
+            if(TabelaItens.getItens().length == 0){
+                Alert.print("Nenhum item foi adicionado na compra.");
+                return false;
+            }
             var dadosProduto = $("#dadosProduto");
             var pagamento = $("#pagamento");
 
@@ -283,9 +397,9 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
 
         var removeIndexModal = new ModalConfirmacao("removeIndexModal");
         removeIndexModal.listenAccept(function(){
+            var length = $("#itens tbody tr").length - 1;
+            TabelaItens.removeItem(length);
             removeIndexModal.hide();
-            var length = $("#itens tbody tr").length;
-            TableItens.removeItem(length);
         });
 
         registry.add(KeyEvent.Shorcut.F8, function(){
@@ -306,15 +420,15 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             ModalRemoveItemByIndex.show();
         });
 
-        $('#modalRemoveItemByIndex').on('shown.bs.modal', function () {
+        $('#modalRemoveItemByIndex').on('shown.bs.modal', function(){
             $("#numeroItem").focus();
         });
 
         var cancelItemsModal = new ModalConfirmacao("cancelItemsModal");
         cancelItemsModal.listenAccept(function(){
             $("#itens tbody").empty();
-            TableItens.calculaValorCompra();
-            TableItens.setTotalItens();
+            TabelaItens.calculaValorCompra();
+            TabelaItens.setTotalItens();
             $("#pagamento input").each(function(){
                 $(this).val("");
             });
@@ -327,6 +441,10 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         });
 
         registry.add(KeyEvent.Shorcut.F10, function(){
+            if(TabelaItens.getItens().length == 0){
+                Alert.print("Nenhum item foi adicionado na compra.");
+                return false;
+            }
             cancelItemsModal.show("Você irá cancelar todos os itens da compra, deseja prosseguir?");
         });
 
@@ -350,8 +468,8 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                 ajaxBuscaProduto.call().done(function(json){
                     json[0].quantidade = quantidade;
                     var item = BuscaProdutos.process(json[0]);
-                    $.when(TableItens.addItemToTable(item)).then(TableItens.calculaValorCompra());
-                    TableItens.setTotalItens();
+                    $.when(TabelaItens.addItemToTable(item)).then(TabelaItens.calculaValorCompra());
+                    TabelaItens.setTotalItens();
             
                   }).fail(function(err){
                     alert("erro");
@@ -361,6 +479,7 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
 
         $("#cliente").select2({
             theme: 'bootstrap',
+            allowClear: true,
             ajax: {
               url: api["pdv.pesquisa.cliente"],
               dataType: 'json',
@@ -389,11 +508,24 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             templateSelection: BuscaCliente.formatItemSelection
           });
 
+          $(".cash").on("keyup", function(){
+                Pagamento.calculaValorTroco();
+          });
 
-          $(".cash").focusout(function(){
+          $(".desconto").on("keyup", function(){
 
-            Pagamento.calculaValorTroco();
-
+                var id = $(this).attr("id");
+                
+                $(".desconto").prop("disabled", false);
+                if($(this).val() != ""){
+                    if(id == "valorDeconto"){
+                        $("#taxaDesconto").prop("disabled", true);
+                    }
+                    else{
+                        $("#valorDeconto").prop("disabled", true);
+                    }
+                }
+                Pagamento.calculaValorTroco();
           });
 
     });

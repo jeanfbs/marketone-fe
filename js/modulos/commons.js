@@ -166,7 +166,7 @@ define(['ajax'],function(Ajax){
 
     $.fn.extend({
         validate: function(){
-            $(this).formValidation({
+            return $(this).formValidation({
                 framework: 'bootstrap',
                 icon: {
                     valid: '',
