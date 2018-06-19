@@ -6,8 +6,8 @@
             <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
         </button>
         <a class="navbar-brand" data-th-href="@{/cpanel/dashboard}" href="/templates/paginas/dashboard.html">
-            <span id="black-brand">Up</span>
-            <span id="light-brand">Sale</span>
+            <span id="light-brand">Market</span>
+            <span id="black-brand">One</span>
             <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
         </a>
     </div>
@@ -24,8 +24,23 @@
             <li>
                 <a data-th-href="@{/cpanel/fornecedores/}" href="/templates/paginas/fornecedores/pesquisa.html"><i class="fa fa-truck fa-fw" aria-hidden="true"></i> Fornecedores</a>
             </li>
-            <li>
-                <a data-th-href="@{/cpanel/vendas/}" href="/templates/paginas/vendas/pesquisa.html"><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Vendas</a>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Vendas
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-th-href="@{/cpanel/vendas/}" href="/templates/paginas/vendas/pesquisa.html"><i class="fa fa-search fa-fw" aria-hidden="true"></i> Consulta</a>
+                    </li>
+                    <li>
+                        <a data-th-href="@{/cpanel/vendas/analise}" href="/templates/paginas/vendas/analise.html">
+                        <i class="fa fa-line-chart fa-fw" aria-hidden="true"></i> Análise</a>
+                    </li>
+                    <li>
+                        <a data-th-href="@{/cpanel/vendas/relatorios}" href="/templates/paginas/vendas/relatorios.html">
+                        <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i> Relatórios</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a data-th-href="@{/cpanel/pdv/}" href="/templates/paginas/pdv/cadastro.html">PDV</a>

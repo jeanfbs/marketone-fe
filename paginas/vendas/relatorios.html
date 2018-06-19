@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Relatórios de Vendas</title>
+
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
+        <ol class="breadcrumb container">
+            <li>
+                <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
+                    <i class="fa fa-home fa-fw" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Home"></i>
+                </a>
+            </li>
+            <li class="active">Relatórios</li>
+        </ol>
+    </div>
+    <div class="container" data-layout-fragment="content">
+        <div class="row">
+            <div class="panel panel-primary card-4">
+                <div class="panel-heading">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i> Relatórios
+                    <a data-th-href="@{/docs#vendas}" href="/templates/paginas/doc/manual-usuario.html#vendas" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-no-padding">
+                            <div class="col-md-12">
+                                <label>Data</label>
+                            </div>
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" name="dataInicial"  id="dataInicial" placeholder="Data Inicial"/>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">	
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" name="dataFinal"  id="dataFinal" placeholder="Data Final"/>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-4">
+                            <button class="btn btn-primary" style="margin-top:30px;" type="button" id="btn-search"><i class="fa fa-search fa-fw" aria-hidden="true"></i> Pesquisar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item-report col-sm-12">
+            
+                <a class="btn btn-primary btn-lg item-link" href="#" role="button">
+                    <i class="fa fa-download fa-fw" aria-hidden="true"></i>
+                </a>
+                <span class="item-description text-primary">Relatório Resumido</span>
+            </div>
+            <div class="item-report col-sm-12">
+                <a class="btn btn-primary btn-lg item-link" href="#" role="button">
+                    <i class="fa fa-download fa-fw" aria-hidden="true"></i>
+                </a>
+                <span class="item-description text-primary">Relatório Detalhado</span>
+            </div>
+            <div class="item-report col-sm-12">
+                <a class="btn btn-primary btn-lg item-link" href="#" role="button">
+                    <i class="fa fa-download fa-fw" aria-hidden="true"></i>
+                </a>
+                <span class="item-description text-primary">Relatorios de Vendas Canceladas</span>
+            </div>
+            <div class="item-report col-sm-12">
+                <a class="btn btn-primary btn-lg item-link" href="#" role="button">
+                    <i class="fa fa-download fa-fw" aria-hidden="true"></i>
+                </a>
+                <span class="item-description text-primary">Relatorios de Vendas por Caixa</span>
+            </div>
+            <div class="item-report col-sm-12">
+                <a class="btn btn-primary btn-lg item-link" href="#" role="button">
+                    <i class="fa fa-download fa-fw" aria-hidden="true"></i>
+                </a>
+                <span class="item-description text-primary">Relatorios de Vendas por Caixa</span>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root', 'analise-vendas']);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

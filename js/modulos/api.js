@@ -24,6 +24,7 @@ define(function(){
         "fornecedores.deletar": baseUrl + "deletarFornecedor",
 
         "vendas.pesquisa": baseUrl + "buscarVendas",
+        "vendas.analise": baseUrl + "vendasPeriodo",
 
         "pdv.pesquisa.produto": baseUrl + "buscaPDV",
 

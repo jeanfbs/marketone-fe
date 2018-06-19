@@ -22,7 +22,6 @@ UpSale Front-End
 
 Dicas:
 
-Aumentar o tamanho da foto para 350px
 
 Remover a complexidade da tela, de preferencia os usuarios só usam o teclado
 
@@ -31,8 +30,6 @@ tem o codigo e o preço junto
 
 Lembrar que no supermecado existem balanças.
 
-Alterar os dados do produto para debaixo da tabela de itens e colocar os atalhos
-no lado esquerdo abaixo da foto.
 
 Cuidado com os uploads de imagens, geralmente os usuarios não gostam de cadastrar produtos
 surgiu uma ideia de criar uma base compartilhada de produtos porem cuidado com os seguintes pontos:
@@ -106,12 +103,25 @@ Precisa permitir que seja possivel dar desconto
 
 
 
+Vendas
+
+O fluxo de uma venda se inicia no modulo PDV, o caixa precisa estar aberto e configurado para
+um atendente.
+
+O usuario poderá pesquisar uma venda na tela de consulta utilizando os filtros: Data, Valor, Status,
+Tipo de Pagamento, Cliente, Desconto, Nr Nota Fiscal, Produtos.
+
+Nessa tela também será possivel realizar um cancelamento de venda com devolução.
+
+Resumo
+Relatorios de Vendas Realizadas
+Relatorios de Vendas Canceladas
+Relatorios de Vendas por Caixa
+
 
 
 
 observacoes importantes
-
-
 Corrigir o menu superio, para destacar apenas a pagina atual com base na url,
 como a chamada dos links esta sendo feita via html tem que ser alterado no root
 para ativar o link correto com base na rota quando integrar com o spring.

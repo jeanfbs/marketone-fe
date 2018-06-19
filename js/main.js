@@ -23,9 +23,9 @@ requirejs.config({
         "pesquisa-fornecedores": "fornecedores/pesquisa",
         "detalhes-fornecedores": "fornecedores/detalhes",
 
-        "cadastro-vendas": "vendas/cadastro",
+        "analise-vendas": "vendas/analise",
         "pesquisa-vendas": "vendas/pesquisa",
-        "detalhes-vendas": "vendas/detalhes",
+        
 
 
         "cadastro-pdv": "pdv/cadastro",

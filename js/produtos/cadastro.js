@@ -109,7 +109,5 @@ define(['ajax', 'api'], function(Ajax, api){
                 return split[0];
             }
         });
-
-        $(".photo").fileUpload();
     });
 });
