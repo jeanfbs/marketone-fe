@@ -130,27 +130,150 @@
     "vendasPeriodo": [  
         {  
            "x":"02/06",
-           "total":1254
+           "dinheiro":1254,
+           "credito":55.21,
+           "debito":100,
+           "total":1409.21
         },
         {  
            "x":"03/06",
-           "total":152.54
+           "dinheiro":152.54,
+           "credito":125,
+           "debito":205,
+           "total":482.53999999999996
         },
         {  
            "x":"04/06",
-           "total":50
+           "dinheiro":50,
+           "credito":454,
+           "debito":2120,
+           "total":2624
         },
         {  
            "x":"05/06",
-           "total":3678.12
+           "dinheiro":3678.12,
+           "credito":3342.67,
+           "debito":490,
+           "total":7510.79
         },
         {  
            "x":"08/06",
-           "total":242
+           "dinheiro":242,
+           "credito":2817,
+           "debito":809,
+           "total":3868
         },
         {  
            "x":"09/06",
-           "total":1544.65
+           "dinheiro":1544.65,
+           "credito":89,
+           "debito":550.66,
+           "total":2184.31
+        },
+        {  
+           "x":"10/06",
+           "dinheiro":100,
+           "credito":1209,
+           "debito":2779,
+           "total":4088
+        },
+        {  
+           "x":"02/06",
+           "dinheiro":1254,
+           "credito":55.21,
+           "debito":100,
+           "total":1409.21
+        },
+        {  
+           "x":"03/06",
+           "dinheiro":152.54,
+           "credito":125,
+           "debito":205,
+           "total":482.53999999999996
+        },
+        {  
+           "x":"04/06",
+           "dinheiro":50,
+           "credito":454,
+           "debito":2120,
+           "total":2624
+        },
+        {  
+           "x":"05/06",
+           "dinheiro":3678.12,
+           "credito":3342.67,
+           "debito":490,
+           "total":7510.79
+        },
+        {  
+           "x":"08/06",
+           "dinheiro":242,
+           "credito":2817,
+           "debito":809,
+           "total":3868
+        },
+        {  
+           "x":"09/06",
+           "dinheiro":1544.65,
+           "credito":89,
+           "debito":550.66,
+           "total":2184.31
+        },
+        {  
+           "x":"10/06",
+           "dinheiro":100,
+           "credito":1209,
+           "debito":2779,
+           "total":4088
+        },
+        {  
+           "x":"02/06",
+           "dinheiro":1254,
+           "credito":55.21,
+           "debito":100,
+           "total":1409.21
+        },
+        {  
+           "x":"03/06",
+           "dinheiro":152.54,
+           "credito":125,
+           "debito":205,
+           "total":482.53999999999996
+        },
+        {  
+           "x":"04/06",
+           "dinheiro":50,
+           "credito":454,
+           "debito":2120,
+           "total":2624
+        },
+        {  
+           "x":"05/06",
+           "dinheiro":3678.12,
+           "credito":3342.67,
+           "debito":490,
+           "total":7510.79
+        },
+        {  
+           "x":"08/06",
+           "dinheiro":242,
+           "credito":2817,
+           "debito":809,
+           "total":3868
+        },
+        {  
+           "x":"09/06",
+           "dinheiro":1544.65,
+           "credito":89,
+           "debito":550.66,
+           "total":2184.31
+        },
+        {  
+           "x":"10/06",
+           "dinheiro":100,
+           "credito":1209,
+           "debito":2779,
+           "total":4088
         }
      ]
 }

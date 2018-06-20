@@ -233,6 +233,14 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             }
             
             total -= valorDesconto;
+            if(total < 0){
+                Pagamento.Erro.print("O valor de desconto ultrapassou o valor total da compra.");
+                Pagamento.invalidar();
+                return false;
+            }else{
+                Pagamento.Erro.clear();
+                Pagamento.validar();
+            }
             $("#spanValorTotal").text(total.toLocaleString('pt-BR', formato)).attr("data-valor-desconto", valorDesconto);
             
             var troco = recebido - total;
@@ -240,11 +248,13 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             var spanValorTroco = $("#spanValorTroco");
 
             if(troco < 0){
-                Pagamento.Erro.print("O valor recebido não é suficiente para completar o pagamento.");
+                this.Erro.print("O valor recebido não é suficiente para completar o pagamento.");
                 recebido = 0;
                 troco = 0;
+                this.invalidar();
             }else{
-                Pagamento.Erro.clear();
+                this.Erro.clear();
+                this.validar();
             }
             spanValorRecebido.text(recebido.toLocaleString('pt-BR', formato)).attr("data-valor-recebido",recebido);
             spanValorTroco.text(troco.toLocaleString('pt-BR', formato)).attr("data-valor-troco", troco);
@@ -253,35 +263,66 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         estaAtivo: function(){
             return $("#pagamento").attr("data-ativo") === 'true';
         },
+        estaValido: function(){
+            return $("#pagamentoForm").attr("data-valid") === 'true';
+        },
+        invalidar: function(){
+            $("#pagamentoForm").attr("data-valid", false);
+        },
+        validar: function(){
+            $("#pagamentoForm").attr("data-valid", true);
+        },
+        trocaPagamentoDiv: function(status){
+            
+            var dadosProduto = $("#dadosProduto");
+            var pagamento = $("#pagamento");
+            var buscaProduto = $("#buscaProduto");
 
+            if(!dadosProduto.hasClass("hide")){
+                dadosProduto.addClass("hide");
+                pagamento.removeClass("hide").attr("data-ativo", true);
+                $("#cliente").focus();
+                buscaProduto.prop("disabled", true);
+            }else{
+                dadosProduto.removeClass("hide");
+                pagamento.addClass("hide").attr("data-ativo", false);
+                buscaProduto.prop("disabled", false);
+            }
+        },
         setValoresCompra: function(compra){
-            if($("#spanValorTotal").attr("data-valor-total") != "" && !isNaN(parseFloat($("#spanValorTotal").attr("data-valor-total")))){
-                compra.valorTotal = parseFloat($("#spanValorTotal").attr("data-valor-total"));
-                if($("#spanValorTotal").attr("data-valor-desconto") != "" && !isNaN(parseFloat($("#spanValorTotal").attr("data-valor-desconto")))){
-                    compra.desconto = parseFloat($("#spanValorTotal").attr("data-valor-desconto"));
+            var spanValorTotal = $("#spanValorTotal");
+            if(spanValorTotal.attr("data-valor-total") != "" && !isNaN(parseFloat(spanValorTotal.attr("data-valor-total")))){
+                compra.valorTotal = parseFloat(spanValorTotal.attr("data-valor-total"));
+                if(spanValorTotal.attr("data-valor-desconto") != "" && !isNaN(parseFloat(spanValorTotal.attr("data-valor-desconto")))){
+                    compra.desconto = parseFloat(spanValorTotal.attr("data-valor-desconto"));
                 }
             }
-            if($("#spanValorRecebido").attr("data-valor-recebido") != "" && !isNaN(parseFloat($("#spanValorRecebido").attr("data-valor-recebido")))){
-                compra.valorRecebido = parseFloat($("#spanValorRecebido").attr("data-valor-recebido"));
+
+            var spanValorRecebido = $("#spanValorRecebido");
+            if(spanValorRecebido.attr("data-valor-recebido") != "" && !isNaN(parseFloat(spanValorRecebido.attr("data-valor-recebido")))){
+                compra.valorRecebido = parseFloat(spanValorRecebido.attr("data-valor-recebido"));
             }
-            if($("#spanValorTroco").attr("data-valor-troco") != "" && !isNaN(parseFloat($("#spanValorTroco").attr("data-valor-troco")))){
-                compra.valorTroco = parseFloat($("#spanValorTroco").attr("data-valor-troco"));
+
+            var spanValorTroco = $("#spanValorTroco");
+            if(spanValorTroco.attr("data-valor-troco") != "" && !isNaN(parseFloat(spanValorTroco.attr("data-valor-troco")))){
+                compra.valorTroco = parseFloat(spanValorTroco.attr("data-valor-troco"));
             }
         },
 
         setValoresPagamento: function(compra){
-            
-            if($("#dinheiro").val() != "" && !isNaN(parseFloat($("#dinheiro").val()))){
-                compra.pagamento.dinheiro = parseFloat($("#dinheiro").val());
+            var dinheiro = $("#dinheiro");
+            if(dinheiro.val() != "" && !isNaN(parseFloat(dinheiro.val()))){
+                compra.pagamento.dinheiro = parseFloat(dinheiro.val());
             }
-            if($("#cheque").val() != "" && !isNaN(parseFloat($("#cheque").val()))){
-                compra.pagamento.cheque = parseFloat($("#cheque").val());
+
+            var debito = $("#cartaoDebito");
+            if(debito.val() != "" && !isNaN(parseFloat(debito.val()))){
+                compra.pagamento.debito = parseFloat(debito.val());
             }
-            if($("#cartaoDebito").val() != "" && !isNaN(parseFloat($("#cartaoDebito").val()))){
-                compra.pagamento.debito = parseFloat($("#cartaoDebito").val());
-            }
-            if($("#cartaoCredito").val() != "" && !isNaN(parseFloat($("#cartaoCredito").val()))){
-                compra.pagamento.credito = parseFloat($("#cartaoCredito").val());
+
+            var credito = $("#cartaoCredito");
+            if(credito.val() != "" && !isNaN(parseFloat(credito.val()))){
+                compra.pagamento.credito = parseFloat(credito.val());
             }
         },
 
@@ -302,6 +343,33 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
 
     };
 
+    var Compra = {
+        limparDados: function(){
+            $("#itens tbody").empty();
+            $("#pagamentoForm input").each(function(){
+                $(this).val("");
+            });
+            $("#cliente").val(null).trigger('change');
+            $("#descricao").text("CAIXA LIVRE");
+            
+
+            var elements = [
+                $("#medida"),
+                $("#spanCodigoBarra"), 
+                $("#spanValorUnitario"), 
+                $("#spanQuantidade"),
+                $("#spanTotalItem"),
+                $("#spanValorTotal"),
+                $("#spanValorRecebido"),
+                $("#spanValorTroco")
+            ];
+
+            $.each(elements, function(i, el){
+                $(this).text("");
+            });
+        }
+    };
+
 
     var ProgressBar = {
         init: function(){
@@ -314,8 +382,11 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         },
         stopProgress: function(loop){
             clearInterval(loop);
+            $(".progress-bar").width(1);
         }
     };
+
+   
 
     $(function(){
 
@@ -333,13 +404,14 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         $("#itens tbody").empty();
         $("#hideMenu").on("click", function(){
             var selected = $(this).hasClass("selected");
+            var navbarTheme = $("#navbar-theme");
             if(!selected){
                 $(this).addClass("selected");
-                $("#navbar-theme").addClass("hide");
+                navbarTheme.addClass("hide");
             }
             else{
                 $(this).removeClass("selected");
-                $("#navbar-theme").removeClass("hide");
+                navbarTheme.removeClass("hide");
             }
         });
 
@@ -352,7 +424,11 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
 
         registry.add(KeyEvent.Shorcut.F6, function(){
             
-            $("#progressoFecharCompra").modal("show");
+            if(!Pagamento.estaValido()){
+                Alert.print("Os dados do pagamento estão inválidos.");
+                return false;
+            }
+            var fecharCompraModal = $("#progressoFecharCompra").modal("show");
             var compra = {};
             Pagamento.setValoresCompra(compra);
             
@@ -365,12 +441,19 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             var loop = ProgressBar.init();
 
             setTimeout(function(){
-                ProgressBar.stopProgress(loop);
+               
+                $.when( ProgressBar.stopProgress(loop)).then(function(){
+                    fecharCompraModal.modal("hide");
+                    Pagamento.trocaPagamentoDiv(false);
+                    Compra.limparDados();
+                });
             },2000);
 
             compra.caixa = parseInt($("#caixa").attr("data-id-caixa"));
             compra.timestamp = new Date().getTime();
             // a chamada ajax vai aqui
+
+            
         });
 
 
@@ -380,19 +463,8 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
                 Alert.print("Nenhum item foi adicionado na compra.");
                 return false;
             }
-            var dadosProduto = $("#dadosProduto");
-            var pagamento = $("#pagamento");
-
-            if(!dadosProduto.hasClass("hide")){
-                dadosProduto.addClass("hide");
-                pagamento.removeClass("hide").attr("data-ativo", true);
-                $("#cliente").focus();
-                $("#buscaProduto").prop("disabled", true);
-            }else{
-                dadosProduto.removeClass("hide");
-                pagamento.addClass("hide").attr("data-ativo", false);
-                $("#buscaProduto").prop("disabled", false);
-            }
+            Pagamento.trocaPagamentoDiv(!$("#dadosProduto").hasClass("hide"));
+            
         });
 
         var removeIndexModal = new ModalConfirmacao("removeIndexModal");
@@ -452,6 +524,7 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
         $("#buscaProduto").on("keyup", function(e){
             if (e.keyCode == KeyEvent.Shorcut.ENTER) {
                 var inputValue = $(this).val();
+                // TODO remover esse comentario apos terminar os testes
                 // $(this).val("");
                 var codigoBarra = 0;
                 var quantidade = 1;
@@ -508,14 +581,13 @@ define(['ajax', 'keyevent', 'api'], function(Ajax, KeyEvent, api){
             templateSelection: BuscaCliente.formatItemSelection
           });
 
-          $(".cash").on("keyup", function(){
+          $(".cash").on("keyup change", function(){
                 Pagamento.calculaValorTroco();
           });
 
-          $(".desconto").on("keyup", function(){
-
+          $(".desconto").on("keyup change", function(){
                 var id = $(this).attr("id");
-                
+                    
                 $(".desconto").prop("disabled", false);
                 if($(this).val() != ""){
                     if(id == "valorDeconto"){

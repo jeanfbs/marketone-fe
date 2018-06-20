@@ -3,11 +3,7 @@ define(['chart', 'ajax', 'api'], function(Chart, Ajax, api){
 
   $("#insertHeader").load("../fragmentos/menu-navegacao.html");
     
-    var COLORS = {
-      barColors: ["#009688", "#004D40", "#80CBC4","#00BFA5" ],
-      donutColors: ["#009688", "#004D40", "#80CBC4"]
-    };
-
+    
     var Utils = {
       getFormParameters: function _getFormParameters(form){
         var formParams = {};
@@ -66,7 +62,7 @@ define(['chart', 'ajax', 'api'], function(Chart, Ajax, api){
       
 
       ajaxDonutAcumuloMes.call().done(function(data){
-        donutVendasAtuais = new Chart.Donut('donut-vendas-atuais', data, COLORS.donutColors);
+        donutVendasAtuais = new Chart.Donut('donut-vendas-atuais', data, Chart.COLORS.donutColors);
       }).fail(function(err){
         donutVendasAtuais = new Chart.Donut('donut-vendas-atuais');
       }).always(function(){
@@ -78,7 +74,7 @@ define(['chart', 'ajax', 'api'], function(Chart, Ajax, api){
       
       ajaxBarSemanal.call().done(function(data){
         chartBarVendasSemanal = new Chart.BarChart("vendas-semanal", data, {
-          barColors: COLORS.barColors.slice(0, 3),
+          barColors: Chart.COLORS.barColors.slice(0, 3),
           labels: ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito'],
   
         });
@@ -93,7 +89,7 @@ define(['chart', 'ajax', 'api'], function(Chart, Ajax, api){
       
       ajaxBarMensal.call().done(function(data){
         chartBarVendasMensal = new Chart.BarChart("vendas-mensal", data, {
-          barColors: COLORS.barColors,
+          barColors: Chart.COLORS.barColors,
           labels: ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito','Total'],
   
         });
@@ -109,7 +105,7 @@ define(['chart', 'ajax', 'api'], function(Chart, Ajax, api){
       
       ajaxBarEstoqueAnual.call().done(function(data){
         chartBarEstoqueAnual = new Chart.BarChart("estoque-anual", data, {
-          barColors: COLORS.barColors,
+          barColors: Chart.COLORS.barColors,
           labels: ['Entradas', 'Saidas', 'Saldo Final','Total do Estoque'],
         });
       }).fail(function(err){
@@ -186,7 +182,7 @@ define(['chart', 'ajax', 'api'], function(Chart, Ajax, api){
 
       ajaxLineMensal.call().done(function(data){
         chartLineFaturamentoMensal = new Chart.LineChart("faturamento-mensal", data, {
-          lineColors: COLORS.barColors.slice(0, 2),
+          lineColors: Chart.COLORS.barColors.slice(0, 2),
           labels: ['Faturamento', 'Lucro Líquido'],
   
         });

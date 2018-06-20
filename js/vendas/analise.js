@@ -9,8 +9,8 @@ define(['chart', 'ajax', 'api'], function(Chart, Ajax, api){
       
 		ajaxVolumePeriodo.call().done(function(data){
 			chartBarVolumePeriodo = new Chart.BarChart("vendasPeriodo", data, {
-			barColors: ["#009688"],
-			labels: ['Total']
+			barColors: Chart.COLORS.barColors,
+			labels: ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito', 'Total'],
 			});
 		}).fail(function(err){
 			chartBarVolumePeriodo = new Chart.BarChart("vendasPeriodo");

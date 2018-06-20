@@ -1,5 +1,12 @@
 define(function(){
 
+    var COLORS = (function(){
+
+      return {
+        barColors: ["#009688", "#004D40", "#80CBC4","#00BFA5" ],
+        donutColors: ["#009688", "#004D40", "#80CBC4"]
+      };
+    })();
 
     var BarChart = (function(){
         
@@ -435,7 +442,8 @@ define(function(){
       BarChart: BarChart,
       Knob: Knob,
       Donut: Donut,
-      LineChart: LineChart
+      LineChart: LineChart,
+      COLORS: COLORS
     };
     
 });

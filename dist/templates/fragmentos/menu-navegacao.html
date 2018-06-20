@@ -43,19 +43,57 @@
                 </ul>
             </li>
             <li>
-                <a data-th-href="@{/cpanel/pdv/}" href="/templates/paginas/pdv/cadastro.html">PDV</a>
+                <a data-th-href="@{/cpanel/pdv/}" href="/templates/paginas/pdv/cadastro.html">
+                    <i class="fa fa-desktop fa-fw" aria-hidden="true"></i> PDV
+                </a>
             </li>
-            <li>
-                <a href="/#"><i class="fa fa-hdd-o fa-fw" aria-hidden="true"></i> Caixa</a>
+            <li class="hidden-xs hidden-sm">
+                <a data-th-href="@{/cpanel/caixa/}" href="/templates/paginas/caixa/cadastro.html"><i class="fa fa-hdd-o fa-fw" aria-hidden="true"></i> Caixa</a>
             </li>
-            <li>
-                <a href="/#">Contabilidade</a>
+            <li class="hidden-xs hidden-sm">
+                <a data-th-href="@{/cpanel/financeiro/}" href="/templates/paginas/financeiro/cadastro.html"><i class="fa fa-calculator fa-fw" aria-hidden="true"></i> Financeiro</a>
             </li>
-            <li class="dropdown">
+            <li class="dropdown hidden-xs hidden-sm">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-cog fa-fw" aria-hidden="true"></i> Sistema
                 </a>
                 <ul class="dropdown-menu">
+                    <li>
+                        <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">
+                            <i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuários</a>
+                    </li>
+                    <li>
+                        <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">
+                            <i class="fa fa-database fa-fw" aria-hidden="true"></i> Auditoria</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown hidden-md hidden-lg">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Mais <i class="fa fa-caret-down fa-fw" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">Caixa</li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users fa-fw" aria-hidden="true"></i> Opcao1</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users fa-fw" aria-hidden="true"></i> Opcao2</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Financeiro</li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users fa-fw" aria-hidden="true"></i> Opcao1</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users fa-fw" aria-hidden="true"></i> Opcao2</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Sistema</li>
                     <li>
                         <a data-th-href="@{/cpanel/usuarios/}" href="/templates/paginas/usuarios/pesquisa.html">
                             <i class="fa fa-users fa-fw" aria-hidden="true"></i> Usuários</a>
