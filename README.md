@@ -68,27 +68,59 @@ endereço, numero, bairro, cidade, estado, pais
 
 
 Caixa
+Controle de caixa: Tela responsavel por visualizar, criar, remover
+configurar um caixa. 
 
-O caixa precisa ter um atendente que possa realizar as movimentações de caixa
-O caixa possui alguns status: Aberto, Fechado. Só é possivel realizar uma venda com o caixa aberto.
+Nas configuracoes de um caixa, o usuario podera adicionar quais os tipos de pagamento
+que o caixa aceita: exemplo, caixa 1 so aceita pagamento em dinheiro, caixa 2 dinheiro, cartao
+
+Na Tela dos caixas devera permitir que se consulte todas as movimentacoes que o caixa teve com
+base no fechamento especifico, ou seja, selecionara o fechamento do caixa e visualizara os 
+detalhes das moviementacoes daquele fechamento.
+
+Assim devera ter uma tela de consulta de fechamento do caixa, filtrando pelo numero do caixa,
+responsavel, e periodo. A consulta deve retornar todos os fechamentos correspondentes.
+
+Ao clicar em um fechamento deverá ser visualizado as movimentacoes daquele fechamento com
+o codigo da venda para navegar ate os itens da venda.
+
 O caixa possui a seguintes informações:
+    ID,
+    tipo de pagamento[dinheiro, cartao]
+    status,
+
+
+Fechamento de caixa
+    ID do caixa,
+    responsavel,
     Saldo inicial da operação
     Totais das Entradas
         Dinheiro
-        Cheque
         Cartão de Credito
         Cartão de Debito
-        Total
-    TOtal das Saidas
+    Total das Saidas
         Dinheiro
-        Cheque
-        Total
     Saldo final do caixa em Dinheiro
+    Data de abertura,
+    Data de Fechamento
+
+Movimentacao de Caixa
+    ID do caixa,
+    data e horario,
+    Totais das Entradas
+        Dinheiro
+        Cartão de Credito
+        Cartão de Debito
+    Valor de Saida
+    Tipo de Operacao(Venda, Sangria)
+
 O caixa deve possuir o historico dos ultimos fechamentos e quem era o responsavel
+
+O caixa precisa ter um atendente que possa realizar as movimentações de caixa
+O caixa possui alguns status: Aberto, Fechado. Só é possivel realizar uma venda com o caixa aberto.
 Deve ser possivel imprimir o relatorio das movimentações realizadas até o momento e o atual resumo do caixa
 Deve ser posivel imprimir relatorios de fechamentos de outros caixas
-A operação de sangria de caixa deve ser associado a um caixa com status em aberto, dessa forma o valor feito pela sangria
-deverá ser contabilizado no fechamento do caixa.
+A operação de sangria de caixa deve ser associado a um caixa com status em aberto, dessa forma o valor feito pela sangria deverá ser contabilizado no fechamento do caixa.
 
 
 Movimentações

@@ -29,6 +29,8 @@ define(function(){
         "pdv.pesquisa.produto": baseUrl + "buscaPDV",
 
         "pdv.pesquisa.cliente": baseUrl + "clientePDV",
+
+        "fechamentos.pesquisa": baseUrl + "buscarFechamentos",
         
     };
 

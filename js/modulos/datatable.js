@@ -121,6 +121,10 @@ define(function(){
             
         };
 
+        Table.prototype.getDT = function(){
+            return this.dataTable;
+        };
+
         return Table;
     })();
 

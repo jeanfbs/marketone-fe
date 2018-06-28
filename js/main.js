@@ -25,9 +25,9 @@ requirejs.config({
 
         "analise-vendas": "vendas/analise",
         "pesquisa-vendas": "vendas/pesquisa",
-        
-
 
         "cadastro-pdv": "pdv/cadastro",
+
+        "pesquisa-caixa": "caixa/pesquisa",
     },
 });
