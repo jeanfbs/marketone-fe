@@ -28,6 +28,7 @@ requirejs.config({
 
         "cadastro-pdv": "pdv/cadastro",
 
+        "cadastro-caixa": "caixa/cadastro",
         "pesquisa-caixa": "caixa/pesquisa",
     },
 });

@@ -63,7 +63,7 @@ define(['datatable', 'api'], function(datatable, api){
 			if ( row.child.isShown() ) {
 				$(this).find(".plus").removeClass("hide");
 				$(this).find(".minus").addClass("hide");
-				tr.removeClass("selected");
+				tr.removeClass("selected text-primary text-weight-bold");
 				row.child.hide();
 	
 				// Remove from the 'open' array
@@ -72,7 +72,7 @@ define(['datatable', 'api'], function(datatable, api){
 			else {
 				$(this).find(".plus").addClass("hide");
 				$(this).find(".minus").removeClass("hide");
-				tr.addClass("selected");
+				tr.addClass("selected text-primary text-weight-bold");
 				row.child( format( row.data() ) ).show();
 	
 				// Add to the 'open' array

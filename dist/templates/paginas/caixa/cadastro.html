@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cadastro de Caixa</title>
+
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
+        <ol class="breadcrumb container">
+            <li>
+                <a data-th-href="@{/cpanel/dashboard}"  href="/templates/">
+                    <i class="fa fa-home fa-fw" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Home"></i>
+                </a>
+            </li>
+            <li><a data-th-href="@{/cpanel/caixa/}" href="/templates/paginas/caixa/pesquisa.html">Caixa</a></li>
+            <li class="active">Cadastro</li>
+        </ol>
+    </div>
+    <div class="container" data-layout-fragment="content">
+        <div class="row">
+            <div class="panel panel-primary card-4">
+                <div class="panel-heading">
+                    <i class="fa fa-check" aria-hidden="true"></i> Cadastro de Caixa
+                    <a data-th-href="@{/docs#caixa}" href="/templates/paginas/doc/manual-usuario.html#caixa" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-2">
+                        <img src="../../../static/img/cashier.png" class="img-responsive text-center img-cashier" data-th-src="@{${img/cahsier.png}}" />
+                        <h3>Novo Caixa</h3>
+                    </div>
+                    <div class="col-sm-8">
+                            <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success"
+                            role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                            <strong>
+                                <span data-th-if="${responseVo.erro}">
+                                    <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
+                                    <span data-th-text="${responseVo.tipoErro}"></span>
+                                </span>
+                                <span data-th-if="${not responseVo.erro}">
+                                    <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
+                                </span>
+                            </strong>
+                            &nbsp;&nbsp;
+                            <span data-th-text="${responseVo.mensagem}"></span>
+                        </div>
+                        <form class="form-horizontal" enctype="multipart/form-data" action="#" data-th-action="@{~/cpanel/caixa/cadastro/}" id="caixaForm" data-th-object="${caixa}" method="post">
+                            <p class="text-muted"><i class="fa fa-caret-right fa-fw" aria-hidden="true"></i> Dados do Caixa</p>
+                            <div class="form-group">
+                                <label for="nome" class="col-sm-3 control-label">* Nome do Terminal</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="nome" autofocus maxlength="10" minlength="3" data-th-field="*{nome}" data-fv-notempty="true"  placeholder="TRM001" name="nome" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="marca" class="col-sm-3 control-label">* Tipos de Pagamento</label>
+                                <div class="col-sm-9">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="credito" disabled checked value="DINHEIRO"> Dinheiro
+                                    </label>
+                                    <br>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="credito" value="CREDITO"> Cartão de Crédito
+                                    </label>
+                                    <br>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="debito" value="DEBITO"> Cartão de Débito
+                                    </label>
+                                    <br>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="ticket" value="TICKET"> Ticket
+                                    </label>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check fa-fw" aria-hidden="true"></i> Salvar</button>
+                                    <button type="button" onClick="window.location.reload()" class="btn btn-default"><i class="fa fa-undo fa-fw" aria-hidden="true"></i> Limpar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de exclusão</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desabilitar permanentemente esses caixa.
+                        <strong>Deseja mesmo prosseguir?</strong>
+                    </p>
+                    <div class="deleteIds"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-danger btn-outline confirm-delete">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root', 'commons', 'cadastro-caixa']);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

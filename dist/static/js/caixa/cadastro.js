@@ -1,0 +1,1 @@
+define(["ajax","api"],function(a,e){$(function(){$("#insertHeader").load("../../fragmentos/menu-navegacao.html"),$("#caixaForm").validate()})});
