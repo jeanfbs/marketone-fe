@@ -1,9 +1,52 @@
-# upsale-front
-UpSale Front-End
+# marketone-fe
+MarketOne Front-End
+
+## Getting started
+
+Pre-requisites
+- Node JS 6.10+
+- bower ^1.8.4,
+- browser-sync ^2.23.6
+- gulp ^3.9.1
+- gulp-clean ^0.4.0
+- gulp-clean-css ^3.9.3
+- gulp-concat ^2.6.1
+- gulp-jshint ^2.1.0
+- gulp-json-srv ^1.2.0
+- gulp-less ^4.0.0
+- gulp-rename ^1.2.2
+- gulp-replace ^0.6.1
+- gulp-requirejs-optimize ^1.3.0
+- gulp-uglify ^3.0.0
+- jshint ^2.9.5
+- map-stream 0.0.7
+- run-sequence ^2.2.1 
+
+## Installation
+
+        $ npm install
+        $ bower install
+        $ gulp recompileBootstrap   # recompila o template do bootstrap, execute apenas um unica vez
+
+## Running 
+        $ gulp start-mock   # inicia o json-server para os mocks de chamada ajax
+        $ gulp serve        # inicia a aplicação no node
 
 
-### Regras
+### Json-Server (diretorio /mock-server)
+* A task start-mock simula um servidor back-end de retorno json, para simular as chamadas ajax
+feita no prototipo. Por isso se não estiver iniciado todos os dados mocados da aplicação irão dar 
+erro.
 
+* Cada arquivo do diretorio /mock-server representa a chamada  mocada de uma feature da aplicação
+exemplo:
+    - Arquivo: caixa.json 
+    - Endpoint: http://localhost:3003/api/buscarFechamentos
+
+[Documentação do Json-Server](https://github.com/typicode/json-server/blob/master/README.md)
+
+
+### Business Rules
 1. Valor liquido de vendas
 
 2. Modulo financeiro, 
