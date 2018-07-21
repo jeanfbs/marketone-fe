@@ -45,8 +45,15 @@ exemplo:
 
 [Documentação do Json-Server](https://github.com/typicode/json-server/blob/master/README.md)
 
+## Requisitos não funcionais
+* Cobertura de 90% de testes unitários
+* Usar de boas praticas de programação como:
+nome de variaveis explicativas, metodos pequenos, reaproveitamento de codigo,
+design patterns, proteção contra ataque XSS.
+* Documentação sempre atualizada
 
-### Business Rules
+
+## Business Rules
 1. Valor liquido de vendas
 
 2. Modulo financeiro, 
