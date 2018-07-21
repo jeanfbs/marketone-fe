@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Entrar</title>
+
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <style>
+        body{
+            
+            background-color: #fefefe;
+        }
+        .panel-login{
+            margin-top: 3%;
+        }
+        .market-detail{
+            border-right: 1px solid #ccc;
+        }
+        #black-brand-hight{
+            background: #00756a;
+            border-radius: 4px;
+            padding: 2px;
+            color: #fff;
+        }
+        #light-brand-hight{
+            margin-left: -4px;
+        }
+        .dl-horizontal{
+            line-height: 2%;
+        }
+        .dl-horizontal dt{
+            width: 30px;
+            line-height:  1.8;
+        }
+        .dl-horizontal dd{
+            margin-left: 40px;
+            line-height:  1.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="insertHeader"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-1 col-sm-10 panel-login">
+                    <div class="panel panel-default card-4">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8 market-detail">
+                                    <div class="page-header">
+                                        <h1 class="huge text-primary">
+                                            <span id="light-brand-hight" class="text-primary">Market</span>
+                                            <span id="black-brand-hight">One</span>
+                                            <small>A ferramenta ideal do seu negócio.</small>
+                                        </h1>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 text-center">
+                                            <h3 class="text-primary">100%</h3>
+                                            <h5>Gratuito</h5>
+                                        </div>
+                                        <div class="col-sm-4 text-center">
+                                            <h3 class="text-primary"><i class="fa fa-desktop" aria-hidden="true"></i></h3>
+                                            <h5>Responsivo</h5>
+                                        </div>
+                                        <div class="col-sm-4 text-center">
+                                            <h3 class="text-primary"><i class="fa fa-shield" aria-hidden="true"></i></h3>
+                                            <h5>Seguro</h5>
+                                        </div>
+                                    </div>
+                                    <h3><i class="fa fa-caret-right" aria-hidden="true"></i> Registre-se agora!</h3>
+                                    <dl class="dl-horizontal">
+                                            <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                            <dd>Com <b>Dashboard</b> completo e fácil, tenha em mãos todos os indicadores necessários para tomada de decisão.</dd>
+                                        <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                        <dd>Organize suas finanças com o módulo de controle de contas a pagar, contas a receber e faturamento.</dd>
+                                        <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                        <dd>Gere e exporte <b>Relatórios</b> de vendas, estoques, indicadores diários, semanais e mensais.</dd>
+                                        <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                        <dd>Cadastre seus produtos ou utilize nossa base de produtos.</dd>
+                                        <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                        <dd>Gerencie sua receita de vendas organizada por meios de pagamento.</dd>
+                                        <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                        <dd>Utilize de nosso frente de caixa com o módulo PDV totalmente adaptável para diversos tipos de dispositivos e com atalhos configuráveis e integração com leitores ópticos.</dd>
+                                        <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                        <dd>
+                                            Controle seus estoques e mantenha seus produtos em alta rotatividade, obtendo melhor aproveitamento de estoque com análise 
+                                            dos indicadores básicos de uma boa gestão.
+                                        </dd>
+                                        <dt><i class="fa fa-check-square-o fa-fw text-primary" aria-hidden="true"></i></dt>
+                                        <dd>Saiba de todas as operações realiadas pelo Caixa através do historico de fechamentos de caixas e movimentações do dia.</dd>
+                                    </dl>
+                                    <p class="text-center">
+                                        <a href="#">Quero saber mais</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <br>
+                                    <form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
+                                        <div class="well">
+                                            <div class="form-group">
+                                                <label for="email" class="control-label">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@teste.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="senha" class="control-label">Senha</label>
+                                                <input type="password" class="form-control" id="senha" name="senha">
+                                            </div>
+                                            <p class="text-danger">
+                                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Usuário ou senha inválidos
+                                            </p>
+                                        </div>
+                                        <div class="g-recaptcha" data-sitekey="6LezjWIUAAAAAG0chY8sArTvt8aO5eEW5R2nr6Gk"></div>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                                        <a href="/forgot/" class="btn btn-default btn-block">Criar Nova Conta</a>
+                                        <p class="text-right">
+                                            <br>
+                                            <a href="/forgot/">Esqueci minha senha</a>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root','site-login']);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

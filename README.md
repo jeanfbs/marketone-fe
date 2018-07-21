@@ -86,6 +86,7 @@ o codigo da venda para navegar ate os itens da venda.
 
 O caixa possui a seguintes informações:
     ID,
+    Nome terminal,
     tipo de pagamento[dinheiro, cartao]
     status,
 

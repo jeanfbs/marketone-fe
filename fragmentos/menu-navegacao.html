@@ -8,7 +8,6 @@
         <a class="navbar-brand" data-th-href="@{/cpanel/dashboard}" href="/templates/paginas/dashboard.html">
             <span id="light-brand">Market</span>
             <span id="black-brand">One</span>
-            <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
         </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -50,8 +49,28 @@
             <li class="hidden-xs hidden-sm">
                 <a data-th-href="@{/cpanel/caixa/}" href="/templates/paginas/caixa/pesquisa.html"><i class="fa fa-hdd-o fa-fw" aria-hidden="true"></i> Caixa</a>
             </li>
-            <li class="hidden-xs hidden-sm">
-                <a data-th-href="@{/cpanel/financeiro/}" href="/templates/paginas/financeiro/cadastro.html"><i class="fa fa-calculator fa-fw" aria-hidden="true"></i> Financeiro</a>
+            
+            <li class="dropdown hidden-xs hidden-sm">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-calculator fa-fw" aria-hidden="true"></i> Financeiro
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-th-href="@{/cpanel/financeiro/contavirtual}" href="/templates/paginas/financeiro/contaVirtual.html"><i class="fa fa-usd fa-fw" aria-hidden="true"></i> Conta Virtual</a>
+                    </li>
+                    <li>
+                        <a data-th-href="@{/cpanel/financeiro/contaspagar}" href="/templates/paginas/financeiro/contasAPagar.html">
+                        <i class="fa fa-arrow-circle-o-up fa-fw" aria-hidden="true"></i> Contas a Pagar</a>
+                    </li>
+                    <li>
+                        <a data-th-href="@{/cpanel/financeiro/contasreceber}" href="/templates/paginas/financeiro/contasAReceber.html">
+                        <i class="fa fa-arrow-circle-o-down fa-fw" aria-hidden="true"></i> Contas a Receber</a>
+                    </li>
+                    <li>
+                        <a data-th-href="@{/cpanel/financeiro/}" href="/templates/paginas/financeiro/faturamento.html">
+                        <i class="fa fa-area-chart fa-fw" aria-hidden="true"></i> Faturamento</a>
+                    </li>
+                </ul>
             </li>
             <li class="dropdown hidden-xs hidden-sm">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

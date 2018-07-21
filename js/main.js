@@ -1,6 +1,9 @@
 requirejs.config({
     baseUrl: "/static/js/",
     paths: {
+        "site-login": "site/login",
+        
+        
         chart: "modulos/chart",
         ajax: "modulos/ajax",
         api: "modulos/api",
@@ -11,6 +14,7 @@ requirejs.config({
         perfil: "perfil/perfil",
         "editar-perfil": "perfil/editar",
         
+
         "cadastro-produtos": "produtos/cadastro",
         "pesquisa-produtos": "produtos/pesquisa",
         "detalhes-produtos": "produtos/detalhes",
@@ -30,5 +34,9 @@ requirejs.config({
 
         "cadastro-caixa": "caixa/cadastro",
         "pesquisa-caixa": "caixa/pesquisa",
+
+
+        "conta-virtual-financeiro": "financeiro/contaVirtual",
+        "contas-pagar-financeiro": "financeiro/contasAPagar",
     },
 });

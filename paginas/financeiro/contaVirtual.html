@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-layout-decorate="~{layouts/base}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Conta Virtual</title>
+
+    <link data-th-href="@{/css/vendor.min.css}" href="/static/css/vendor.min.css" rel="stylesheet" />
+    <link data-th-href="@{/css/style.min.css}" href="/static/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="insertHeader"></div>
+    <div id="row-breadcrumb" data-layout-fragment="breadcrumb">
+        <ol class="breadcrumb container">
+            <li>
+                <a data-th-href="@{/cpanel/dashboard}" href="/templates/">
+                    <i class="fa fa-home fa-fw" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Home"></i>
+                </a>
+            </li>
+            <li class="active">Gerenciar Contas Virtuais</li>
+        </ol>
+    </div>
+    <div class="container" data-layout-fragment="content">
+        <div class="row">
+            <div class="panel panel-primary card-4">
+                <div class="panel-heading">
+                    <i class="fa fa-check" aria-hidden="true"></i> Gerenciar Contas Virtuais
+                    <a href="#" target="_blank" class="pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Ajuda">
+                        <i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div data-th-if="${T(java.util.Objects).nonNull(responseVo)}" class="alert alert-dismissible fade in" data-th-classappend="${responseVo.erro} ? alert-danger : alert-success"
+                        role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <strong>
+                            <span data-th-if="${responseVo.erro}">
+                                <i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i>
+                                <span data-th-text="${responseVo.tipoErro}"></span>
+                            </span>
+                            <span data-th-if="${not responseVo.erro}">
+                                <i class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i>
+                            </span>
+                        </strong>
+                        &nbsp;&nbsp;
+                        <span data-th-text="${responseVo.mensagem}"></span>
+                    </div>
+                    <p class="text-muted"><i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Conta usada atualmente</p>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4 col-xs-12">
+                            <div class="well well-sm text-center">
+                                    <h1 class="text-center"><b>C012315</b></h1>
+                                    <span class="text-muted">Saldo Atual</span>
+                                    <h5 class="huge">R$ 21.890,90</h5>
+                                    <p class="text-muted">Última movimentação: 25/07/2018 15:45</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-xs-12">
+                            <table class="table table-bordered table-striped">
+                                <caption>Detalhes da Conta</caption>
+                                <tr>
+                                    <td><b>Portador</b></td>
+                                    <td>Conta Comercial</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Data de criação</b></td>
+                                    <td>12/12/12</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Status</b></td>
+                                    <td><span class="label label-success">Ativo</span> <span class="label label-warning">Inativo</span></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Ações</b></td>
+                                    <td>
+                                        <a href="#" class="btn btn-outline btn-danger btn-xs" id="delete" role="button" data-toggle="modal" data-target="#removerContaModal">
+                                            Desativar
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="col-md-12 col-sm-12" id="controls">
+                        <div class="form-group">
+                            <a data-th-href="@{/cpanel/financeiro/contavirtual/nova}" href="/templates/paginas/financeiro/cadastroContaVirtual.html" class="btn btn-outline btn-default btn-xs" role="button" data-toggle="modal" data-target="#novaContaModal" id="new" role="button">
+                                <i class="fa fa-plus fa-fw"></i> Nova Conta
+                            </a>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" enctype="multipart/form-data" action="#" data-th-action="@{~/cpanel/financeiro/contavirtual/}" id="contaVirtualForm" data-th-object="${contaVirtual}" method="post">
+                        <p class="text-muted">
+                            <i class="fa fa-caret-right fa-fw" aria-hidden="true"></i>Contas Disponiveis</p>
+                        <div class="form-group">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="well account-box card-4 account-selected">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <img src="../../../static/img/cash.png" width="75" />
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-12 text-right">
+                                        <h4>C012131</h4>
+                                        <span>Conta Comercial</span>
+                                        <i>12/12/12</i>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="well card-4 account-box">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <img src="../../../static/img/cash.png" width="75" />
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-12 text-right">
+                                        <h4>C012131</h4>
+                                        <span>Conta Comercial</span>
+                                        <i>12/12/12</i>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="well card-4 account-box">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <img src="../../../static/img/cash.png" width="75" />
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-12 text-right">
+                                        <h4>C012131</h4>
+                                        <span>Conta Comercial</span>
+                                        <i>12/12/12</i>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <div class=" col-sm-10">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-check fa-fw" aria-hidden="true"></i> Salvar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nova Conta -->
+    <div class="modal fade" id="novaContaModal" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-primary" id="alertModal">Adicionar Nova Conta Virtual</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" enctype="multipart/form-data" action="#" data-th-action="@{~/cpanel/financeiro/contavirtual/}" id="contaVirtualForm" data-th-object="${contaVirtual}" method="post">
+                        <div class="form-group">
+                            <label for="portador" class="col-sm-3 control-label">* Portador</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="portador" autofocus  data-th-field="*{portador}" data-fv-notempty="true"  name="portador" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary confirm-delete">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Remover Conta-->
+    <div class="modal fade" id="removerContaModal" tabindex="-1" role="dialog" aria-labelledby="alertModal">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title text-primary" id="alertModal">Confirmação de desativação</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Você irá desativar permanentemente essa conta.
+                        <strong>Deseja mesmo prosseguir?</strong>
+                    </p>
+                    <div class="deleteIds"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-danger confirm-delete">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/js/vendor.min.js}" src="/static/js/vendor.min.js"></script>
+    <script data-th-src="@{/js/vendor.min.js}" data-main="/static/js/main" src="/static/js/require.js"></script>
+    <div data-layout-fragment="script">
+        <script>
+            require(['main'], function () {
+                require(['root', 'commons', 'conta-virtual-financeiro']);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

@@ -6,12 +6,17 @@ textarea {
 }
 #black-brand {
   background: #fff;
-  border-radius: 4px;
-  padding: 2px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 3px 2px;
   color: #00756a;
+  margin-left: -5px;
 }
 #light-brand {
-  margin-left: -4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  padding: 2px 4px;
+  border: 1px solid #fff;
 }
 .navbar-brand {
   font-weight: 600;
@@ -523,4 +528,12 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 }
 .img-cashier {
   margin-top: 80px;
+}
+.account-box:not(.account-selected):hover {
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 66, 60, 0.22), 0 6px 12px rgba(0, 66, 60, 0.45);
+}
+.account-selected {
+  border: 2px solid #00756a;
+  box-shadow: 0 3px 6px rgba(0, 66, 60, 0.22), 0 3px 6px rgba(0, 66, 60, 0.45);
 }
